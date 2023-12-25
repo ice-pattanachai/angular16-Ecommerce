@@ -1,0 +1,29 @@
+
+<app-navbar></app-navbar>
+<body>
+  <div class="pagination">
+    <p>#####</p>
+  </div>
+  
+  <section class="product-container">
+    <div class="img-card">
+      <img [src]="featuredImg" alt="" id="featured-image">
+  
+      <div class="small-Card">
+        <img *ngFor="let img of smallImgs" [src]="img" alt="" class="small-Img" (click)="changeFeaturedImage(img)">
+      </div>
+    </div>
+  
+    <div class="product-info">
+      <h3>##</h3>
+      <h5>##<del>##</del></h5>
+      <p>###</p>
+      
+      <!-- ... (rest of the HTML template) ... -->
+  
+    </div>
+  </section>
+  
+  <script src="js/cart.js"></script>
+  <app-back-to-top></app-back-to-top>
+</body>

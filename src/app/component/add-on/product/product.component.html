@@ -1,0 +1,25 @@
+<div class="shop">
+  <div class="wrapper">
+    <div class="container">
+      <!-- <div class="sidebar">
+        <ul>
+          <li><a href="#">หมวดหมู่ 1</a></li>
+          <li><a href="#">หมวดหมู่ 2</a></li>
+        </ul>
+      </div> -->
+
+      <div class="row">
+        <div *ngFor="let product of products" class="product-item" >
+          <a [routerLink]="product.link">
+            <img [src]="product.imageUrl" alt="{{ product.name }}" >
+            <h3 >{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p class="price">: {{ product.price | currency }}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+</div>
