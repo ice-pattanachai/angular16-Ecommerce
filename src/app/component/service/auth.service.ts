@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { StorageService } from './storage.service';
 
-const AUTH_API = 'http://localhost:3000/api/';
+const AUTH_API = 'http://localhost:3030/api/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,7 +26,7 @@ export class AuthService {
     );
   }
 
-  register_seller(username: string, password_hash: string , mail: string,): Observable<any> {
+  register_seller(username: string, password_hash: string, mail: string,): Observable<any> {
     return this.http.post(
       AUTH_API + 'register_seller',
       {
@@ -37,7 +37,7 @@ export class AuthService {
       httpOptions
     );
   }
-  
+
   login_user(username: string, password_hash: string): Observable<any> {
     return this.http.post(
       AUTH_API + 'login_user',
@@ -49,7 +49,7 @@ export class AuthService {
     );
   }
 
-  register_user(username: string, password_hash: string , mail: string,): Observable<any> {
+  register_user(username: string, password_hash: string, mail: string,): Observable<any> {
     return this.http.post(
       AUTH_API + 'register_user',
       {

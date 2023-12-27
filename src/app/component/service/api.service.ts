@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const API_URL = 'http://localhost:3000/api/';
+const API_URL = 'http://localhost:3030/api/';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   postLoginSellet(): Observable<any> {
     return this.http.post(API_URL + 'login_admin', { responseType: 'text' });

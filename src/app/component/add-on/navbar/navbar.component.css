@@ -1,9 +1,8 @@
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins" , sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 .header {
@@ -18,7 +17,7 @@
     align-items: center;
     z-index: 100;
     margin-right: 50px;
-      box-shadow: 0 1px 15px #0000002d;
+    box-shadow: 0 1px 15px #0000002d;
 }
 
 .hidden {
@@ -31,10 +30,12 @@
     text-decoration: none;
     font-weight: 700;
 }
-.logo svg{
+
+.logo svg {
     width: 20px;
     height: 20px;
 }
+
 a .badge {
     position: absolute;
     top: -25px;
@@ -47,7 +48,7 @@ a .badge {
 
 .navbar a {
     position: relative;
-    font-size: 15px;
+    font-size: 20px;
     color: var(--bkg-color);
     font-weight: 500;
     text-decoration: none;
@@ -56,7 +57,7 @@ a .badge {
 }
 
 .navbar i {
-    font-size: 28px;
+    font-size: 26px;
     color: var(--text-color);
     text-decoration: none;
 }
@@ -84,33 +85,40 @@ a .badge {
     color: var(--color-white);
 }
 
-.responsive-menu a , .dropdown a {
+.responsive-menu a,
+.dropdown a {
     color: var(--text-d-color);
     text-decoration: none;
 }
-.responsive-menu a{
+
+.responsive-menu a {
     padding: 12px;
 }
+
 .dropdown a {
     padding: 6px;
 }
-.dropdown , .responsive-menu {
+
+.dropdown,
+.responsive-menu {
     flex-direction: column;
     position: absolute;
     top: 80px;
     background-color: #222831;
     z-index: 99;
     padding: auto 0;
-    color:var(--text-d-color);
+    color: var(--text-d-color);
 }
+
 .dropdown {
     right: 50px;
     width: 250px;
     height: auto;
     display: flex;
-    align-items: center; 
+    align-items: center;
     animation: fadeIn .5s forwards;
 }
+
 .responsive-menu {
     display: none;
     left: 0;
@@ -135,7 +143,8 @@ a .badge {
     margin-left: 20px;
 }
 
-.search-box input , .search-box-dropdown input {
+.search-box input,
+.search-box-dropdown input {
     padding: 8px;
     margin-right: 8px;
     border: none;
@@ -152,7 +161,8 @@ a .badge {
     width: 350px;
 }
 
-.search-box button , .search-box-dropdown button{
+.search-box button,
+.search-box-dropdown button {
     padding: 8px 12px;
     background-color: #222831;
     color: #fff;
@@ -174,7 +184,7 @@ a .badge {
     width: 100%;
     z-index: 99;
     padding: auto 0;
-    color:var(--text-d-color);
+    color: var(--text-d-color);
 }
 
 .search-dropdown {
@@ -192,7 +202,8 @@ a .badge {
     transform: translate(-50%, -50%);
 }
 
-.search-box-dropdown button:hover , .search-box button:hover{
+.search-box-dropdown button:hover,
+.search-box button:hover {
     background-color: #3b3b3b;
     transform: scale(1.1);
 }
@@ -203,13 +214,14 @@ a .badge {
     margin-left: 40px;
 }
 
-.menu-icon-dropdown, .menu-icon {
+.menu-icon-dropdown,
+.menu-icon {
     margin-right: 40px;
     cursor: pointer;
 }
 
 @media screen and (max-width: 350px) {
-    .header{
+    .header {
         padding: 20px 20%;
     }
 }
@@ -218,12 +230,15 @@ a .badge {
     .logo {
         display: none;
     }
-    .header{
+
+    .header {
         padding: 26px 50%;
     }
+
     .search-box {
         width: 100%;
     }
+
     .search-box input {
         width: 100%;
     }
@@ -247,7 +262,7 @@ a .badge {
     .menu-icon {
         margin-left: 0px;
     }
-    
+
 }
 
 @media screen and (max-width: 950px) {
@@ -260,15 +275,16 @@ a .badge {
         display: flex;
         top: 80px;
         min-height: 80px;
-        align-items: center; 
+        align-items: center;
         animation: fadeIn .5s forwards
     }
 
     .search-box:hover .search-dropdown {
-        display: block; 
+        display: block;
     }
-    
+
 }
+
 @media screen and (max-width: 1114px) {
     .logo svg {
         display: none;
@@ -279,13 +295,15 @@ a .badge {
 
     .navbar a {
         display: none;
-        margin-left : none;
+        margin-left: none;
     }
+
     .responsive-menu a {
         display: block;
         text-align: center;
         margin-left: none;
     }
+
     .menu-icon {
         display: flex;
     }
@@ -298,15 +316,15 @@ a .badge {
         width: 100%;
         z-index: 99;
         min-height: 200px;
-        align-items: center; 
+        align-items: center;
         animation: fadeIn .5s forwards
     }
-    
+
     .responsive-menu a::before {
         content: none;
     }
 
-    .dropdown{
+    .dropdown {
         display: none;
     }
 }
@@ -315,6 +333,7 @@ a .badge {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -324,6 +343,7 @@ a .badge {
     from {
         opacity: 1;
     }
+
     to {
         opacity: 0;
     }

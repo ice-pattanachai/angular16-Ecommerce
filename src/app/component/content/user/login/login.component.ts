@@ -11,9 +11,9 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
   isSignIn: boolean = true;
-  username : string = '';
-  password_hash : string = '';
-  mail : string = '';
+  username: string = '';
+  password_hash: string = '';
+  mail: string = '';
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
@@ -37,10 +37,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onClickSubmitLogin(){
+  onClickSubmitLogin() {
     this.authService.login_user(this.username, this.password_hash).subscribe({
       next: data => {
         this.storageService.saveUser(data);
+
 
         if (data.token) {
           this.storageService.saveToken(data.token);
@@ -75,7 +76,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onClickSubmitRegister(){
+  onClickSubmitRegister() {
     this.authService.register_user(this.username, this.password_hash, this.mail).subscribe({
       next: data => {
         this.storageService.saveUser(data);
@@ -88,7 +89,7 @@ export class LoginComponent implements OnInit {
           title: 'register Success',
           text: 'register Success',
         });
-        
+
       },
       error: err => {
         // console.log(err.error.message);

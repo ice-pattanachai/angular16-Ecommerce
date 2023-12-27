@@ -1,4 +1,5 @@
 import { Component, HostBinding, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,10 +8,17 @@ import { Component, HostBinding, HostListener } from '@angular/core';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
+  userName: string = "";
+  sellerName: string = "";
+  badgeCount: number = 9;
+  menuType: string = 'default';
+
+  constructor(private route: Router) { }
+
   toggleDarkTheme(): void {
     document.body.classList.toggle('dark-theme');
   }
-  
+
   isNavbarVisible = true;
   prevScrollpos = window.pageYOffset;
 
@@ -53,5 +61,38 @@ export class NavbarComponent {
     this.isMenuOpen3 = false;
   }
 
-  badgeCount : number = 9;
+  ngOnInit(): void {
+    this.route.events.subscribe((val: any) => {
+      if (val.url) {
+        if (localStorage.getItem('seller') && val.url.includes('seller')) {
+          let sellerStore = localStorage.getItem('seller');
+          let sellerData = sellerStore && JSON.parse(sellerStore)[0];
+          this.sellerName = sellerData.name;
+          this.menuType = 'seller';
+        }
+        else if (localStorage.getItem('user')) {
+          let userStore = localStorage.getItem('user');
+          let userData = userStore && JSON.parse(userStore);
+          this.userName = userData.name;
+          this.menuType = 'user';
+          this.product.getCartList(userData.id);
+        }
+        else {
+          this.menuType = 'default';
+        }
+      }
+    });
+  }
+
+  logout() {
+    localStorage.removeItem('seller');
+    this.route.navigate(['/'])
+  }
+
+  userLogout() {
+    localStorage.removeItem('user');
+    this.route.navigate(['/user-auth'])
+    this.product.cartData.emit([])
+  }
+
 }

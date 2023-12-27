@@ -64,7 +64,7 @@
 }
 
 /* ปรับระยะห่างระหว่างลิงค์ */
-.nav.prod-cat > li > a {
+.nav.prod-cat>li>a {
   padding-left: 0;
 }
 
