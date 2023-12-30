@@ -10,5 +10,9 @@ export class ProductComponent {
   products = [
     { name: 'Product 1', description: 'Description 1', price: 19.99 , link:'' , imageUrl: this.image},
     { name: 'Product 1', description: 'Description 1', price: 19.99 , link:'' , imageUrl: this.image},
+    { name: 'Product 1', description: 'Description 1', price: 19.99 , link:'' , imageUrl: this.image},
+    { name: 'Product 1', description: 'Description 1', price: 19.99 , link:'' , imageUrl: this.image},
+
+    
   ];
 }

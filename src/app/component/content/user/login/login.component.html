@@ -5,14 +5,19 @@
       </svg>
       <!-- {{ isSignIn ? 'Login' : 'Signup' }} -->
   </a>
+  <nav class="navbar">
+    <a href="/user-login">
+      user
+    </a>
+    <a href="/seller-login">
+      seller
+    </a>
+  </nav>
 </header>
 <body>
-  <div class="login-image">
-    <img [src]="images" alt="">
-  </div>
   <div class="signin" *ngIf="isSignIn; else signup">
     <div class="content">
-      <h2>Sign In</h2>
+      <h2>User Login</h2>
         <div class="form">
           <div class="inputBox">
             <input type="text" [(ngModel)]="username" name="username" required>

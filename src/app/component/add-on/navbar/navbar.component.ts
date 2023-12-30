@@ -1,40 +1,129 @@
-import { Component, HostBinding, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
+import { AuthService } from '../../service/auth.service'
 
 
 @Component({
   selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
+  templateUrl: 'navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  isNavbarVisible: boolean = true;
   userName: string = "";
   sellerName: string = "";
-  badgeCount: number = 9;
+  badgeCount: string = '!';
   menuType: string = 'default';
 
-  constructor(private route: Router) { }
+  constructor(
+    private route: Router,
+    private http: HttpClient,
+    private authService: AuthService
+  ) { }
 
-  toggleDarkTheme(): void {
-    document.body.classList.toggle('dark-theme');
+  ngOnInit(): void {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      const userObject = JSON.parse(userData);
+      const token = userObject.token;
+      if (token) {
+        console.log('Sending request with token:', token);
+        this.authService.authenticateToken(token)
+          .subscribe((response: any) => {
+            const status = response.status;
+            console.log('API Response Status:', status);
+            if (status === 'ok') {
+              const decoded = response.decoded;
+              if (decoded && decoded.roles !== undefined) {
+                const roles = decoded.roles;
+                if (typeof roles === 'string') {
+                  const roleParts = roles.split('|');
+                  const firstRole = roleParts[0];
+
+                  if (firstRole === 'seller') {
+                    this.menuType = 'seller';
+                  } else if (firstRole === 'user') {
+                    this.menuType = 'user';
+                  } else {
+                    this.menuType = 'default';
+                  }
+                } else {
+                  console.error('Invalid roles format:', roles);
+                  this.menuType = 'error';
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Invalid roles format',
+                  });
+                }
+              } else {
+                console.error('Error: Roles is undefined');
+                this.menuType = 'error';
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'Roles is undefined',
+                });
+              }
+            } else {
+              console.error('Error response from API:', response);
+              const errorMessage = response.message || 'Failed to Authenticate';
+              console.error(`Error: ${errorMessage}`);
+              this.menuType = 'error';
+              let displayMessage = errorMessage;
+              if (response.status === 'error' && response.message === 'jwt expired') {
+                displayMessage = 'Please log in again.';
+                this.authService.removeItem()
+                Swal.fire({
+                  icon: 'warning',
+                  title: 'Connection timed out',
+                  text: displayMessage,
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    window.location.reload();
+                    // this.route.navigate(['/user-login']);
+                  }
+                });
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: errorMessage,
+                })
+                .then((result) => {
+                  if (result.isConfirmed) {
+                    window.location.reload();
+                  }
+                });
+              }
+            }
+            if (response.status === 'error' && response.message === 'Connection timed out') {
+              console.log('Token has expired. Logging out...');
+              this.authService.removeItem()
+              this.route.navigate(['/']);
+            }
+          },
+            error => {
+              console.error('HTTP Error:', error);
+              this.menuType = 'error';
+              Swal.fire({
+                icon: 'error',
+                title: 'HTTP Error',
+                text: 'Failed to communicate with the server',
+              });
+            });
+      } else {
+        console.error('Error: Token is missing');
+      }
+    }
   }
 
-  isNavbarVisible = true;
-  prevScrollpos = window.pageYOffset;
-
-  @HostListener('window:scroll', ['$event'])
-  onScroll() {
-    const currentScrollPos = window.pageYOffset;
-
-    if (this.prevScrollpos > currentScrollPos) {
-      // Scroll up, show navbar
-      this.isNavbarVisible = true;
-    } else {
-      // Scroll down, hide navbar
-      this.isNavbarVisible = false;
-    }
-
-    this.prevScrollpos = currentScrollPos;
+  logout() {
+    this.authService.removeItem()
+    this.route.navigate(['/'])
+    window.location.reload();
   }
 
   isMenuOpen1 = false;
@@ -60,39 +149,4 @@ export class NavbarComponent {
   closeMenu3() {
     this.isMenuOpen3 = false;
   }
-
-  ngOnInit(): void {
-    this.route.events.subscribe((val: any) => {
-      if (val.url) {
-        if (localStorage.getItem('seller') && val.url.includes('seller')) {
-          let sellerStore = localStorage.getItem('seller');
-          let sellerData = sellerStore && JSON.parse(sellerStore)[0];
-          this.sellerName = sellerData.name;
-          this.menuType = 'seller';
-        }
-        else if (localStorage.getItem('user')) {
-          let userStore = localStorage.getItem('user');
-          let userData = userStore && JSON.parse(userStore);
-          this.userName = userData.name;
-          this.menuType = 'user';
-          this.product.getCartList(userData.id);
-        }
-        else {
-          this.menuType = 'default';
-        }
-      }
-    });
-  }
-
-  logout() {
-    localStorage.removeItem('seller');
-    this.route.navigate(['/'])
-  }
-
-  userLogout() {
-    localStorage.removeItem('user');
-    this.route.navigate(['/user-auth'])
-    this.product.cartData.emit([])
-  }
-
 }

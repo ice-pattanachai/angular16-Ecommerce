@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'shop' , component : ShopComponent},
   { path: 'product' , component : ProductDetailComponent},
   // user
-  { path: 'login' , component : LoginComponent },
+  { path: 'user-login' , component : LoginComponent },
   { path: 'buyproduct', component : BuyProductUserComponent },
   // { path: 'buyproduct', component : PaymentComponent },
   // seller

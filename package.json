@@ -1,5 +1,5 @@
 {
-  "name": "co-op-project",
+  "name": "angular16-ecommerce",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -23,6 +23,7 @@
     "@cloudflare/stream-angular": "^1.0.1",
     "angular-material-icons": "^0.7.1",
     "bootstrap": "^5.3.2",
+    "bootstrap-icons": "^1.11.2",
     "ngx-turnstile": "^0.1.0",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.10.1",

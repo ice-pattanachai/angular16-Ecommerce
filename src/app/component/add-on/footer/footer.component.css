@@ -1,5 +1,13 @@
 
   
+  
+  body {
+    margin: 0; /* ลบ margin ที่อาจเกิดขึ้นจาก body */
+    padding: 0; /* ลบ padding ที่อาจเกิดขึ้นจาก body */
+    height: 100vh; /* กำหนดความสูงของ body เต็มหน้าจอ */
+    position: relative; /* ต้องการให้ child element มี position: absolute อ้างอิงตำแหน่งจาก body */
+  }
+
   .footer {
     background-color: var(--color-footer);
     color: #fff;
@@ -7,10 +15,12 @@
     /* padding: 10px; */
     width: 100%;
     height: 200px;
-    /* position: absolute; */
+    position: absolute;
     /* position: fixed; */
+    /* position:static; */
     bottom: 0;
     float: left;
+    z-index: 1001;
   }
   
   @media (max-width: 767px) {

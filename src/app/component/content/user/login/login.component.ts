@@ -92,11 +92,7 @@ export class LoginComponent implements OnInit {
 
       },
       error: err => {
-        // console.log(err.error.message);
-        // window.alert("Register Failed");
         window.alert(err.error.message);
-        // window.alert(err.error.message || 'Register failed');
-        // this.errorMessages.push(err.error.message || 'Login failed');
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       }

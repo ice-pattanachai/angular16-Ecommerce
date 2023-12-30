@@ -29,15 +29,6 @@ export class StorageService {
     return {};
   }
 
-  public saveToken(token: string): void {
-    window.localStorage.removeItem(TOKEN_KEY);
-    window.localStorage.setItem(TOKEN_KEY, token);
-  }
-
-  public getToken(): string | null {
-    return window.localStorage.getItem(TOKEN_KEY);
-  }
-
   public isLoggedIn(): boolean {
     const user = window.localStorage.getItem(USER_KEY);
     if (user) {
@@ -45,4 +36,15 @@ export class StorageService {
     }
     return false;
   }
+
+  public saveToken(token: string): void {
+    window.localStorage.removeItem(TOKEN_KEY);
+    window.localStorage.setItem(TOKEN_KEY, token);
+  }
+  
+  public getToken(): string | null {
+    return window.localStorage.getItem(TOKEN_KEY);
+  }
+
+
 }

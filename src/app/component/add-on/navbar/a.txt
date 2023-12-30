@@ -1,0 +1,192 @@
+import { Component,HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { catchError, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import Swal from 'sweetalert2';
+
+
+@Component({
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css'],
+})
+export class NavbarComponent implements OnInit {
+  isNavbarVisible: boolean = true;
+  userName: string = "";
+  sellerName: string = "";
+  badgeCount: number = 9;
+  menuType: string = 'default';
+
+  constructor(private route: Router , private http: HttpClient) { }
+
+  // ngOnInit(): void {
+  //   this.route.events.subscribe((val: any) => {
+  //     if (val.url) {
+  //       if (localStorage.getItem('seller') && val.url.includes('login')) {
+  //        let sellerStore=localStorage.getItem('seller');
+  //        let sellerData =sellerStore && JSON.parse(sellerStore)[0];
+  //        this.sellerName=sellerData.name;
+  //         this.menuType = 'seller';
+  //       }
+  //       else if(localStorage.getItem('user')){
+  //         let userStore = localStorage.getItem('user');
+  //         let userData = userStore && JSON.parse(userStore);
+  //         this.userName= userData.name;
+  //         this.menuType='user';
+  //       }
+  //        else {
+  //         this.menuType = 'default';
+  //       }
+  //     }
+  //   });
+  // }
+  // ngOnInit(): void {
+  //   const userData = localStorage.getItem('user');
+    
+  //   if (userData) {
+  //     const userObject = JSON.parse(userData);
+      
+  //     if (userObject.class === 'seller') {
+  //       // ถ้าเป็น seller
+  //       this.menuType = 'seller';
+  //     } else if (userObject.class === 'user') {
+  //       // ถ้าเป็น user
+  //       this.menuType = 'user';
+  //     } else {
+  //       // ถ้าไม่ใช่ทั้ง seller และ user
+  //       this.menuType = 'default';
+  //     }
+  //   }
+  // }
+
+  // ngOnInit(): void {
+  //   const userData = localStorage.getItem('user');
+  
+  //   if (userData) {
+  //     const userObject = JSON.parse(userData);
+  //     const token = userObject.token;
+  
+  //     this.http.post<any>('http://172.20.0.7:3030/api/authen', { token })
+  //       .subscribe(response => {
+  //         if (response.status === 'ok') {
+  //           const roles = response.decoded?.roles;
+  //           if (roles === 'seller') {
+  //             this.menuType = 'seller';
+  //           } else if (roles === 'user') {
+  //             this.menuType = 'user';
+  //           } else {
+  //             this.menuType = 'default';
+  //           }
+  //         } else {
+  //           console.log('Error response from API:', response);
+  //           const errorMessage = response.message || 'Failed to Authenticate';
+  //           this.menuType = 'error';
+  //           Swal.fire({
+  //             icon: 'error',
+  //             title: 'Error',
+  //             text: errorMessage,
+  //           });
+  //         }
+  //       });
+  //   }
+  // }
+  ngOnInit(): void {
+    const userData = localStorage.getItem('user');
+  
+    if (userData) {
+      const userObject = JSON.parse(userData);
+      const token = userObject.token;
+  
+      this.http.post<any>('http://172.20.0.7:3030/api/authen', { token })
+        .subscribe(response => {
+          const status = response.status;
+          console.log('API Response Status:', status);
+  
+          if (status === 'ok' ) {
+            const decoded = response.decoded;
+  
+            if (decoded && decoded.roles !== undefined) {
+              const roles = decoded.roles;
+  
+              if (typeof roles === 'string') {
+                const roleParts = roles.split('|');
+                const firstRole = roleParts[0];
+  
+                if (firstRole === 'seller') {
+                  this.menuType = 'seller';
+                } else if (firstRole === 'user') {
+                  this.menuType = 'user';
+                } else {
+                  this.menuType = 'default';
+                }
+              } else {
+                console.error('Invalid roles format:', roles);
+                this.menuType = 'error';
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'Invalid roles format',
+                });
+              }
+            } else {
+              console.error('Error: Roles is undefined');
+              this.menuType = 'error';
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Roles is undefined',
+              });
+            }
+          } else {
+            console.error('Error response from API:', response);
+            const errorMessage = response.message || 'Failed to Authenticate';
+            console.error(`Error: ${errorMessage}`);
+            this.menuType = 'error';
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: errorMessage,
+            });
+          }
+        },
+        error => {
+          console.error('HTTP Error:', error);
+          this.menuType = 'error';
+          Swal.fire({
+            icon: 'error',
+            title: 'HTTP Error',
+            text: 'Failed to communicate with the server',
+          });
+        });
+    }
+  }
+
+  
+
+
+
+  isMenuOpen1 = false;
+  toggleMenu1() {
+    this.isMenuOpen1 = !this.isMenuOpen1;
+  }
+  closeMenu1() {
+    this.isMenuOpen1 = false;
+  }
+
+  isMenuOpen2 = false;
+  toggleMenu2() {
+    this.isMenuOpen2 = !this.isMenuOpen2;
+  }
+  closeMenu2() {
+    this.isMenuOpen2 = false;
+  }
+
+  isMenuOpen3 = false;
+  toggleMenu3() {
+    this.isMenuOpen3 = !this.isMenuOpen3;
+  }
+  closeMenu3() {
+    this.isMenuOpen3 = false;
+  }
+}

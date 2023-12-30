@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, throwError } from 'rxjs';
 import { StorageService } from './storage.service';
+import { catchError, map } from 'rxjs/operators';
 
-const AUTH_API = 'http://localhost:3030/api/';
+const AUTH_API = 'http://172.20.0.7:3030/api/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -59,5 +60,21 @@ export class AuthService {
       },
       httpOptions
     );
+  }
+
+  authenticateToken(token: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http
+      .post<any>(AUTH_API + 'authen ', {}, { headers })
+      .pipe(
+        map((response) => response),
+        catchError((error) => throwError(error))
+      );
+  }
+
+  removeItem (){
+    localStorage.removeItem('user');
+    localStorage.removeItem('auth-token');
   }
 }
