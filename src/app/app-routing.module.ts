@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'about' , component : AboutComponent },
   { path: 'bongo-cat' , component : CatErrorComponent},
   { path: 'shop' , component : ShopComponent},
-  { path: 'product' , component : ProductDetailComponent},
+  { path: 'product/:id' , component : ProductDetailComponent},
   // user
   { path: 'user-login' , component : LoginComponent },
   { path: 'buyproduct', component : BuyProductUserComponent },

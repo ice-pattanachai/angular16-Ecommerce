@@ -16,14 +16,8 @@
   
   .product-container {
     display: flex;
-    /* justify-content: start;
-    align-items: start; */
     gap: 40px;
   }
-  
-  /* .img-card{
-      width: 40%;
-  } */
   
   .img-card img {
     width: 100%;
@@ -35,7 +29,6 @@
   
   .small-Card {
     display: flex;
-    /* justify-content: start; */
     align-items: center;
     margin-top: 15px;
     gap: 12px;

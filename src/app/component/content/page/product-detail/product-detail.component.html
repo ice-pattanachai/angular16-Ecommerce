@@ -1,4 +1,3 @@
-
 <app-navbar></app-navbar>
 <body>
   <div class="pagination">
@@ -7,20 +6,17 @@
   
   <section class="product-container">
     <div class="img-card">
-      <img [src]="featuredImg" alt="" id="featured-image">
+      <img [src]="featuredImg" alt="Featured Image" id="featured-image">
   
       <div class="small-Card">
-        <img *ngFor="let img of smallImgs" [src]="img" alt="" class="small-Img" (click)="changeFeaturedImage(img)">
+        <img *ngFor="let img of smallImgs" [src]="img" alt="Small Image" class="small-Img" (click)="changeFeaturedImage(img)">
       </div>
     </div>
   
     <div class="product-info">
-      <h3>##</h3>
-      <h5>##<del>##</del></h5>
-      <p>###</p>
-      
-      <!-- ... (rest of the HTML template) ... -->
-  
+      <h3>{{ products[selectedProductId].name }}</h3>
+      <h5>{{ products[selectedProductId].price | currency }}<del>##</del></h5>
+      <p>{{ products[selectedProductId].description }}</p>
     </div>
   </section>
   
