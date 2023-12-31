@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "co-op-project": {
+    "angular16-Ecommerce": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/co-op-project",
+            "outputPath": "dist/angular16-Ecommerce",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "co-op-project:build:production"
+              "browserTarget": "angular16-Ecommerce:build:production"
             },
             "development": {
-              "browserTarget": "co-op-project:build:development"
+              "browserTarget": "angular16-Ecommerce:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "co-op-project:build"
+            "browserTarget": "angular16-Ecommerce:build"
           }
         },
         "test": {
