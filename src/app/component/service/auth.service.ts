@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, tap, throwError } from 'rxjs';
 import { StorageService } from './storage.service';
 import { catchError, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 const AUTH_API = 'http://172.20.0.7:3030/api/';
 
@@ -14,7 +15,11 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient, private storageService: StorageService) { }
+  constructor(
+    private http: HttpClient,
+    private storageService: StorageService,
+    private router: Router
+  ) { }
 
   login_seller(username: string, password_hash: string): Observable<any> {
     return this.http.post(
@@ -73,8 +78,20 @@ export class AuthService {
       );
   }
 
-  removeItem (){
+  removeItem() {
     localStorage.removeItem('user');
     localStorage.removeItem('auth-token');
+  }
+
+  userAuthReload() {
+    if (localStorage.getItem('user')) {
+      this.router.navigate(['/']);
+    }
+  }
+
+  sellerProders() {
+    if (localStorage.getItem('user')) {
+      this.router.navigate(['/']);
+    }
   }
 }

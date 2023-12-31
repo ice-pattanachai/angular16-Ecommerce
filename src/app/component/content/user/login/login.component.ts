@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private storageService: StorageService, private router: Router) { }
 
   ngOnInit(): void {
+    this.authService.userAuthReload();
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.roles = this.storageService.getUser().roles;
@@ -52,18 +53,10 @@ export class LoginComponent implements OnInit {
             text: 'Login Success',
           });
         }
-
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;
-        // this.reloadPage();
-
       },
-      // error: err => {
-      //   window.alert(err.error.message || 'Login failed');
-      //   this.isLoginFailed = true;
-      //   console.log(err.error.message);
-      // }
       error: err => {
         Swal.fire({
           icon: 'error',
@@ -102,19 +95,4 @@ export class LoginComponent implements OnInit {
   reloadPage(): void {
     window.location.reload();
   }
-  // onClickSubmitLogin() {
-  //   if (this.username == "1" && this.password == "1") {
-  //     this.router.navigate(["/product"])
-  //   } else {
-  //     window.alert("Login Failed");
-  //   }
-  // }
-
-  // onClickSubmitRegister() {
-  //   if (this.username == "1" && this.password_hash == "1" && this.email == "1") {
-  //     window.alert("Register Success");
-  //   } else {
-  //     window.alert("Register Failed");
-  //   }
-  // }
 }
