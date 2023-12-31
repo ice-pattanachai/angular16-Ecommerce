@@ -27,6 +27,7 @@ export class ProductComponent implements OnInit{
     // ปรับแก้โค้ดใน subscribe นี้
     this.productService.productList().subscribe((data) => {
       this.products = data;
+      // console.warn(product.id);
 
       this.productService.popularProducts().subscribe((data) => {
         this.popularProducts = data;
