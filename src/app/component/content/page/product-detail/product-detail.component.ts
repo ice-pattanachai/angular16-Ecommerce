@@ -57,7 +57,6 @@ export class ProductDetailComponent implements OnInit {
 
     const existingProduct = cartData.find((item: any) => item.id === productId);
     if (existingProduct) {
-      // ถ้ามีสินค้านี้อยู่ในตะกร้าแล้ว
       existingProduct.quantity += this.quantity;
       localStorage.setItem('AddToCart', JSON.stringify(cartData));
     } else {
@@ -90,19 +89,7 @@ export class ProductDetailComponent implements OnInit {
       this.quantity -= 1;
     }
   }
-  // removeFromCart(productId: number): void {
-  //   const existingCartData = localStorage.getItem('AddToCart');
-  //   if (existingCartData) {
-  //     let cartData = JSON.parse(existingCartData);
-  //     const productIndex = cartData.findIndex((item: any) => item.id === productId);
 
-  //     if (productIndex !== -1) {
-  //       cartData.splice(productIndex, 1);
-  //       localStorage.setItem('AddToCart', JSON.stringify(cartData));
-  //     } else {
-  //     }
-  //   }
-  // }
   removeFromCart(productId: number): void {
     const existingCartData = localStorage.getItem('AddToCart');
     if (existingCartData) {
@@ -117,7 +104,7 @@ export class ProductDetailComponent implements OnInit {
           localStorage.setItem('AddToCart', JSON.stringify(cartData));
         }
       } else {
-        // ไม่พบสินค้าที่ต้องการลบ
+
       }
     }
   }

@@ -30,8 +30,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { ProductDetailComponent } from './component/content/page/product-detail/product-detail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CartgoComponent } from './component/content/page/cartgo/cartgo.component';
-
-
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -65,7 +64,8 @@ import { CartgoComponent } from './component/content/page/cartgo/cartgo.componen
     NgxTurnstileModule,
     MatPaginatorModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
   ],
 
   providers: [],
