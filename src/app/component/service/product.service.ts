@@ -82,5 +82,7 @@ export class ProductService {
         }
       });
   }
-  
+  getSelectedProductById(productId: number) {
+    return this.http.get<product>(`http://localhost:3000/products/${productId}`);
+  }
 }

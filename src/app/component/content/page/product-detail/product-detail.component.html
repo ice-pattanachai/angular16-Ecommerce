@@ -1,25 +1,38 @@
 <app-navbar></app-navbar>
-<body>
+
+<body *ngIf="product">
   <div class="pagination">
-    <p>#####</p>
+    <p>{{ product.name }}</p>
   </div>
-  
+
   <section class="product-container">
     <div class="img-card">
-      <img [src]="featuredImg" alt="Featured Image" id="featured-image">
-  
-      <div class="small-Card">
-        <img *ngFor="let img of smallImgs" [src]="img" alt="Small Image" class="small-Img" (click)="changeFeaturedImage(img)">
-      </div>
+      <img [src]="product.image" alt="{{ product.name }}">
+      <!-- <div class="small-Card">
+        <img *ngFor="let img of smallImgs" [src]="img" alt="Small Image" class="small-Img"
+          (click)="changeFeaturedImage(img)">
+      </div> -->
     </div>
-  
     <div class="product-info">
-      <h3>{{ products[selectedProductId].name }}</h3>
-      <h5>{{ products[selectedProductId].price | currency }}<del>##</del></h5>
-      <p>{{ products[selectedProductId].description }}</p>
+      <h3>{{ product.name }}</h3>
+      <h5>{{ product.price | currency }}<del></del></h5>
+      <p>{{ product.description }}</p>
+      <div class="quantity">
+        <!-- <button (click)="handleQuantity('min')">-</button> -->
+        <input type="number" step="1" min="1" [(ngModel)]="quantity" />
+        <!-- <button (click)="handleQuantity('plus')">+</button> -->
+      </div>
+      <button (click)="addToCart(
+                product.id,
+                product.name, 
+                product.price, 
+                product.category, 
+                product.color, 
+                product.description, 
+                product.image)">AddToCart
+      </button>
+      <button (click)="removeFromCart(product.id)">Remove</button>
     </div>
   </section>
-  
-  <script src="js/cart.js"></script>
   <app-back-to-top></app-back-to-top>
 </body>

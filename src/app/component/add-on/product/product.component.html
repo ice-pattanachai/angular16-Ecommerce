@@ -20,7 +20,8 @@
     <div class="container">
       <div class="row">
         <div *ngFor="let product of products" class="product-item">
-          <a [routerLink]="'/product/' + product.id">
+          <a [routerLink]="'/product/'"
+            (click)="storeProduct(product.id, product.name, product.price, product.category, product.color, product.description, product.image)">
             <img [src]="product.image" alt="{{ product.name }}">
             <h3>{{ product.name }}</h3>
             <p>{{ product.description }}</p>

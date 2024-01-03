@@ -29,6 +29,7 @@ import { PaginationComponent } from './component/add-on/pagination/pagination.co
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ProductDetailComponent } from './component/content/page/product-detail/product-detail.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CartgoComponent } from './component/content/page/cartgo/cartgo.component';
 
 
 
@@ -55,7 +56,8 @@ import { HttpClientModule } from '@angular/common/http';
     SidebarComponent,
     ImageCarouselIIComponent,
     PaginationComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CartgoComponent
   ],
   imports: [
     BrowserModule,

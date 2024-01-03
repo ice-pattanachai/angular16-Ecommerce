@@ -14,7 +14,8 @@ export class NavbarComponent implements OnInit {
   isNavbarVisible: boolean = true;
   userName: string = "";
   sellerName: string = "";
-  badgeCount: string = '!';
+  // badgeCount: string = '1';
+  badgeCount: string | null = null;
   menuType: string = 'default';
 
   constructor(
@@ -24,16 +25,17 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.AddToCart();
     const userData = localStorage.getItem('user');
     if (userData) {
       const userObject = JSON.parse(userData);
       const token = userObject.token;
       if (token) {
-        console.log('Sending request with token:', token);
+        // console.log('Sending request with token:', token);
         this.authService.authenticateToken(token)
           .subscribe((response: any) => {
             const status = response.status;
-            console.log('API Response Status:', status);
+            // console.log('API Response Status:', status);
             if (status === 'ok') {
               const decoded = response.decoded;
               if (decoded && decoded.roles !== undefined) {
@@ -92,11 +94,11 @@ export class NavbarComponent implements OnInit {
                   title: 'Error',
                   text: errorMessage,
                 })
-                .then((result) => {
-                  if (result.isConfirmed) {
-                    window.location.reload();
-                  }
-                });
+                  .then((result) => {
+                    if (result.isConfirmed) {
+                      window.location.reload();
+                    }
+                  });
               }
             }
             if (response.status === 'error' && response.message === 'Connection timed out') {
@@ -148,5 +150,16 @@ export class NavbarComponent implements OnInit {
   }
   closeMenu3() {
     this.isMenuOpen3 = false;
+  }
+
+
+  AddToCart(): void {
+    const existingCartData = localStorage.getItem('AddToCart');
+    if (existingCartData) {
+      // ให้แสดง "สัญญาลัก" ใน <span class="badge">
+      this.badgeCount = "!";
+    } else {
+      this.badgeCount = null;
+    }
   }
 }

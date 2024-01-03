@@ -51,6 +51,8 @@ export class LoginComponent implements OnInit {
             icon: 'success',
             title: 'Login Success',
             text: 'Login Success',
+            showConfirmButton: false,
+            timer: 1000,
           });
         }
         this.isLoginFailed = false;

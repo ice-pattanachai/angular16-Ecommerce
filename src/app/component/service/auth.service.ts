@@ -5,7 +5,7 @@ import { StorageService } from './storage.service';
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-const AUTH_API = 'http://172.20.0.7:3030/api/';
+const AUTH_API = 'http://localhost:3030/api/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -81,6 +81,7 @@ export class AuthService {
   removeItem() {
     localStorage.removeItem('user');
     localStorage.removeItem('auth-token');
+    localStorage.removeItem('AddToCart');
   }
 
   userAuthReload() {

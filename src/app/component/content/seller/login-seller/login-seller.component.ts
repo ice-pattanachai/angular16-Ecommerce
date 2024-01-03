@@ -52,6 +52,8 @@ export class LoginSellerComponent {
             icon: 'success',
             title: 'Login Success',
             text: 'Login Success',
+            showConfirmButton: false,
+            timer: 1000,
           });
         }
         this.isLoginFailed = false;
@@ -63,6 +65,8 @@ export class LoginSellerComponent {
           icon: 'error',
           title: 'Error',
           text: err.error.message || 'Login failed',
+          showConfirmButton: false,
+          timer: 1000,
         });
         this.isLoginFailed = true;
         console.log(err.error.message);
