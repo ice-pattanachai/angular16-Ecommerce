@@ -1,21 +1,48 @@
-<body>
-    <app-navbar ></app-navbar>
-    <app-back-to-top></app-back-to-top>
-    <div class="add-product">
-        <h1>Add New Product</h1>
-        <p class="message-p"></p>
-        <form class="common-form">
-          <input type="text" class="form-input" placeholder="Enter Product Name" name="name" ngModel />
-          <input type="text" class="form-input" placeholder="Enter Product Price" name="price" ngModel />
-          <input type="text" class="form-input" placeholder="Enter Product Category" name="category" ngModel />
-          <input type="text" class="form-input" placeholder="Enter Product Color" name="color" ngModel />
-          <textarea type="text" class="form-input" placeholder="Enter Product Description" name="description"
-            ngModel></textarea>
-      
-          <input type="text" class="form-input" placeholder="Enter Product Image URL" name="image" ngModel />
-          <button class="form-button">Add Product</button>
-      
-        </form>
-      </div>
-</body>
+<body class="animsition">
+  <app-navbar></app-navbar>
+  <app-back-to-top></app-back-to-top>
+  <div *ngIf="!showLogin">
+    <!-- แสดงเฉพาะถ้าล็อกอินสำเร็จ -->
+    <h2>Add New Product</h2>
 
+    <form #productForm="ngForm" (ngSubmit)="addProduct()" enctype="multipart/form-data">
+      <!-- รายละเอียดสินค้า -->
+      <label for="product_name">Product Name:</label>
+      <input type="text" name="product_name" [(ngModel)]="product_name" required>
+
+      <label for="description">Description:</label>
+      <textarea name="description" [(ngModel)]="description" required></textarea>
+
+      <!-- <label for="product_status">Product Status:</label>
+      <input type="checkbox" name="product_status" [(ngModel)]="isChecked"> -->
+      <label for="product_status">Product Status:</label>
+      <select name="product_status" [(ngModel)]="selectedProductStatus">
+        <option value="true">Active</option>
+        <option value="false">Inactive</option>
+      </select>
+
+      <label for="price_per_piece">Price per Piece (THB): </label>
+      <input type="number" name="price_per_piece" [(ngModel)]="price_per_piece" required>
+
+      <label for="stock_quantity">Stock Quantity:</label>
+      <input type="number" name="stock_quantity" [(ngModel)]="stock_quantity" required>
+
+      <!-- รูปภาพ -->
+      <label for="image">Image:</label>
+      <input type="file" name="image" (change)="onFileSelected($event)" required>
+
+      <!-- ประเภทสินค้า -->
+      <!-- <label for="categories">Categories:</label>
+      <div *ngFor="let category of categories">
+        <input type="text" name="category_name" [(ngModel)]="category.category_name" placeholder="Category Name"
+          required>
+        <textarea name="category_description" [(ngModel)]="category.description" placeholder="Category Description"
+          required></textarea>
+      </div> -->
+
+      <button type="button" (click)="addProduct()">Add Product</button>
+    </form>
+
+    <div *ngIf="addProductMessage">{{ addProductMessage }}</div>
+  </div>
+</body>

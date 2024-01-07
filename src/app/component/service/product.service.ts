@@ -1,35 +1,42 @@
 import { EventEmitter, Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http';
 import { cart, order, product } from '../../data-type'
+import { Observable } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  private apiUrl = 'http://localhost:3030/api';
   cartData = new EventEmitter<product[] | []>();
   constructor(private http: HttpClient) { }
-  addProduct(data: product) {
-    return this.http.post('http://localhost:3000/products', data);
+
+  addProduct(productData: FormData): Observable<any> {
+    return this.http.post('http://localhost:3030/api/add_product', productData);
   }
-  productList() {
-    return this.http.get<product[]>('http://localhost:3000/products');
+  getProductImage(productId: number): Observable<string> {
+    const url = `${this.apiUrl}/products_allimage?product_id=${productId}`;
+    return this.http.get<string>(url);
   }
 
-  deleteProduct(id: number) {
-    return this.http.delete(`http://localhost:3000/products/${id}`);
+  productList(): Observable<product[]> {
+    return this.http.post<product[]>('http://localhost:3030/api/products_all', {});
   }
 
-  getProduct(id: string) {
-    return this.http.get<product>(`http://localhost:3000/products/${id}`);
+  // updateProduct(productId: number, productData: any): Observable<any> {
+  //   const url = `${this.apiUrl}/edit_product/`;
+  //   return this.http.post<any>(url, productData);
+  // }
+  updateProduct(productData: FormData): Observable<any> {
+    return this.http.post('http://localhost:3030/api/products_edit', productData);
   }
-
-  updateProduct(product: product) {
-    return this.http.put<product>(
-      `http://localhost:3000/products/${product.id}`,
-      product
-    );
-  }
+  // updateProduct(product: product) {
+  //   return this.http.put<product>(
+  //     `http://localhost:3000/products/${product.id}`,
+  //     product
+  //   );
+  // }
   popularProducts() {
     return this.http.get<product[]>('http://localhost:3000/products?_limit=3');
   }

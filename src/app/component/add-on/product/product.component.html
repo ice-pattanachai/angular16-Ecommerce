@@ -1,32 +1,26 @@
-<!-- <div class="shop">
-  <div class="wrapper">
-    <div class="container">
-      <div class="row">
-        <div *ngFor="let product of products" class="product-item">
-            <a [routerLink]="'/product/' + product.id">
-            <img [src]="product.imageUrl[0]" alt="{{ product.name }}">
-            <h3>{{ product.name }}</h3>
-            <p>{{ product.description }}</p>
-            <p class="price">{{ product.price | currency }}</p>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <div class="shop">
   <div class="wrapper">
     <div class="container">
       <div class="row">
+        <!-- <div *ngFor="let product of products" class="product-item"> -->
         <div *ngFor="let product of products" class="product-item">
-          <a [routerLink]="'/product/'"
-            (click)="storeProduct(product.id, product.name, product.price, product.category, product.color, product.description, product.image)">
-            <img [src]="product.image" alt="{{ product.name }}">
-            <h3>{{ product.name }}</h3>
-            <p>{{ product.description }}</p>
-            <p class="price">{{ product.price | currency }}</p>
-          </a>
+          <div *ngIf="product.product_status && product.price_per_piece !== 0 && product.stock_quantity !== 0 ">
+            <a [routerLink]="'/product/'" (click)="storeProduct(
+              product.id,
+              product.product_name, 
+              product.product_status, 
+              product.price_per_piece,
+              product.stock_quantity, 
+              url+ product.id
+            )">
+              <!-- เปลี่ยนที่นี่ -->
+              <img [src]=" url+ product.id" alt="{{ product.name }}">
+              <!-- จบที่นี่ -->
+              <h3>{{ product.product_name }}</h3>
+              <p>{{ product.description }}</p>
+              <p class="price">{{ product.price_per_piece | currency: '฿' }}</p>
+            </a>
+          </div>
         </div>
       </div>
     </div>

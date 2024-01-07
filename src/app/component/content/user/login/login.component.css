@@ -35,6 +35,10 @@ body {
   text-decoration: none;
 }
 
+.navbar a:hover{
+  color: #ff5e00;
+}
+
 .header {
   position: fixed;
   top: 0;

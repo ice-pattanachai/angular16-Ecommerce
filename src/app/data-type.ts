@@ -9,17 +9,33 @@ export interface login {
 }
 
 export interface product {
+  description: string;
+  product_status: boolean;
+  stock_quantity: number;
+  images: any;
+  price_per_piece: any;
+  status: number;
+  product_name: string;
   imageUrl: any;
   name: string,
   price: number,
   category: string,
   color: string,
   image: string,
-  description: string,
   id: number,
   quantity: undefined | number,
   productId: undefined | number
 }
+// export interface product {
+// name: string;
+//   id: number;
+//   product_name:string;
+//   product_status:number;
+//   price_per_piece:number;
+//   stock_quantity:number;
+//   images:any;
+// }
+
 export interface cart {
   name: string,
   price: number,

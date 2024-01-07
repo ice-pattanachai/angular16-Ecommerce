@@ -15,7 +15,10 @@ import { PaymentComponent } from './component/content/user/payment/payment.compo
 import { LoginSellerComponent } from './component/content/seller/login-seller/login-seller.component';
 import { ManagePordersSellerComponent } from './component/content/seller/manage-porders-seller/manage-porders-seller.component';
 import { EditProductsComponent } from './component/content/seller/edit-products/edit-products.component';
+import { ProductsForSaleComponent } from './component/content/seller/products-for-sale/products-for-sale.component';
 import { AddProductsComponent } from './component/content/seller/add-products/add-products.component';
+import { SettingsComponent } from './component/content/seller/settings/settings.component';
+
 
 // const routes: Routes = [];
 const routes: Routes = [
@@ -37,6 +40,9 @@ const routes: Routes = [
   { path: 'edit-products', component: EditProductsComponent },
   { path: 'add-proders', component: AddProductsComponent },
   { path: 'manage_porders', component: ManagePordersSellerComponent },
+  { path: 'all', component: ProductsForSaleComponent },
+  { path: 'shop_settings', component: SettingsComponent },
+  // { path: '/edit-product', component: EditProductsComponent },
   // admin
   // <-- -->
   // end

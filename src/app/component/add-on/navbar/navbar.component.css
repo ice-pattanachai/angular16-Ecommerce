@@ -74,8 +74,11 @@ a .badge {
     transition: .3s;
 }
 
-.navbar a:hover::before {
+/* .navbar a:hover::before {
     width: 100%;
+} */
+.navbar a:hover{
+    color: #000000;
 }
 
 .menu-icon {

@@ -34,11 +34,21 @@
                 </a>
             </ul>
             <ul *ngSwitchCase="'seller'" style="display: flex;">
+                <a href="/cartgo">
+                    Cargo
+                    <span class="badge" *ngIf="badgeCount !== null">{{ badgeCount }}</span>
+                </a>
+                <a href="/all">
+                    ProductsAll
+                </a>
                 <a href="/add-proders">
                     Add Proders
                 </a>
                 <a href="/shop">
                     Shop
+                </a>
+                <a href="shop_settings">
+                    S_Shop
                 </a>
                 <a href="/home" (click)="logout()">
                     Logout

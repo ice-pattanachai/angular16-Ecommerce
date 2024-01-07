@@ -18,6 +18,7 @@ export class CartgoComponent implements OnInit, AfterViewInit {
   product: any;
   totalPerItem: number[] = [];
   grandTotal: number = 0;
+  url = "http://172.20.1.120:3030/api/products_all/image?product_id="
 
   constructor(
     private router: Router,
@@ -65,8 +66,28 @@ export class CartgoComponent implements OnInit, AfterViewInit {
   }
 
   calculateTotals(): void {
-    this.totalPerItem = this.cartData.map(item => item.price * item.quantity);
+    this.totalPerItem = this.cartData.map(item => item.price_per_piece * item.quantity);
     this.grandTotal = this.totalPerItem.reduce((acc, total) => acc + total, 0);
+  }
+  
+  storeProduct(
+    id: number,
+    product_name: string,
+    product_status:boolean,
+    price_per_piece:number,
+    stock_quantity:number,
+    image:string,
+  ): void {
+    const productData = {
+      id: id,
+      name: product_name,
+      status: product_status,
+      price: price_per_piece,
+      quantity:stock_quantity,
+      image: image,
+      
+    };
+    localStorage.setItem('Product', JSON.stringify(productData));
   }
 
 }
