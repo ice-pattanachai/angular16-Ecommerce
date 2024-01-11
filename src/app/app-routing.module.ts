@@ -18,6 +18,7 @@ import { EditProductsComponent } from './component/content/seller/edit-products/
 import { ProductsForSaleComponent } from './component/content/seller/products-for-sale/products-for-sale.component';
 import { AddProductsComponent } from './component/content/seller/add-products/add-products.component';
 import { SettingsComponent } from './component/content/seller/settings/settings.component';
+import { SettingUserAllComponent } from './component/content/page/setting-user-all/setting-user-all.component';
 
 
 // const routes: Routes = [];
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'shop', component: ShopComponent },
   { path: 'product', component: ProductDetailComponent },
   { path: 'cartgo', component: CartgoComponent },
+  { path: 'setting', component: SettingUserAllComponent },
   // { path: 'product/:id', component: ProductDetailComponent },
   // user
   { path: 'user-login', component: LoginComponent },

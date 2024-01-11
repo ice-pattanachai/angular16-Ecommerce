@@ -59,38 +59,29 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;
       },
-      error: err => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: err.error.message || 'Login failed',
-        });
-        this.isLoginFailed = true;
-        console.log(err.error.message);
-      }
+      // error: err => {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Error',
+      //     text: err.error.message || 'Login failed',
+      //   });
+      //   this.isLoginFailed = true;
+      //   console.log(err.error.message);
+      // }
     });
   }
 
   onClickSubmitRegister() {
     this.authService.register_user(this.username, this.password_hash, this.mail).subscribe({
       next: data => {
-        this.storageService.saveUser(data);
-        // window.alert("Register Success");
-        this.roles = this.storageService.getUser().roles;
-
+        this.storageService.registerUser(data);
         this.reloadPage();
         Swal.fire({
           icon: 'success',
           title: 'register Success',
           text: 'register Success',
         });
-
       },
-      error: err => {
-        window.alert(err.error.message);
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
-      }
     });
   }
 

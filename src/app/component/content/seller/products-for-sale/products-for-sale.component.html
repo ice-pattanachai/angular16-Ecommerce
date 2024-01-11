@@ -10,11 +10,12 @@
                             <thead>
                                 <tr class="table-head">
                                     <th class="column-1"></th>
-                                    <th class="column-2">Name</th>
-                                    <th class="column-3">Price</th>
-                                    <th class="column-4 p-l-70">Quantity</th>
-                                    <th class="column-5">Status</th>
-                                    <th class="column-6">Actions</th>
+                                    <th class="column-2">Id</th>
+                                    <th class="column-3">Name</th>
+                                    <th class="column-4">Price</th>
+                                    <th class="column-5 p-l-70">Quantity</th>
+                                    <th class="column-6">Status</th>
+                                    <th class="column-7">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -24,13 +25,15 @@
                                             <img [src]=" url+ product.id" alt="{{ product.name }}">
                                         </div>
                                     </td>
-                                    <td class="column-2">{{ product.product_name }}</td>
-                                    <td class="column-3">{{ product.price_per_piece | currency: '฿' }}</td>
-                                    <td class="column-4">{{ product.stock_quantity }}</td>
-                                    <td class="column-5">{{ product.product_status }}
+                                    <td class="column-2">{{ product.id }}</td>
+                                    <td class="column-3">{{ product.product_name }}</td>
+                                    <td class="column-4">{{ product.price_per_piece | currency: '฿' }}</td>
+                                    <td class="column-5">{{ product.stock_quantity }}</td>
+                                    <td class="column-6">{{ product.product_status }}
                                     </td>
-                                    <td class="column-6">
-                                        <button mat-button class=" rounded-btn" (click)="editProduct(product.id)">Edit</button>
+                                    <td class="column-7">
+                                        <button mat-button class=" rounded-btn"
+                                            (click)="editProduct(product.id)">Edit</button>
                                     </td>
                                 </tr>
                             </tbody>

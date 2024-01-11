@@ -77,7 +77,7 @@ a .badge {
 /* .navbar a:hover::before {
     width: 100%;
 } */
-.navbar a:hover{
+.navbar a:hover {
     color: #000000;
 }
 
@@ -93,6 +93,10 @@ a .badge {
 .dropdown a {
     color: var(--text-d-color);
     text-decoration: none;
+}
+
+.dropdown a:hover {
+    color: var(--color-orange);
 }
 
 .responsive-menu a {

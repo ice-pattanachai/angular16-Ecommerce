@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
-import {HttpClient} from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { ProductService } from 'src/app/component/service/product.service';
 import Swal from 'sweetalert2';
 
@@ -13,24 +13,26 @@ import Swal from 'sweetalert2';
 export class AddProductsComponent implements OnInit {
   showLogin = true;
   addProductMessage: string | undefined;
-
-  product_name: string = '';
-  description: string = '';
-
-  price_per_piece: number = 0;
-  stock_quantity: number = 0;
   image: File | undefined;
   categories: any[] = [{ category_name: '', description: '' }];
 
   selectedProductStatus: boolean = false;
-  product_status: boolean = false;
   isChecked: boolean = false;
+  errorMessage = '';
+
+  id: number = 0;
+  product_name: string = '';
+  description: string = '';
+  product_status: boolean = false;
+  price_per_piece: number = 0;
+  stock_quantity: number = 0;
+
   constructor(
-    private router: Router, 
-    private authService: AuthService ,
-    private http:HttpClient,
+    private router: Router,
+    private authService: AuthService,
+    private http: HttpClient,
     private productService: ProductService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     const userData = localStorage.getItem('user');
@@ -80,7 +82,7 @@ export class AddProductsComponent implements OnInit {
       this.router.navigate(['/add-proders']);
     }
   }
-  
+
   onFileSelected(event: any) {
     this.image = event.target.files[0];
   }
@@ -97,7 +99,10 @@ export class AddProductsComponent implements OnInit {
     formData.append('categories', JSON.stringify(this.categories));
 
 
-    window.location.reload();
+    // window.location.reload();
+    setTimeout(function () {
+      window.location.reload();
+    }, 1000);
     this.productService.addProduct(formData).subscribe(
       (response: any) => {
         this.addProductMessage = 'Product added successfully!';

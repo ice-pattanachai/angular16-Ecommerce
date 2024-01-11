@@ -10,7 +10,7 @@ import { product } from '../../../data-type';
 export class ProductComponent implements OnInit {
   products: product[] = [];
   productImages: { [key: number]: string } = {};
-  url = "http://172.20.1.120:3030/api/products_all/image?product_id="
+  url = "http://localhost:3030/api/products_all/image?product_id="
 
   popularProducts: undefined | product[];
   trendyProducts: undefined | product[];
@@ -28,19 +28,19 @@ export class ProductComponent implements OnInit {
   storeProduct(
     id: number,
     product_name: string,
-    product_status:boolean,
-    price_per_piece:number,
-    stock_quantity:number,
-    image:string,
+    product_status: boolean,
+    price_per_piece: number,
+    stock_quantity: number,
+    image: string,
   ): void {
     const productData = {
       id: id,
       name: product_name,
       status: product_status,
       price: price_per_piece,
-      quantity:stock_quantity,
+      quantity: stock_quantity,
       image: image,
-      
+
     };
     localStorage.setItem('Product', JSON.stringify(productData));
   }
@@ -49,9 +49,9 @@ export class ProductComponent implements OnInit {
     //   this.products = data;
     // });
     this.productService.productList().subscribe((data) => {
-      this.products = data.filter((product) => product.product_status === true);
-      this.products = data.filter((product) => product.price_per_piece !== 0)
-      this.products = data.filter((product) => product.stock_quantity !== 0);
+      this.products = data.filter((product) => product.product_status === true && product.price_per_piece !== 0 && product.stock_quantity !== 0);
+      // this.products = data.filter((product) => product.price_per_piece !== 0)
+      // this.products = data.filter((product) => product.stock_quantity !== 0);
     });
 
     this.productService.popularProducts().subscribe((data) => {

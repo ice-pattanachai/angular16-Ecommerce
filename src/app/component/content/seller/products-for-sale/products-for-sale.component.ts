@@ -11,7 +11,7 @@ import { product } from '../../../../data-type';
   styleUrls: ['./products-for-sale.component.css']
 })
 export class ProductsForSaleComponent implements OnInit {
-  url = "http://172.20.1.120:3030/api/products_all/image?product_id="
+  url = "http://localhost:3030/api/products_all/image?product_id="
   showLogin = true;
   products: product[] = [];
   popularProducts: undefined | product[];
@@ -101,7 +101,8 @@ export class ProductsForSaleComponent implements OnInit {
     }
   }
   // productId.toString()
-  editProduct(productId: number): void {const productID = {id: productId,};
+  editProduct(productId: number): void {
+    const productID = { id: productId, };
     localStorage.setItem('EditProductId', JSON.stringify(productID));
     this.router.navigate(['/edit-products']);
   }

@@ -1,9 +1,13 @@
 import { EventEmitter, Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { cart, order, product } from '../../data-type'
 import { Observable } from 'rxjs';
 
+const AUTH_API = 'http://localhost:3030/api/';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +19,26 @@ export class ProductService {
   addProduct(productData: FormData): Observable<any> {
     return this.http.post('http://localhost:3030/api/add_product', productData);
   }
+
+  edit_Product(
+    id: number, product_name: string, description: string,
+    product_status: boolean, price_per_piece: number,
+    stock_quantity: number
+  ): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'products_edit',
+      {
+        id,
+        product_name,
+        description,
+        product_status,
+        price_per_piece,
+        stock_quantity,
+      },
+      httpOptions
+    );
+  }
+
   getProductImage(productId: number): Observable<string> {
     const url = `${this.apiUrl}/products_allimage?product_id=${productId}`;
     return this.http.get<string>(url);

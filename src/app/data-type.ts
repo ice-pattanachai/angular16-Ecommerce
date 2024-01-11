@@ -26,16 +26,6 @@ export interface product {
   quantity: undefined | number,
   productId: undefined | number
 }
-// export interface product {
-// name: string;
-//   id: number;
-//   product_name:string;
-//   product_status:number;
-//   price_per_piece:number;
-//   stock_quantity:number;
-//   images:any;
-// }
-
 export interface cart {
   name: string,
   price: number,
@@ -49,13 +39,6 @@ export interface cart {
   userId: number
 }
 
-export interface priceSummary {
-  price: number,
-  discount: number,
-  tax: number,
-  delivery: number,
-  total: number
-}
 
 export interface order {
   email: string,
@@ -64,4 +47,28 @@ export interface order {
   totalPrice: number,
   userId: string,
   id: number | undefined
+}
+
+export interface Address {
+  id: number;
+  fullname: string;
+  address: string;
+  postalcode: number;
+  phone: string;
+  createdAt: string;
+  updatedAt: string;
+  user_id: number;
+}
+
+export interface User {
+  id: number;
+  username: string;
+  password_hash: string;
+  mail: string;
+  name: string;
+  fullname: string;
+  createdAt: string;
+  updatedAt: string;
+  roles_id: number;
+  addresses: Address[];
 }

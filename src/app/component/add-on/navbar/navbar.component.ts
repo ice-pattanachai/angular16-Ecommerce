@@ -140,6 +140,17 @@ export class NavbarComponent implements OnInit {
   toggleMenu2() {
     this.isMenuOpen2 = !this.isMenuOpen2;
   }
+
+  isMenuOpenUser = false;
+  toggleMenuUser() {
+    this.isMenuOpenUser = !this.isMenuOpenUser;
+  }
+
+  isMenuOpenSeller = false;
+  toggleMenuSeller() {
+    this.isMenuOpenSeller = !this.isMenuOpenSeller;
+  }
+
   closeMenu2() {
     this.isMenuOpen2 = false;
   }

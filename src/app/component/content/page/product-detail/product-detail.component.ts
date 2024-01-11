@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-  url = "http://172.20.1.120:3030/api/products_all/image?product_id="
+  url = "http://localhost:3030/api/products_all/image?product_id="
   product: product | undefined;
   quantity: number = 1;
 
@@ -36,64 +36,6 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
-  // getProduct(id: string) {
-  //   this.productService.getProduct(id).subscribe((data) => {
-  //     this.product = data;
-  //   });
-  // }
-
-  // addToCart(
-  //   productId: number,
-  //   product_name: string,
-  //   price: number,
-  //   category: string,
-  //   color: string,
-  //   description: string,
-  //   image: string
-  // ): void {
-  //   const userData = localStorage.getItem('user');
-  //   if (!userData) {
-  //     Swal.fire({
-  //       icon: 'warning',
-  //       title: 'Login',
-  //       text: 'Log in before using',
-  //       showConfirmButton: false,
-  //       timer: 1000,
-  //     }).then(() => {
-  //       this.router.navigate(['/user-login']);
-  //     });
-  //     return;
-  //   }
-
-  //   const existingCartData = localStorage.getItem('AddToCart');
-  //   let cartData = existingCartData ? JSON.parse(existingCartData) : [];
-
-  //   const existingProduct = cartData.find((item: any) => item.id === productId);
-  //   if (existingProduct) {
-  //     existingProduct.quantity += this.quantity;
-  //     localStorage.setItem('AddToCart', JSON.stringify(cartData));
-  //   } else {
-  //     const productData = {
-  //       name: name,
-  //       price: price,
-  //       category: category,
-  //       color: color,
-  //       description: description,
-  //       image: image,
-  //       id: productId,
-  //       quantity: this.quantity
-  //     };
-  //     cartData.push(productData);
-  //     localStorage.setItem('AddToCart', JSON.stringify(cartData));
-  //     Swal.fire({
-  //       icon: 'success',
-  //       title: 'Add To Cart',
-  //       text: 'Successfully',
-  //       showConfirmButton: false,
-  //       timer: 1000,
-  //     });
-  //   }
-  // }
   addToCart(product: product): void {
     const userData = localStorage.getItem('user');
     if (!userData) {
@@ -108,10 +50,10 @@ export class ProductDetailComponent implements OnInit {
       });
       return;
     }
-  
+
     const existingCartData = localStorage.getItem('AddToCart');
     let cartData = existingCartData ? JSON.parse(existingCartData) : [];
-  
+
     const existingProduct = cartData.find((item: any) => item.id === product.id);
     if (existingProduct) {
       existingProduct.quantity += this.quantity;
@@ -137,7 +79,7 @@ export class ProductDetailComponent implements OnInit {
         window.location.reload();
       });
     }
-  
+
     localStorage.setItem('AddToCart', JSON.stringify(cartData));
   }
 

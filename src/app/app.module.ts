@@ -33,6 +33,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ProductsForSaleComponent } from './component/content/seller/products-for-sale/products-for-sale.component';
 import { AddProductsComponent } from './component/content/seller/add-products/add-products.component';
 import { SettingsComponent } from './component/content/seller/settings/settings.component';
+import { SettingUserAllComponent } from './component/content/page/setting-user-all/setting-user-all.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { SettingsComponent } from './component/content/seller/settings/settings.
     CartgoComponent,
     ProductsForSaleComponent,
     AddProductsComponent,
-    SettingsComponent
+    SettingsComponent,
+    SettingUserAllComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import { Observable, tap, throwError } from 'rxjs';
 import { StorageService } from './storage.service';
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { User } from 'src/app/data-type';
 
 const AUTH_API = 'http://localhost:3030/api/';
 
@@ -66,6 +67,110 @@ export class AuthService {
       httpOptions
     );
   }
+
+  userList(id: any): Observable<User[]> {
+    const body = { id: id };
+    const data = this.http.post<User[]>('http://localhost:3030/api/user_id', body)
+    return data;
+  }
+
+  sellerList(id: any): Observable<User[]> {
+    const body = { id: id };
+    const data = this.http.post<User[]>('http://localhost:3030/api/seller_id', body)
+    return data;
+  }
+
+  edit_User(
+    id: number, password_hash: string, mail: string, name: string, fullname: string
+  ): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'edit_user',
+      {
+        id,
+        password_hash,
+        mail,
+        name,
+        fullname
+      },
+      httpOptions
+
+    );
+  }
+
+  edit_seller(
+    id: number, password_hash: string, name: string
+  ): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'edit_seller',
+      {
+        id,
+        password_hash,
+        name,
+      },
+      httpOptions
+
+    );
+  }
+
+  checkPasswordUser(id: number, password_hash: string): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'check_password/user',
+      { id, password_hash },
+      httpOptions
+    );
+  }
+
+  checkPasswordSeller(id: number, password_hash: string): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'check_password/seller',
+      { id, password_hash },
+      httpOptions
+    );
+  }
+
+  add_Assresses(
+    fullname: string, address: string, postalcode: number, phone: string, user_id: number
+  ): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'assresses_user/add',
+      {
+        fullname,
+        address,
+        postalcode,
+        phone,
+        user_id,
+      },
+      httpOptions
+    );
+  }
+
+  edit_Assresses(
+    id: number, fullname: string, address: string, postalcode: number, phone: string, user_id: number
+  ): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'assresses_user/edit',
+      {
+        id,
+        fullname,
+        address,
+        postalcode,
+        phone,
+        user_id,
+      },
+      httpOptions
+    );
+  }
+
+  delete_Assresses(id: number): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'assresses_user/delete',
+      {
+        id,
+      },
+      httpOptions
+    );
+  }
+
 
   authenticateToken(token: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

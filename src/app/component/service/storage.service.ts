@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 const USER_KEY = 'user';
 const TOKEN_KEY = 'auth-token';
@@ -8,7 +10,7 @@ const seller = 'seller'
   providedIn: 'root'
 })
 export class StorageService {
-  constructor() { }
+  constructor(private router: Router) { }
 
   clean(): void {
     window.sessionStorage.clear();
@@ -16,8 +18,35 @@ export class StorageService {
   }
 
   public saveUser(user: any): void {
-    window.localStorage.removeItem(USER_KEY);
-    window.localStorage.setItem(USER_KEY, JSON.stringify(user));
+    if (user.status && user.status.toLowerCase() === 'error') {
+      // Handle error case, do not setItem
+      console.error('Login failed:', user.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: user.message || 'Login failed',
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    } else {
+      // SetItem only if the response is not an error
+      window.localStorage.removeItem(USER_KEY);
+      window.localStorage.setItem(USER_KEY, JSON.stringify(user));
+    }
+  }
+  public registerUser(user: any): void {
+    if (user.status && user.status.toLowerCase() === 'error') {
+      console.error('Login failed:', user.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: user.message || 'Register failed',
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    } else {
+      this.router.navigate(['/user-login'])
+    }
   }
 
   public getUser(): any {
@@ -41,7 +70,7 @@ export class StorageService {
     window.localStorage.removeItem(TOKEN_KEY);
     window.localStorage.setItem(TOKEN_KEY, token);
   }
-  
+
   public getToken(): string | null {
     return window.localStorage.getItem(TOKEN_KEY);
   }

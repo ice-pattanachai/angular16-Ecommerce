@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CartgoComponent } from './cartgo.component';
+import { SettingUserAllComponent } from './SettingUserAllComponent';
 
-describe('CartgoComponent', () => {
-  let component: CartgoComponent;
-  let fixture: ComponentFixture<CartgoComponent>;
+describe('SettingUserAllComponent', () => {
+  let component: SettingUserAllComponent;
+  let fixture: ComponentFixture<SettingUserAllComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CartgoComponent]
+      declarations: [SettingUserAllComponent]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(CartgoComponent);
+    fixture = TestBed.createComponent(SettingUserAllComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

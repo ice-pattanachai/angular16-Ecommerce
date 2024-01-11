@@ -34,21 +34,103 @@
                                             (click)="removeFromCart(element.id)">Remove</button>
                                     </td>
                                 </tr>
+                            </tbody>
+                            <tbody *ngIf="cartData.length !== 0">
+                                <tr class="table-row">
+                                    <td class="column-1">Cart Totals</td>
+                                    <td class="column-2"></td>
+                                    <td class="column-3"></td>
+                                    <td class="column-4">Total price:</td>
+                                    <td class="column-5">{{ grandTotal | currency: '฿' }}</td>
+                                    <td class="column-6"></td>
+                                </tr>
+                            </tbody>
                         </table>
+                        <div *ngIf="cartData.length === 0">
+                            <p>Your cart is empty.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-table-container pos-relative" *ngIf="cartData.length !== 0">
+                    <div class="shopping-cart-wrap bg-white" *ngFor="let user of userall">
+                        <table class="shopping-cart-table">
+                            <thead>
+                                <tr class="table-head">
+                                    <th class="column-1">ชื่อ</th>
+                                    <th class="column-2">ที่อยู่</th>
+                                    <th class="column-3">เบอร์โทร</th>
+                                    <th class="column-4">ชำระ</th>
+                                </tr>
+                                <tr class="table-address">
+                                    <th class="column-1" style="width: 100px;  max-width: 10%;">
+                                        <select name="product_status" (change)="selectChang($event)">
+                                            <option value="">กรุณาเลือกที่อยู่</option>
+                                            <ng-container *ngFor="let address of user.addresses">
+                                                <option [value]="address.id">{{ address.fullname }}</option>
+                                            </ng-container>
+                                        </select>
+                                    </th>
+                                    <th class="column-2" *ngIf="selectedAddress" style="width: 500; max-width: 70%;">
+                                        {{ selectedAddress.address }}
+                                        {{selectedAddress.postalcode }}
+                                    </th>
+                                    <th class="column-3" *ngIf="selectedAddress" style="width: 100px;  max-width: 10%;">
+                                        {{ selectedAddress.phone }}</th>
+                                    <th class="column-4" style="width: 100px;  max-width: 10%; ">
+                                        <select name="product_status" style="float: right;">
+                                            <option>PromptPay</option>
+                                            <option>Cash on delivery</option>
+                                        </select>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+
                     </div>
                 </div>
                 <div
                     class="cart-totals-container bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
-                    <h5 class="cart-totals-heading m-text20 p-b-24">Cart Totals</h5>
                     <div class="total flex-w flex-sb-m p-t-26 p-b-30">
-                        <span class="total-label m-text22 w-size19 w-full-sm">Total:</span>
-                        <span class="total-amount m-text21 w-size20 w-full-sm">{{ grandTotal | currency: '฿' }}</span>
+                        <span class="total-label m-text22 w-size19 w-full-sm"> </span>
+                        <span class="total-amount m-text21 w-size20 w-full-sm" *ngIf="cartData.length !== 0">Total: {{
+                            grandTotal | currency: '฿'}}</span>
                     </div>
                 </div>
-                <div class="r">
-                    <button class=" bg-primary rounded-btn">Proceed to Checkout</button>
+                <div class="r" *ngIf="cartData.length !== 0">
+                    <button class=" bg-primary rounded-btn">settle</button>
                 </div>
             </div>
         </section>
     </div>
+
+
+
+    <table mat-table class="mat-elevation-z8">
+
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell> </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell> </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="weight">
+            <th mat-header-cell *matHeaderCellDef> Weight </th>
+            <td mat-cell> </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="symbol">
+            <th mat-header-cell *matHeaderCellDef> Symbol </th>
+            <td mat-cell> </td>
+        </ng-container>
+
+        <tr mat-header-row></tr>
+        <tr mat-row></tr>
+    </table>
 </body>
