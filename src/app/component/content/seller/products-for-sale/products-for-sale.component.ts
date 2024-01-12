@@ -73,13 +73,13 @@ export class ProductsForSaleComponent implements OnInit {
       this.updateProductsInCurrentPage();
     });
 
-    this.productService.popularProducts().subscribe((data) => {
-      this.popularProducts = data;
-    });
+    // this.productService.popularProducts().subscribe((data) => {
+    //   this.popularProducts = data;
+    // });
 
-    this.productService.trendyProducts().subscribe((data) => {
-      this.trendyProducts = data;
-    });
+    // this.productService.trendyProducts().subscribe((data) => {
+    //   this.trendyProducts = data;
+    // });
 
   }
   goToPage(page: number): void {

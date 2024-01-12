@@ -9,10 +9,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login-seller.component.css']
 })
 export class LoginSellerComponent {
-  isSignIn: boolean = true;
+
   username: string = '';
   password_hash: string = '';
-  mail: string = '';
+  name: string = '';
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
@@ -23,6 +23,7 @@ export class LoginSellerComponent {
     "../../../../../assets/images/login.png",
   ];
 
+  isSignIn: boolean = true;
   toggleSignIn() {
     this.isSignIn = !this.isSignIn;
   }
@@ -71,6 +72,21 @@ export class LoginSellerComponent {
         this.isLoginFailed = true;
         console.log(err.error.message);
       }
+    });
+  }
+
+
+  onClickSubmitRegister() {
+    this.authService.register_seller(this.username, this.password_hash, this.name).subscribe({
+      next: data => {
+        this.storageService.registerUser(data);
+        this.reloadPage();
+        Swal.fire({
+          icon: 'success',
+          title: 'register Success',
+          text: 'register Success',
+        });
+      },
     });
   }
 

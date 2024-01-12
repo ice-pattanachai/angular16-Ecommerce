@@ -1,6 +1,6 @@
-<app-navbar></app-navbar>
-
 <body class="animsition">
+    <app-navbar></app-navbar>
+    <app-back-to-top></app-back-to-top>
     <div class="bodymain">
         <section class="cart-container bg-white p-t-70 p-b-100">
             <div class="container">
@@ -8,8 +8,8 @@
                     <div class="shopping-cart-wrap bg-white">
                         <table class="shopping-cart-table">
                             <thead>
-                                <tr class="table-head">
-                                    <th class="column-1"></th>
+                                <tr class="table-head" *ngFor="let user of userall">
+                                    <th class="column-1">{{user.id}}</th>
                                     <th class="column-2">Product</th>
                                     <th class="column-3">Price</th>
                                     <th class="column-4 p-l-70">Quantity</th>
@@ -62,11 +62,12 @@
                                     <th class="column-4">ชำระ</th>
                                 </tr>
                                 <tr class="table-address">
-                                    <th class="column-1" style="width: 100px;  max-width: 10%;">
+                                    <th class="column-1" style="width: 130px;  max-width: 10%;">
                                         <select name="product_status" (change)="selectChang($event)">
                                             <option value="">กรุณาเลือกที่อยู่</option>
                                             <ng-container *ngFor="let address of user.addresses">
                                                 <option [value]="address.id">{{ address.fullname }}</option>
+
                                             </ng-container>
                                         </select>
                                     </th>
@@ -77,15 +78,14 @@
                                     <th class="column-3" *ngIf="selectedAddress" style="width: 100px;  max-width: 10%;">
                                         {{ selectedAddress.phone }}</th>
                                     <th class="column-4" style="width: 100px;  max-width: 10%; ">
-                                        <select name="product_status" style="float: right;">
-                                            <option>PromptPay</option>
-                                            <option>Cash on delivery</option>
+                                        <select name="product_status" style="float: right;" [(ngModel)]="paymentFormat">
+                                            <option value="Waiting for payment , PromptPay">PromptPay</option>
+                                            <option value="Cash on delivery">Cash on delivery</option>
                                         </select>
                                     </th>
                                 </tr>
                             </thead>
                         </table>
-
                     </div>
                 </div>
                 <div
@@ -97,40 +97,9 @@
                     </div>
                 </div>
                 <div class="r" *ngIf="cartData.length !== 0">
-                    <button class=" bg-primary rounded-btn">settle</button>
+                    <button class=" bg-primary rounded-btn" (click)="onClickConfirm()">Confirm</button>
                 </div>
             </div>
         </section>
     </div>
-
-
-
-    <table mat-table class="mat-elevation-z8">
-
-        <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell> </td>
-        </ng-container>
-
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell> </td>
-        </ng-container>
-
-        <!-- Weight Column -->
-        <ng-container matColumnDef="weight">
-            <th mat-header-cell *matHeaderCellDef> Weight </th>
-            <td mat-cell> </td>
-        </ng-container>
-
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="symbol">
-            <th mat-header-cell *matHeaderCellDef> Symbol </th>
-            <td mat-cell> </td>
-        </ng-container>
-
-        <tr mat-header-row></tr>
-        <tr mat-row></tr>
-    </table>
 </body>

@@ -54,13 +54,13 @@ export class ProductComponent implements OnInit {
       // this.products = data.filter((product) => product.stock_quantity !== 0);
     });
 
-    this.productService.popularProducts().subscribe((data) => {
-      this.popularProducts = data;
-    });
+    // this.productService.popularProducts().subscribe((data) => {
+    //   this.popularProducts = data;
+    // });
 
-    this.productService.trendyProducts().subscribe((data) => {
-      this.trendyProducts = data;
-    });
+    // this.productService.trendyProducts().subscribe((data) => {
+    //   this.trendyProducts = data;
+    // });
   }
 }
 

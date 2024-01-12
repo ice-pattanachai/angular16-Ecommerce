@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SettingUserAllComponent } from './SettingUserAllComponent';
+import { SettingUserAllComponent } from './setting-user-all.component';
 
 describe('SettingUserAllComponent', () => {
   let component: SettingUserAllComponent;

@@ -21,7 +21,7 @@
                                     <td class="column-2">Username: {{ seller.username }}</td>
                                     <td class="column-3">Name: {{ seller.name }}</td>
                                     <td class="column-4">
-                                        <button (click)="toggleMenuSeller()">Edit</button>
+                                        <button (click)="toggleMenuSeller()" class="bg-edit">Edit</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -54,7 +54,7 @@
                                     </td>
                                     <td class="column-3"></td>
                                     <td class="column-4">
-                                        <button
+                                        <button class="bg-Ok"
                                             (click)="onClickEditSeller(seller.id , checkpasswordseller_hash ,seller.name)">
                                             Ok
                                         </button>
@@ -89,7 +89,7 @@
                                     <td class="column-4">Name: {{ user.name }}</td>
                                     <td class="column-5">Fullname: {{ user.fullname }}</td>
                                     <td class="column-6">
-                                        <button (click)="toggleMenuUser()">
+                                        <button class="bg-edit" (click)="toggleMenuUser()">
                                             Edit
                                         </button>
                                     </td>
@@ -133,7 +133,7 @@
                                     </td>
                                     <td class="column-5"></td>
                                     <td class="column-6">
-                                        <button
+                                        <button class="bg-Ok"
                                             (click)="onClickEditUser(user.id , checkpassword_hash ,user.mail ,user.name ,user.fullname)">
                                             Ok
                                         </button>
@@ -151,7 +151,6 @@
                                     <th class="column-3">Postal Code</th>
                                     <th class="column-4">Phone</th>
                                     <th class="column-5"></th>
-                                    <!-- <th class="column-6"></th> -->
                                 </tr>
                                 <tr class="table-row" *ngFor="let address of user.addresses">
                                     <td class="column-1">{{ address.fullname }}</td>
@@ -163,7 +162,6 @@
                                             delete
                                         </button>
                                     </td>
-                                    <!-- <td class="column-6">delete</td> -->
                                 </tr>
                                 <tr class="table-row">
                                     <td class="column-1">
@@ -178,9 +176,8 @@
                                     <td class="column-4">
                                         <input type="text" name="name" required [(ngModel)]="phone">
                                     </td>
-                                    <!-- <td class="column-5"></td> -->
                                     <td class="column-5">
-                                        <button (click)="onClickSubmitAssresses(user.id)">
+                                        <button class="bg-Ok" (click)="onClickSubmitAssresses(user.id)">
                                             Add
                                         </button>
                                     </td>

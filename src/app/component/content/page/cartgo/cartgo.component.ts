@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/component/service/auth.service';
+import { ProductService } from 'src/app/component/service/product.service';
 import { StorageService } from 'src/app/component/service/storage.service';
 import { User } from 'src/app/data-type';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cartgo',
@@ -26,6 +28,7 @@ export class CartgoComponent implements OnInit, AfterViewInit {
     private storageService: StorageService,
     private authService: AuthService,
     private route: ActivatedRoute,
+    private productService: ProductService,
   ) { }
   ngAfterViewInit(): void {
     throw new Error('Method not implemented.');
@@ -120,5 +123,112 @@ export class CartgoComponent implements OnInit, AfterViewInit {
     if (this.userall) {
       return this.userall[0].addresses.find((e: any) => e.id == addressId);
     }
+  }
+
+  addresses_name: string = '';
+  address: string = '';
+  postalcode: number = 0;
+  phone: string = '';
+  total_price: number = 0;
+  status: boolean = false;
+  payment_format: string = '';
+  confirm_payment: boolean = false;
+  user_id: number = 0;
+  product_id: number = 0;
+  paymentFormat: string = '';
+
+  onClickConfirm() {
+    for (const product of this.cartData) {
+      const productId = product.id;
+      const selectedAddressId = this.selectedAddressId;
+      const selectedAddress = this.getSelectedAddress(selectedAddressId);
+      // const address = selectedAddress ? `${selectedAddress.address} ${selectedAddress.postalcode}` : '';
+      // const phone = selectedAddress ? selectedAddress.phone : '';
+      const user_id = this.userall![0].id;
+      const address = this.selectedAddress.address;
+      const addresses_name = this.selectedAddress.fullname;
+      const phone = this.selectedAddress.phone;
+      const payment_format = this.paymentFormat;
+      const postalcode = this.selectedAddress.postalcode;
+      const status = this.status;
+
+      // เรียกใช้ฟังก์ชันที่ปรับปรุงไว้เพื่อทำการส่งข้อมูล
+      this.processOrder(
+        addresses_name,
+        address,
+        postalcode,
+        phone,
+        product.quantity
+        , product.price_per_piece * product.quantity,
+        status,
+        payment_format,
+        this.confirm_payment,
+        user_id,
+        productId
+      );
+    }
+  }
+
+
+  processOrder(
+    addresses_name: string,
+    address: string,
+    postalcode: number,
+    phone: string,
+    quantity: number,
+    total_price: number,
+    status: boolean,
+    payment_format: string,
+    confirm_payment: boolean,
+    user_id: number,
+    product_id: number): void {
+    this.productService.add_purchase_orders(
+      addresses_name,
+      address,
+      postalcode,
+      phone,
+      quantity,
+      total_price,
+      status,
+      payment_format,
+      confirm_payment,
+      user_id,
+      product_id
+    ).subscribe({
+      next: data => {
+        console.log('Order placed successfully for product id:', product_id);
+      },
+    });
+  }
+
+
+
+  // onClickConfirm() {
+  //   this.productService.add_purchase_orders(
+  //     this.addresses_name,
+  //     this.address,
+  //     this.postalcode,
+  //     this.phone,
+  //     this.quantity,
+  //     this.total_price,
+  //     this.status,
+  //     this.payment_format,
+  //     this.confirm_payment,
+  //     this.user_id,
+  //     this.product_id,
+  //   ).subscribe({
+  //     next: data => {
+  //       this.reloadPage();
+  //       Swal.fire({
+  //         icon: 'success',
+  //         title: 'register Success',
+  //         text: 'register Success',
+  //       });
+  //     },
+  //   });
+  // }
+
+  reloadPage(): void {
+    window.location.reload();
   }
 }

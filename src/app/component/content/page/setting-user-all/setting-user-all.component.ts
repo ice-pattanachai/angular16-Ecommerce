@@ -127,8 +127,6 @@ export class SettingUserAllComponent implements OnInit {
     }
     this.authService.add_Assresses(this.fullname, this.address, this.postalcode, this.phone, user_id).subscribe({
       next: data => {
-        this.storageService.registerUser(data);
-        // this.reloadPage();
         Swal.fire({
           icon: 'success',
           title: 'Success',
@@ -136,8 +134,7 @@ export class SettingUserAllComponent implements OnInit {
           showConfirmButton: false,
           timer: 1000,
         }).then(() => {
-          window.location.reload();
-          this.router.navigate(['/setting']);
+          this.reloadPage()
         });
       },
     });
@@ -211,21 +208,23 @@ export class SettingUserAllComponent implements OnInit {
     Swal.fire({
       icon: 'warning',
       title: 'Want to delete this address?',
-      text: 'If you press OK, it is considered that you agree to delete.',
-    }).then(() => {
-      console.log(id);
-
-      this.authService.delete_Assresses(id).subscribe({
-        next: data => {
-          this.reloadPage();
-          Swal.fire({
-            icon: 'success',
-            title: 'register Success',
-            text: 'register Success',
-          });
-        },
-      });
-    });
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.authService.delete_Assresses(id).subscribe({
+          next: data => {
+            this.reloadPage();
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              showConfirmButton: false,
+            });
+          },
+        });
+      }
+    })
   }
 
   // /////////////////////////////////////////////////////////////////////////////////////////////////////////

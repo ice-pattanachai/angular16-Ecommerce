@@ -133,6 +133,21 @@ button:hover {
     border: 1px solid #ccc;
 }
 
+select {
+    position: relative;
+    min-width: 200px;
+    padding: 7px 10px 7px 10px;
+    width: 100%;
+    border: 1px solid #e8eaed;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 1px 3px -2px #9098a9;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    transition: all 150ms ease;
+}
+
 .bo4 {
     border: 1px solid #ccc;
 }
@@ -150,6 +165,8 @@ button:hover {
 .animsition {
     animation: fadeIn 1s;
 }
+
+
 
 @keyframes fadeIn {
     from {

@@ -33,13 +33,13 @@ export class AuthService {
     );
   }
 
-  register_seller(username: string, password_hash: string, mail: string,): Observable<any> {
+  register_seller(username: string, password_hash: string, name: string,): Observable<any> {
     return this.http.post(
       AUTH_API + 'register_seller',
       {
         username,
         password_hash,
-        mail,
+        name,
       },
       httpOptions
     );

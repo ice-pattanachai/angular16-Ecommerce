@@ -39,6 +39,76 @@ export class ProductService {
     );
   }
 
+  add_purchase_orders(
+    addresses_name: string,
+    address: string,
+    postalcode: number,
+    phone: string,
+    quantity: number,
+    total_price: number,
+    status: boolean,
+    payment_format: string,
+    confirm_payment: boolean,
+    user_id: number,
+    product_id: number
+
+  ): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'purchase_orders/add',
+      {
+        addresses_name,
+        address,
+        postalcode,
+        phone,
+        quantity,
+        total_price,
+        status,
+        payment_format,
+        confirm_payment,
+        user_id,
+        product_id,
+      },
+      httpOptions
+    );
+  }
+
+  edit_purchase_orders(
+    id: number,
+    addresses_name: string,
+    address: string,
+    postalcode: number,
+    phone: string,
+    quantity: number,
+    total_price: number,
+    status: boolean,
+    parcel_number: string,
+    payment_format: string,
+    confirm_payment: boolean,
+    user_id: number,
+    product_id: number
+
+  ): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'purchase_orders/edit',
+      {
+        id,
+        addresses_name,
+        address,
+        postalcode,
+        phone,
+        quantity,
+        total_price,
+        status,
+        parcel_number,
+        payment_format,
+        confirm_payment,
+        user_id,
+        product_id,
+      },
+      httpOptions
+    );
+  }
+
   getProductImage(productId: number): Observable<string> {
     const url = `${this.apiUrl}/products_allimage?product_id=${productId}`;
     return this.http.get<string>(url);
@@ -48,26 +118,17 @@ export class ProductService {
     return this.http.post<product[]>('http://localhost:3030/api/products_all', {});
   }
 
-  // updateProduct(productId: number, productData: any): Observable<any> {
-  //   const url = `${this.apiUrl}/edit_product/`;
-  //   return this.http.post<any>(url, productData);
-  // }
   updateProduct(productData: FormData): Observable<any> {
     return this.http.post('http://localhost:3030/api/products_edit', productData);
   }
-  // updateProduct(product: product) {
-  //   return this.http.put<product>(
-  //     `http://localhost:3000/products/${product.id}`,
-  //     product
-  //   );
-  // }
-  popularProducts() {
-    return this.http.get<product[]>('http://localhost:3000/products?_limit=3');
-  }
 
-  trendyProducts() {
-    return this.http.get<product[]>('http://localhost:3000/products?_limit=8');
-  }
+  // popularProducts() {
+  //   return this.http.get<product[]>('http://localhost:3000/products?_limit=3');
+  // }
+
+  // trendyProducts() {
+  //   return this.http.get<product[]>('http://localhost:3000/products?_limit=8');
+  // }
 
   searchProduct(query: string) {
     return this.http.get<product[]>(
