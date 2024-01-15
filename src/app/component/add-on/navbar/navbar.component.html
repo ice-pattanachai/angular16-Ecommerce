@@ -58,6 +58,7 @@
                     </svg> -->
                     Shop
                 </a>
+
                 <a (click)="toggleMenu2()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                         class="bi bi-caret-down-fill" viewBox="0 0 16 16">
@@ -141,11 +142,12 @@
         <a href="/shop_settings">Settings Shop</a>
         <a href="/all">ProductsAll</a>
         <a href="/add-proders">Add Proders</a>
+        <a href="/manage_porders">จัดการคำสั่งซื้อ</a>
         <a href="" (click)="logout()">Logout</a>
     </div>
     <div class="dropdown" *ngIf="isMenuOpenUser">
         <a href="/setting">Setting</a>
-
+        <a href="/purchasehistory">ประวัติการสั่งซื้อ</a>
         <a href="" (click)="logout()">Logout</a>
     </div>
 </body>

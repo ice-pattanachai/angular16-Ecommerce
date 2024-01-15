@@ -4,7 +4,6 @@ import { AuthService } from 'src/app/component/service/auth.service';
 import { ProductService } from 'src/app/component/service/product.service';
 import { StorageService } from 'src/app/component/service/storage.service';
 import { User } from 'src/app/data-type';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cartgo',
@@ -140,10 +139,6 @@ export class CartgoComponent implements OnInit, AfterViewInit {
   onClickConfirm() {
     for (const product of this.cartData) {
       const productId = product.id;
-      const selectedAddressId = this.selectedAddressId;
-      const selectedAddress = this.getSelectedAddress(selectedAddressId);
-      // const address = selectedAddress ? `${selectedAddress.address} ${selectedAddress.postalcode}` : '';
-      // const phone = selectedAddress ? selectedAddress.phone : '';
       const user_id = this.userall![0].id;
       const address = this.selectedAddress.address;
       const addresses_name = this.selectedAddress.fullname;
@@ -158,8 +153,8 @@ export class CartgoComponent implements OnInit, AfterViewInit {
         address,
         postalcode,
         phone,
-        product.quantity
-        , product.price_per_piece * product.quantity,
+        product.quantity,
+        product.price_per_piece * product.quantity,
         status,
         payment_format,
         this.confirm_payment,
@@ -169,11 +164,10 @@ export class CartgoComponent implements OnInit, AfterViewInit {
     }
   }
 
-
   processOrder(
     addresses_name: string,
     address: string,
-    postalcode: number,
+    postalcode: string,
     phone: string,
     quantity: number,
     total_price: number,
@@ -181,7 +175,8 @@ export class CartgoComponent implements OnInit, AfterViewInit {
     payment_format: string,
     confirm_payment: boolean,
     user_id: number,
-    product_id: number): void {
+    product_id: number
+  ): void {
     this.productService.add_purchase_orders(
       addresses_name,
       address,
@@ -196,37 +191,14 @@ export class CartgoComponent implements OnInit, AfterViewInit {
       product_id
     ).subscribe({
       next: data => {
+        this.removeFromCart(product_id);
         console.log('Order placed successfully for product id:', product_id);
       },
+      error: err => {
+        console.error('Error placing order for product id:', product_id, err);
+      }
     });
   }
-
-
-
-  // onClickConfirm() {
-  //   this.productService.add_purchase_orders(
-  //     this.addresses_name,
-  //     this.address,
-  //     this.postalcode,
-  //     this.phone,
-  //     this.quantity,
-  //     this.total_price,
-  //     this.status,
-  //     this.payment_format,
-  //     this.confirm_payment,
-  //     this.user_id,
-  //     this.product_id,
-  //   ).subscribe({
-  //     next: data => {
-  //       this.reloadPage();
-  //       Swal.fire({
-  //         icon: 'success',
-  //         title: 'register Success',
-  //         text: 'register Success',
-  //       });
-  //     },
-  //   });
-  // }
 
   reloadPage(): void {
     window.location.reload();

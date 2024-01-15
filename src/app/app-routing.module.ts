@@ -11,15 +11,15 @@ import { CartgoComponent } from './component/content/page/cartgo/cartgo.componen
 import { LoginComponent } from './component/content/user/login/login.component';
 import { BuyProductUserComponent } from './component/content/user/buy-product-user/buy-product-user.component';
 import { PaymentComponent } from './component/content/user/payment/payment.component';
+import { PurchaseHistoryComponent } from './component/content/user/purchase-history/purchase-history.component';
 //Selle
 import { LoginSellerComponent } from './component/content/seller/login-seller/login-seller.component';
-import { ManagePordersSellerComponent } from './component/content/seller/manage-porders-seller/manage-porders-seller.component';
 import { EditProductsComponent } from './component/content/seller/edit-products/edit-products.component';
 import { ProductsForSaleComponent } from './component/content/seller/products-for-sale/products-for-sale.component';
 import { AddProductsComponent } from './component/content/seller/add-products/add-products.component';
 import { SettingsComponent } from './component/content/seller/settings/settings.component';
 import { SettingUserAllComponent } from './component/content/page/setting-user-all/setting-user-all.component';
-
+import { ManageOrdersComponent } from './component/content/seller/manage-orders/manage-orders.component';
 
 // const routes: Routes = [];
 const routes: Routes = [
@@ -36,12 +36,14 @@ const routes: Routes = [
   // user
   { path: 'user-login', component: LoginComponent },
   { path: 'buyproduct', component: BuyProductUserComponent },
+  { path: 'purchasehistory', component: PurchaseHistoryComponent },
+
   // { path: 'buyproduct', component : PaymentComponent },
   // seller
   { path: 'seller-login', component: LoginSellerComponent },
   { path: 'edit-products', component: EditProductsComponent },
   { path: 'add-proders', component: AddProductsComponent },
-  { path: 'manage_porders', component: ManagePordersSellerComponent },
+  { path: 'manage_porders', component: ManageOrdersComponent },
   { path: 'all', component: ProductsForSaleComponent },
   { path: 'shop_settings', component: SettingsComponent },
   // { path: '/edit-product', component: EditProductsComponent },

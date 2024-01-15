@@ -1,0 +1,163 @@
+body {
+    margin-top: 80px;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+.bodymain {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.cart-container {
+    background-color: #fff;
+    margin-top: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.shopping-cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table-head th,
+.table-address th {
+    text-align: right;
+    padding: 15px;
+}
+
+.table-head th {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.table-address th {
+    background-color: #c9c9c9;
+    color: #000000;
+    text-align: left;
+    width: 100%;
+}
+
+.table-row td {
+    text-align: left;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-img-container img {
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 8px;
+}
+
+.flex-w {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text-input,
+.rounded-btn {
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.coupon-input-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.coupon-input,
+.apply-coupon-btn {
+    margin-bottom: 10px;
+}
+
+.update-cart-btn,
+.update-totals-btn,
+.checkout-btn {
+    margin-top: 26px;
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.calculate-shipping {
+    cursor: pointer;
+}
+
+.select-container select,
+.text-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+}
+
+select {
+    position: relative;
+    min-width: 200px;
+    padding: 7px 10px 7px 10px;
+    width: 100%;
+    border: 1px solid #e8eaed;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 1px 3px -2px #9098a9;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    transition: all 150ms ease;
+}
+
+.bo4 {
+    border: 1px solid #ccc;
+}
+
+.size13,
+.size14,
+.size15 {
+    margin-bottom: 12px;
+}
+
+.m-l-auto {
+    margin-left: auto;
+}
+
+.animsition {
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Additional styles for better readability */
+.product-name {
+    font-weight: bold;
+}
+
+.address-info {
+    font-style: italic;
+}
+
+.column-1 {
+    width: 30%;
+}
+
+.column-2,
+.column-3 {
+    width: 35%;
+}

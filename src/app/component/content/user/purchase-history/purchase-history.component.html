@@ -1,0 +1,58 @@
+<body class="app-body">
+    <app-navbar></app-navbar>
+    <app-back-to-top></app-back-to-top>
+    <div class="main-container">
+        <section class="cart-section bg-white p-t-70 p-b-100">
+            <div class="container">
+                <div class="cart-table-container">
+                    <div class="shopping-cart-wrap bg-white">
+                        <table class="shopping-cart-table">
+                            <tbody>
+                                <ng-container *ngFor="let product of products; let i = index">
+                                    <tr class="table-row">
+                                        <td colspan="" class="column-1 cart-img-container">
+                                            <img [src]="url + product.id" alt="Product Image">
+                                        </td>
+                                        <td class="column-2"></td>
+                                        <td class="column-3"></td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="column-1 product-name">
+                                            {{product.product_name}}
+                                        </td>
+                                        <td class="column-2"></td>
+                                        <td class="column-3"></td>
+                                    </tr>
+                                    <tr class="table-row" *ngIf="aa && aa[i]">
+                                        <td class="column-1 address-info">
+                                            ที่อยู่: {{aa[i].addresses_name}}: {{aa[i].address}} {{aa[i].postalcode}}
+                                            phone:{{aa[i].phone}}
+                                        </td>
+                                        <td class="column-2"></td>
+                                        <td class="column-3"></td>
+                                    </tr>
+                                    <tr class="table-row" *ngIf="aa && aa[i]">
+                                        <td class="column-1">
+                                            จำนวนการสั่งซื้อ:{{aa[i].quantity}}
+                                        </td>
+                                        <td class="column-2">ราคา:{{aa[i].total_price}}</td>
+                                        <td class="column-3">{{aa[i].parcel_number}}</td>
+                                    </tr>
+                                    <tr class="table-row" *ngIf="aa && aa[i]">
+                                        <td class="column-1">
+                                            สถานะ:{{aa[i].status ? 'ยืนยันคำสั่งซื้อ' : 'รอยืนยันคำสั่งซื้อ'}}
+                                        </td>
+                                        <td class="column-2">ชำระเงิน:{{aa[i].payment_format}}</td>
+                                        <td class="column-3">
+                                            ยืนยันการชำระเงิน:{{aa[i].confirm_payment ? 'ชำระ' :'ยังไม่ชำระ'}}
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>

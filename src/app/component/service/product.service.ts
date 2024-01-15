@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { cart, order, product } from '../../data-type'
+import { PurchaseOrders, User, cart, order, product } from '../../data-type'
 import { Observable } from 'rxjs';
 
 const AUTH_API = 'http://localhost:3030/api/';
@@ -42,7 +42,7 @@ export class ProductService {
   add_purchase_orders(
     addresses_name: string,
     address: string,
-    postalcode: number,
+    postalcode: string,
     phone: string,
     quantity: number,
     total_price: number,
@@ -118,22 +118,20 @@ export class ProductService {
     return this.http.post<product[]>('http://localhost:3030/api/products_all', {});
   }
 
-  updateProduct(productData: FormData): Observable<any> {
-    return this.http.post('http://localhost:3030/api/products_edit', productData);
+  sellerProductId(productId: any): Observable<product[]> {
+    const body = { productId: productId };
+    const data = this.http.post<product[]>('http://localhost:3030/api/products_id', body)
+    return data;
   }
 
-  // popularProducts() {
-  //   return this.http.get<product[]>('http://localhost:3000/products?_limit=3');
-  // }
+  purchase_orders_userid(user_id: any): Observable<PurchaseOrders[]> {
+    const body = { user_id: user_id };
+    const data = this.http.post<PurchaseOrders[]>('http://localhost:3030/api/purchase_orders/search/userId', body)
+    return data;
+  }
 
-  // trendyProducts() {
-  //   return this.http.get<product[]>('http://localhost:3000/products?_limit=8');
-  // }
-
-  searchProduct(query: string) {
-    return this.http.get<product[]>(
-      `http://localhost:3000/products?q=${query}`
-    );
+  updateProduct(productData: FormData): Observable<any> {
+    return this.http.post('http://localhost:3030/api/products_edit', productData);
   }
 
   localAddToCart(data: product) {
@@ -158,23 +156,5 @@ export class ProductService {
       localStorage.setItem('localCart', JSON.stringify(items));
       this.cartData.emit(items);
     }
-  }
-
-  addToCart(cartData: cart) {
-    return this.http.post('http://localhost:3000/cart', cartData);
-  }
-  getCartList(userId: number) {
-    return this.http
-      .get<product[]>('http://localhost:3000/cart?userId=' + userId, {
-        observe: 'response',
-      })
-      .subscribe((result) => {
-        if (result && result.body) {
-          this.cartData.emit(result.body);
-        }
-      });
-  }
-  getSelectedProductById(productId: number) {
-    return this.http.get<product>(`http://localhost:3000/products/${productId}`);
   }
 }

@@ -16,7 +16,6 @@ export class ProductsForSaleComponent implements OnInit {
   products: product[] = [];
   popularProducts: undefined | product[];
   trendyProducts: undefined | product[];
-
   currentPage: number = 1;
   itemsPerPage: number = 10;
   productsInCurrentPage: product[] = [];
@@ -24,7 +23,6 @@ export class ProductsForSaleComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private http: HttpClient,
     private productService: ProductService
   ) { }
 
@@ -72,14 +70,6 @@ export class ProductsForSaleComponent implements OnInit {
       this.products = data;
       this.updateProductsInCurrentPage();
     });
-
-    // this.productService.popularProducts().subscribe((data) => {
-    //   this.popularProducts = data;
-    // });
-
-    // this.productService.trendyProducts().subscribe((data) => {
-    //   this.trendyProducts = data;
-    // });
 
   }
   goToPage(page: number): void {

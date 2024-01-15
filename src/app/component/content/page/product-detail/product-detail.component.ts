@@ -27,7 +27,6 @@ export class ProductDetailComponent implements OnInit {
       const productId = userObject.id;
 
       if (productId) {
-        // this.getProduct(productId);
         this.productService.productList().subscribe((products) => {
           // ค้นหา product ที่มี id ตรงกันใน productList
           this.product = products.find(product => product.id === productId);

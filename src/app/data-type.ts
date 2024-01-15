@@ -72,3 +72,20 @@ export interface User {
   roles_id: number;
   addresses: Address[];
 }
+
+export interface PurchaseOrders {
+  orders: any;
+  id: number,
+  addresses_name: string,
+  address: string,
+  postalcode: number,
+  phone: string,
+  quantity: number,
+  total_price: number,
+  status: boolean,
+  parcel_number: string,
+  payment_format: string,
+  confirm_payment: boolean,
+  user_id: number,
+  product_id: number
+}
