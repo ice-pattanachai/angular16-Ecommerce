@@ -8,22 +8,16 @@ import { NavbarComponent } from './component/add-on/navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { Error404Component } from './component/add-on/error/error404/error404.component';
 import { HomeComponent } from './component/content/page/home/home.component';
-import { AboutComponent } from './component/content/page/about/about.component';
 import { CatErrorComponent } from './component/add-on/error/cat-error/cat-error.component';
 import { LoginComponent } from './component/content/user/login/login.component';
 import { NgxTurnstileModule } from 'ngx-turnstile';
 import { BackToTopComponent } from './component/add-on/back-to-top/back-to-top.component';
 import { ShopComponent } from './component/content/page/shop/shop.component';
-import { ImageCarouselComponent } from './component/add-on/image-carousel/image-carousel.component';
 import { ProductComponent } from './component/add-on/product/product.component';
 import { LoginSellerComponent } from './component/content/seller/login-seller/login-seller.component';
 import { EditProductsComponent } from './component/content/seller/edit-products/edit-products.component';
 import { BuyProductUserComponent } from './component/content/user/buy-product-user/buy-product-user.component';
-import { PaymentComponent } from './component/content/user/payment/payment.component';
-import { FooterComponent } from './component/add-on/footer/footer.component';
-import { SidebarComponent } from './component/add-on/sidebar/sidebar.component';
 import { ImageCarouselIIComponent } from './component/add-on/image-carousel-ii/image-carousel-ii.component';
-import { PaginationComponent } from './component/add-on/pagination/pagination.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ProductDetailComponent } from './component/content/page/product-detail/product-detail.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,10 +25,10 @@ import { CartgoComponent } from './component/content/page/cartgo/cartgo.componen
 import { MatTableModule } from '@angular/material/table';
 import { ProductsForSaleComponent } from './component/content/seller/products-for-sale/products-for-sale.component';
 import { AddProductsComponent } from './component/content/seller/add-products/add-products.component';
-import { SettingsComponent } from './component/content/seller/settings/settings.component';
 import { SettingUserAllComponent } from './component/content/page/setting-user-all/setting-user-all.component';
 import { PurchaseHistoryComponent } from './component/content/user/purchase-history/purchase-history.component';
 import { ManageOrdersComponent } from './component/content/seller/manage-orders/manage-orders.component';
+import { EditOrderComponent } from './component/content/seller/edit-order/edit-order.component';
 
 @NgModule({
   declarations: [
@@ -42,29 +36,23 @@ import { ManageOrdersComponent } from './component/content/seller/manage-orders/
     NavbarComponent,
     Error404Component,
     HomeComponent,
-    AboutComponent,
     CatErrorComponent,
     LoginComponent,
     BackToTopComponent,
     ShopComponent,
-    ImageCarouselComponent,
     ProductComponent,
     LoginSellerComponent,
     EditProductsComponent,
     BuyProductUserComponent,
-    PaymentComponent,
-    FooterComponent,
-    SidebarComponent,
     ImageCarouselIIComponent,
-    PaginationComponent,
     ProductDetailComponent,
     CartgoComponent,
     ProductsForSaleComponent,
     AddProductsComponent,
-    SettingsComponent,
     SettingUserAllComponent,
     PurchaseHistoryComponent,
-    ManageOrdersComponent
+    ManageOrdersComponent,
+    EditOrderComponent
   ],
   imports: [
     BrowserModule,

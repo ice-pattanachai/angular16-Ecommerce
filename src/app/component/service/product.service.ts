@@ -39,6 +39,26 @@ export class ProductService {
     );
   }
 
+  edit_Oders(
+    id: number,
+    addresses_name: string,
+    status: boolean,
+    parcel_number: string,
+    confirm_payment: boolean
+  ): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'purchase_orders/edit',
+      {
+        id,
+        addresses_name,
+        status,
+        parcel_number,
+        confirm_payment,
+      },
+      httpOptions
+    );
+  }
+
   add_purchase_orders(
     addresses_name: string,
     address: string,
@@ -112,6 +132,10 @@ export class ProductService {
   getProductImage(productId: number): Observable<string> {
     const url = `${this.apiUrl}/products_allimage?product_id=${productId}`;
     return this.http.get<string>(url);
+  }
+
+  ordersList(): Observable<PurchaseOrders[]> {
+    return this.http.post<PurchaseOrders[]>('http://localhost:3030/api/purchase_orders/search/all', {});
   }
 
   productList(): Observable<product[]> {

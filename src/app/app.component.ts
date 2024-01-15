@@ -8,24 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  // ใส่ key ของ reCAPTCHA ที่ได้จาก Google reCAPTCHA
-  // public recaptchaKey = '0x4AAAAAAANQPdgDQYKL13BT';
-
-  // constructor(private turnstileService: NgxTurnstileService, private router: Router) {}
-
-  // onCaptchaResolved(response: string | null): void {
-  //   if (response !== null) {
-  //     console.log('', response);
-  //     this.router.navigate(['']);
-  //   } else {
-  //     console.error('reCAPTCHA response is null');
-  //   }
-  // }
-  public recaptchaKey = '0x4AAAAAAANQPdgDQYKL13BT';
+  public recaptchaKey = '';
   public isCaptchaResolved = false;
   public captchaResponse: string | null = null;
 
-  constructor(private turnstileService: NgxTurnstileService, private router: Router) {}
+  constructor(private turnstileService: NgxTurnstileService, private router: Router) { }
 
   onCaptchaResolved(response: string | null): void {
     if (response !== null) {

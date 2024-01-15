@@ -81,7 +81,9 @@ a .badge {
     color: #000000;
 }
 
-.menu-icon {
+.menu-icon,
+.menu-icon-seller,
+.menu-icon-user {
     display: none;
     font-size: 24px;
     margin-left: 20px;
@@ -90,6 +92,8 @@ a .badge {
 }
 
 .responsive-menu a,
+.responsive-menu-user a,
+.responsive-menu-seller a,
 .dropdown a {
     color: var(--text-d-color);
     text-decoration: none;
@@ -99,7 +103,9 @@ a .badge {
     color: var(--color-orange);
 }
 
-.responsive-menu a {
+.responsive-menu a,
+.responsive-menu-user a,
+.responsive-menu-seller a {
     padding: 12px;
 }
 
@@ -108,7 +114,9 @@ a .badge {
 }
 
 .dropdown,
-.responsive-menu {
+.responsive-menu,
+.responsive-menu-user,
+.responsive-menu-seller {
     flex-direction: column;
     position: absolute;
     top: 80px;
@@ -127,7 +135,9 @@ a .badge {
     animation: fadeIn .5s forwards;
 }
 
-.responsive-menu {
+.responsive-menu,
+.responsive-menu-user,
+.responsive-menu-seller {
     display: none;
     left: 0;
 }
@@ -216,14 +226,19 @@ a .badge {
     transform: scale(1.1);
 }
 
-.menu-icons {
+.menu-icons,
+.menu-icons-seller,
+.menu-icons-user {
     display: flex;
     align-items: center;
     margin-left: 40px;
 }
 
 .menu-icon-dropdown,
-.menu-icon {
+.menu-icon,
+.menu-icon-seller,
+.menu-icon-user {
+
     margin-right: 40px;
     cursor: pointer;
 }
@@ -256,6 +271,15 @@ a .badge {
     .search-box input {
         width: 120px;
     }
+
+    .navbar a {
+        display: none;
+        margin-left: none;
+    }
+
+    .dropdown {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -267,7 +291,9 @@ a .badge {
         display: flex;
     }
 
-    .menu-icon {
+    .menu-icon,
+    .menu-icon-seller,
+    .menu-icon-user {
         margin-left: 0px;
     }
 
@@ -299,23 +325,26 @@ a .badge {
     }
 }
 
-/* @media screen and (max-width: 1250px) {
+@media screen and (max-width: 1250px) {
 
-    .navbar a {
-        display: none;
-        margin-left: none;
-    }
 
+
+    .responsive-menu-user a,
+    .responsive-menu-seller a,
     .responsive-menu a {
         display: block;
         text-align: center;
         margin-left: none;
     }
 
-    .menu-icon {
+    .menu-icon,
+    .menu-icon-seller,
+    .menu-icon-user {
         display: flex;
     }
 
+    .responsive-menu-user a,
+    .responsive-menu-seller a,
     .responsive-menu {
         display: flex;
         flex-direction: column;
@@ -328,14 +357,14 @@ a .badge {
         animation: fadeIn .5s forwards
     }
 
+    .responsive-menu-user a::before,
+    .responsive-menu-seller a::before,
     .responsive-menu a::before {
         content: none;
     }
 
-    .dropdown {
-        display: none;
-    }
-} */
+
+}
 
 @keyframes fadeIn {
     from {

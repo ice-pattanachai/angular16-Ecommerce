@@ -1,0 +1,28 @@
+<body class="animsition">
+    <app-navbar></app-navbar>
+    <app-back-to-top></app-back-to-top>
+    <div *ngIf="!showLogin">
+        <form #productForm="ngForm" enctype="multipart/form-data">
+            <h2>Edit Oder</h2>
+            <label for="addresses_name">ชื่อผู้รับสินค้า :{{addresses_name}}</label>
+            <label for="addresses_name">ที่อยู่การจัดส่งสินค้า :{{address}}</label>
+
+            <label for="parcel_number">เลขพัสดุ:</label>
+            <textarea name="description" [(ngModel)]="parcel_number" required></textarea>
+
+            <label for="status">Product Status:</label>
+            <select name="status" [(ngModel)]="status">
+                <option value="true">ยืนยันการสั่งซื้อ</option>
+                <option value="false">รอยืนยันการสั่งซื้อ</option>
+            </select>
+
+            <label for="status">ยืนยันการชำระเงิน:</label>
+            <select name="status" [(ngModel)]="confirm_payment">
+                <option value="true">ยืนยันการชำระเงิน</option>
+                <option value="false">รอยืนยันกาชำระเงิน</option>
+            </select>
+            <br><br>
+            <button type="button" (click)="onClickEditOder()">Update Product</button>
+        </form>
+    </div>
+</body>

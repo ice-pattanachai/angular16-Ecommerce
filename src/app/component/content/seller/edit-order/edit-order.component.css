@@ -1,19 +1,19 @@
-  body {
+body {
     margin-top: 80px;
     margin-right: 2%;
     margin-left: 2%;
 
-  }
+}
 
-  .bodymain {
+.bodymain {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-  }
+}
 
-  select {
+select {
     position: relative;
     min-width: 200px;
     padding: 7px 10px 7px 10px;
@@ -26,9 +26,9 @@
     font-family: inherit;
     font-size: 16px;
     transition: all 150ms ease;
-  }
+}
 
-  button {
+button {
     background: #000000;
     border-radius: 4px;
     padding: 12px 40px;
@@ -40,23 +40,23 @@
     width: auto;
     /* แก้ไขตรงนี้เพื่อให้ปุ่มขยายตามข้อความ */
     transition: ease-in 0.2s;
-  }
+}
 
-  button:hover {
+button:hover {
     background: #ff4242;
-  }
+}
 
-  .r {
+.r {
     position: absolute;
     right: 0;
-  }
+}
 
-  .container {
+.container {
     margin: 0 auto;
-  }
+}
 
-  /* เพิ่มสไตล์สำหรับ form */
-  form {
+/* เพิ่มสไตล์สำหรับ form */
+form {
     display: flex;
     flex-direction: column;
     max-width: 600px;
@@ -65,45 +65,45 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+}
 
-  label {
+label {
     margin-top: 10px;
     font-weight: bold;
-  }
+}
 
-  input,
-  textarea {
+input,
+textarea {
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
-  }
+}
 
-  /* เพิ่มสไตล์สำหรับ error message */
-  div.error-message {
+/* เพิ่มสไตล์สำหรับ error message */
+div.error-message {
     color: red;
     margin-top: 10px;
     font-weight: bold;
-  }
+}
 
-  /* เพิ่มสไตล์สำหรับ success message */
-  div.success-message {
+/* เพิ่มสไตล์สำหรับ success message */
+div.success-message {
     color: green;
     margin-top: 10px;
     font-weight: bold;
-  }
+}
 
-  .animsition {
+.animsition {
     animation: fadeIn 1s;
-  }
+}
 
-  @keyframes fadeIn {
+@keyframes fadeIn {
     from {
-      opacity: 0;
+        opacity: 0;
     }
 
     to {
-      opacity: 1;
+        opacity: 1;
     }
-  }
+}

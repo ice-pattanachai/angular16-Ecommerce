@@ -136,11 +136,6 @@ export class NavbarComponent implements OnInit {
     this.isMenuOpen1 = false;
   }
 
-  isMenuOpen2 = false;
-  toggleMenu2() {
-    this.isMenuOpen2 = !this.isMenuOpen2;
-  }
-
   isMenuOpenUser = false;
   toggleMenuUser() {
     this.isMenuOpenUser = !this.isMenuOpenUser;
@@ -151,10 +146,6 @@ export class NavbarComponent implements OnInit {
     this.isMenuOpenSeller = !this.isMenuOpenSeller;
   }
 
-  closeMenu2() {
-    this.isMenuOpen2 = false;
-  }
-
   isMenuOpen3 = false;
   toggleMenu3() {
     this.isMenuOpen3 = !this.isMenuOpen3;
@@ -162,7 +153,6 @@ export class NavbarComponent implements OnInit {
   closeMenu3() {
     this.isMenuOpen3 = false;
   }
-
 
   AddToCart(): void {
     const existingCartData = localStorage.getItem('AddToCart');
