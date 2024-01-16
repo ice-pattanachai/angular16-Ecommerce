@@ -12,10 +12,7 @@
    flex-wrap: wrap;
    margin-right: -15px;
    margin-left: -15px;
-   /* width: calc(100% - 200px); */
    justify-content: center;
-   /* float: left; */
-   /* justify-content: flex-start; */
  }
 
  .shop {
@@ -33,15 +30,19 @@
    left: 200px;
    width: 190px;
    margin: 5px;
-   /*ระยะห่าง box*/
-   padding: 2px;
-   /*ขนาดช่อง*/
    border: 1px solid var(--color-white);
-   /* border-radius: 8px; */
-   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   border-radius: 12px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.068);
    transition: transform 0.15s ease-in-out;
    border: 1px solid transparent;
-   /* height: 377px; */
+ }
+
+ .product-item:hover {
+   box-shadow: 0 0 10px rgba(0, 173, 181, 0.4);
+ }
+
+ .product-item-text {
+   padding: 15px;
  }
 
  .product-item:hover {
@@ -51,13 +52,19 @@
 
  img {
    max-width: 100%;
-   /* max-height: 200px; */
    height: auto;
+   transition: 0.3s;
+   border-radius: 12px;
+ }
+
+ img:hover {
+   opacity: 0.7;
  }
 
  h3 {
    margin-top: 10px;
-   font-size: 1.2em;
+   /* font-size: 1.2em; */
+   font-size: 20px;
    color: #333;
  }
 

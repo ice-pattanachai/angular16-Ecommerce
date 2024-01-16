@@ -1,46 +1,42 @@
-<body class="animsition">
-    <app-navbar></app-navbar>
-    <app-back-to-top></app-back-to-top>
-    <div class="bodymain">
-        <section class="cart-container bg-white p-t-70 p-b-100">
-            <div class="container">
-                <div class="cart-table-container pos-relative">
-                    <div class="shopping-cart-wrap bg-white">
-                        <table class="shopping-cart-table">
-                            <thead>
-                                <tr class="table-head">
-                                    <th class="column-1"></th>
-                                    <th class="column-2">Id</th>
-                                    <th class="column-3">Name</th>
-                                    <th class="column-4">Price</th>
-                                    <th class="column-5 p-l-70">Quantity</th>
-                                    <th class="column-6">Status</th>
-                                    <th class="column-7">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="table-row" *ngFor="let product of products">
-                                    <td class="column-1">
-                                        <div class="cart-img-container">
-                                            <img [src]=" url+ product.id" alt="{{ product.name }}">
-                                        </div>
-                                    </td>
-                                    <td class="column-2">{{ product.id }}</td>
-                                    <td class="column-3">{{ product.product_name }}</td>
-                                    <td class="column-4">{{ product.price_per_piece | currency: '฿' }}</td>
-                                    <td class="column-5">{{ product.stock_quantity }}</td>
-                                    <td class="column-6">{{ product.product_status }}
-                                    </td>
-                                    <td class="column-7">
-                                        <button mat-button class=" rounded-btn"
-                                            (click)="editProduct(product.id)">Edit</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+<div class="bodymain">
+    <section class="cart-container bg-white p-t-70 p-b-100">
+        <div class="container">
+            <div class="cart-table-container pos-relative">
+                <div class="shopping-cart-wrap bg-white">
+                    <table class="shopping-cart-table">
+                        <thead>
+                            <tr class="table-head">
+                                <th class="column-1"></th>
+                                <th class="column-2">Id</th>
+                                <th class="column-3">Name</th>
+                                <th class="column-4">Price</th>
+                                <th class="column-5 p-l-70">Quantity</th>
+                                <th class="column-6">Status</th>
+                                <th class="column-7">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row" *ngFor="let product of products">
+                                <td class="column-1">
+                                    <div class="cart-img-container">
+                                        <img [src]=" url+ product.id" alt="{{ product.name }}">
+                                    </div>
+                                </td>
+                                <td class="column-2">{{ product.id }}</td>
+                                <td class="column-3">{{ product.product_name }}</td>
+                                <td class="column-4">{{ product.price_per_piece | currency: '฿' }}</td>
+                                <td class="column-5">{{ product.stock_quantity }}</td>
+                                <td class="column-6">{{ product.product_status }}
+                                </td>
+                                <td class="column-7">
+                                    <button mat-button class=" rounded-btn"
+                                        (click)="editProduct(product.id)">Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </section>
-    </div>
-</body>
+        </div>
+    </section>
+</div>

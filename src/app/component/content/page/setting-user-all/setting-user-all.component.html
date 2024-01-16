@@ -1,192 +1,186 @@
-<body class="animsition">
-    <app-navbar></app-navbar>
-    <app-back-to-top></app-back-to-top>
-    <div *ngIf="isLoggedIn" [ngSwitch]="menuType">
-        <div>
-            <ul *ngSwitchCase="'seller'">
-                <div *ngFor="let seller of sellerall">
-                    <div class="container">
-                        <table class="shopping-cart-table">
-                            <thead>
-                                <tr class="table-head">
-                                    <th class="column-1"></th>
-                                    <th class="column-2"></th>
-                                    <th class="column-3"></th>
-                                    <th class="column-4"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="table-row">
-                                    <td class="column-1">Seller Information [{{ seller.id }}]</td>
-                                    <td class="column-2">Username: {{ seller.username }}</td>
-                                    <td class="column-3">Name: {{ seller.name }}</td>
-                                    <td class="column-4">
-                                        <button (click)="toggleMenuSeller()" class="bg-edit">Edit</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody *ngIf="OpenMenuSeller">
-                                <tr class="table-row">
-                                    <td class="column-1">password:</td>
-                                    <td class="column-2">
-                                        <input type="password" name="password" required
-                                            [(ngModel)]="checkpasswordseller_hash">
-                                    </td>
-                                    <td class="column-3">New Name:</td>
-                                    <td class="column-4">
-                                        <input type="text" name="name" required [(ngModel)]="seller.name">
-                                    </td>
-                                </tr>
-                                <tr class="table-row">
-                                    <td class="column-1">New password:</td>
-                                    <td class="column-2">
-                                        <input type="password" name="password" required
-                                            [(ngModel)]="newpasswordseller_hash">
-                                    </td>
-                                    <td class="column-3"></td>
-                                    <td class="column-4"></td>
-                                </tr>
-                                <tr class="table-row">
-                                    <td class="column-1">Confirm Password:</td>
-                                    <td class="column-2">
-                                        <input type="password" name="password" required
-                                            [(ngModel)]="checknewpasswordseller_hash">
-                                    </td>
-                                    <td class="column-3"></td>
-                                    <td class="column-4">
-                                        <button class="bg-Ok"
-                                            (click)="onClickEditSeller(seller.id , checkpasswordseller_hash ,seller.name)">
-                                            Ok
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+<div *ngIf="isLoggedIn" [ngSwitch]="menuType">
+    <div>
+        <ul *ngSwitchCase="'seller'">
+            <div *ngFor="let seller of sellerall">
+                <div class="container">
+                    <table class="shopping-cart-table">
+                        <thead>
+                            <tr class="table-head">
+                                <th class="column-1"></th>
+                                <th class="column-2"></th>
+                                <th class="column-3"></th>
+                                <th class="column-4"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row">
+                                <td class="column-1">Seller Information [{{ seller.id }}]</td>
+                                <td class="column-2">Username: {{ seller.username }}</td>
+                                <td class="column-3">Name: {{ seller.name }}</td>
+                                <td class="column-4">
+                                    <button (click)="toggleMenuSeller()" class="bg-edit">Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="OpenMenuSeller">
+                            <tr class="table-row">
+                                <td class="column-1">password:</td>
+                                <td class="column-2">
+                                    <input type="password" name="password" required
+                                        [(ngModel)]="checkpasswordseller_hash">
+                                </td>
+                                <td class="column-3">New Name:</td>
+                                <td class="column-4">
+                                    <input type="text" name="name" required [(ngModel)]="seller.name">
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="column-1">New password:</td>
+                                <td class="column-2">
+                                    <input type="password" name="password" required
+                                        [(ngModel)]="newpasswordseller_hash">
+                                </td>
+                                <td class="column-3"></td>
+                                <td class="column-4"></td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="column-1">Confirm Password:</td>
+                                <td class="column-2">
+                                    <input type="password" name="password" required
+                                        [(ngModel)]="checknewpasswordseller_hash">
+                                </td>
+                                <td class="column-3"></td>
+                                <td class="column-4">
+                                    <button class="bg-Ok"
+                                        (click)="onClickEditSeller(seller.id , checkpasswordseller_hash ,seller.name)">
+                                        Ok
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </ul>
-        </div>
-        <div *ngIf="userall">
-            <ul *ngSwitchCase="'user'">
-                <div *ngFor="let user of userall">
-                    <div class="container">
-                        <table class="shopping-cart-table">
-                            <thead>
-                                <tr class="table-head">
-                                    <th class="column-1"></th>
-                                    <th class="column-2"></th>
-                                    <th class="column-3"></th>
-                                    <th class="column-4"></th>
-                                    <th class="column-5"></th>
-                                    <th class="column-6"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="table-row">
-                                    <td class="column-1">User Information [{{ user.id }}]</td>
-                                    <td class="column-2">Username: {{ user.username }}</td>
-                                    <td class="column-3">Email: {{ user.mail }}</td>
-                                    <td class="column-4">Name: {{ user.name }}</td>
-                                    <td class="column-5">Fullname: {{ user.fullname }}</td>
-                                    <td class="column-6">
-                                        <button class="bg-edit" (click)="toggleMenuUser()">
-                                            Edit
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody *ngIf="OpenMenuUser">
-                                <tr class="table-row">
-                                    <td class="column-1">password:</td>
-                                    <td class="column-2">
-                                        <input type="password" name="password" required
-                                            [(ngModel)]="checkpassword_hash">
-                                    </td>
-                                    <td class="column-3">New Email:</td>
-                                    <td class="column-4">
-                                        <input type="text" name="mail" required [(ngModel)]="user.mail">
-                                    </td>
-                                    <td class="column-5"></td>
-                                    <td class="column-6"></td>
-                                </tr>
-                                <tr class="table-row">
-                                    <td class="column-1">New password:</td>
-                                    <td class="column-2">
-                                        <input type="password" name="password" required [(ngModel)]="newpassword_hash">
-                                    </td>
-                                    <td class="column-3">New Name:</td>
-                                    <td class="column-4">
-                                        <input type="text" name="name" required [(ngModel)]="user.name">
-                                    </td>
-                                    <td class="column-5"></td>
-                                    <td class="column-6"></td>
-                                </tr>
-                                <tr class="table-row">
-                                    <td class="column-1">Confirm Password:</td>
-                                    <td class="column-2">
-                                        <input type="password" name="password" required
-                                            [(ngModel)]="checknewpassword_hash">
-                                    </td>
-                                    <td class="column-3">Fullname:</td>
-                                    <td class="column-4">
-                                        <input type="text" name="fullname" required [(ngModel)]="user.fullname">
-                                    </td>
-                                    <td class="column-5"></td>
-                                    <td class="column-6">
-                                        <button class="bg-Ok"
-                                            (click)="onClickEditUser(user.id , checkpassword_hash ,user.mail ,user.name ,user.fullname)">
-                                            Ok
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="container">
-                        <table class="shopping-cart-table">
-                            <thead>
-                                <tr class="table-head">
-                                    <th class="column-1">Fullname</th>
-                                    <th class="column-2">Address</th>
-                                    <th class="column-3">Postal Code</th>
-                                    <th class="column-4">Phone</th>
-                                    <th class="column-5"></th>
-                                </tr>
-                                <tr class="table-row" *ngFor="let address of user.addresses">
-                                    <td class="column-1">{{ address.fullname }}</td>
-                                    <td class="column-2">{{ address.address }}</td>
-                                    <td class="column-3">{{ address.postalcode }}</td>
-                                    <td class="column-4">{{ address.phone }}</td>
-                                    <td class="column-5">
-                                        <button (click)="onClickDeleteAssresses( address.id)">
-                                            delete
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="table-row">
-                                    <td class="column-1">
-                                        <input type="text" name="name" required [(ngModel)]="fullname">
-                                    </td>
-                                    <td class="column-2">
-                                        <input type="text" name="name" required [(ngModel)]="address">
-                                    </td>
-                                    <td class="column-3">
-                                        <input type="text" name="name" required [(ngModel)]="postalcode">
-                                    </td>
-                                    <td class="column-4">
-                                        <input type="text" name="name" required [(ngModel)]="phone">
-                                    </td>
-                                    <td class="column-5">
-                                        <button class="bg-Ok" (click)="onClickSubmitAssresses(user.id)">
-                                            Add
-                                        </button>
-                                    </td>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </ul>
-        </div>
+            </div>
+        </ul>
     </div>
-</body>
+    <div *ngIf="userall">
+        <ul *ngSwitchCase="'user'">
+            <div *ngFor="let user of userall">
+                <div class="container">
+                    <table class="shopping-cart-table">
+                        <thead>
+                            <tr class="table-head">
+                                <th class="column-1"></th>
+                                <th class="column-2"></th>
+                                <th class="column-3"></th>
+                                <th class="column-4"></th>
+                                <th class="column-5"></th>
+                                <th class="column-6"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row">
+                                <td class="column-1">User Information [{{ user.id }}]</td>
+                                <td class="column-2">Username: {{ user.username }}</td>
+                                <td class="column-3">Email: {{ user.mail }}</td>
+                                <td class="column-4">Name: {{ user.name }}</td>
+                                <td class="column-5">Fullname: {{ user.fullname }}</td>
+                                <td class="column-6">
+                                    <button class="bg-edit" (click)="toggleMenuUser()">
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="OpenMenuUser">
+                            <tr class="table-row">
+                                <td class="column-1">password:</td>
+                                <td class="column-2">
+                                    <input type="password" name="password" required [(ngModel)]="checkpassword_hash">
+                                </td>
+                                <td class="column-3">New Email:</td>
+                                <td class="column-4">
+                                    <input type="text" name="mail" required [(ngModel)]="user.mail">
+                                </td>
+                                <td class="column-5"></td>
+                                <td class="column-6"></td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="column-1">New password:</td>
+                                <td class="column-2">
+                                    <input type="password" name="password" required [(ngModel)]="newpassword_hash">
+                                </td>
+                                <td class="column-3">New Name:</td>
+                                <td class="column-4">
+                                    <input type="text" name="name" required [(ngModel)]="user.name">
+                                </td>
+                                <td class="column-5"></td>
+                                <td class="column-6"></td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="column-1">Confirm Password:</td>
+                                <td class="column-2">
+                                    <input type="password" name="password" required [(ngModel)]="checknewpassword_hash">
+                                </td>
+                                <td class="column-3">Fullname:</td>
+                                <td class="column-4">
+                                    <input type="text" name="fullname" required [(ngModel)]="user.fullname">
+                                </td>
+                                <td class="column-5"></td>
+                                <td class="column-6">
+                                    <button class="bg-Ok"
+                                        (click)="onClickEditUser(user.id , checkpassword_hash ,user.mail ,user.name ,user.fullname)">
+                                        Ok
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="container">
+                    <table class="shopping-cart-table">
+                        <thead>
+                            <tr class="table-head">
+                                <th class="column-1">Fullname</th>
+                                <th class="column-2">Address</th>
+                                <th class="column-3">Postal Code</th>
+                                <th class="column-4">Phone</th>
+                                <th class="column-5"></th>
+                            </tr>
+                            <tr class="table-row" *ngFor="let address of user.addresses">
+                                <td class="column-1">{{ address.fullname }}</td>
+                                <td class="column-2">{{ address.address }}</td>
+                                <td class="column-3">{{ address.postalcode }}</td>
+                                <td class="column-4">{{ address.phone }}</td>
+                                <td class="column-5">
+                                    <button (click)="onClickDeleteAssresses( address.id)">
+                                        delete
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="column-1">
+                                    <input type="text" name="name" required [(ngModel)]="fullname">
+                                </td>
+                                <td class="column-2">
+                                    <input type="text" name="name" required [(ngModel)]="address">
+                                </td>
+                                <td class="column-3">
+                                    <input type="text" name="name" required [(ngModel)]="postalcode">
+                                </td>
+                                <td class="column-4">
+                                    <input type="text" name="name" required [(ngModel)]="phone">
+                                </td>
+                                <td class="column-5">
+                                    <button class="bg-Ok" (click)="onClickSubmitAssresses(user.id)">
+                                        Add
+                                    </button>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>

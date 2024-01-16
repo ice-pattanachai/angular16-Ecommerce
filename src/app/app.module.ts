@@ -16,7 +16,6 @@ import { ShopComponent } from './component/content/page/shop/shop.component';
 import { ProductComponent } from './component/add-on/product/product.component';
 import { LoginSellerComponent } from './component/content/seller/login-seller/login-seller.component';
 import { EditProductsComponent } from './component/content/seller/edit-products/edit-products.component';
-import { BuyProductUserComponent } from './component/content/user/buy-product-user/buy-product-user.component';
 import { ImageCarouselIIComponent } from './component/add-on/image-carousel-ii/image-carousel-ii.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ProductDetailComponent } from './component/content/page/product-detail/product-detail.component';
@@ -43,7 +42,6 @@ import { EditOrderComponent } from './component/content/seller/edit-order/edit-o
     ProductComponent,
     LoginSellerComponent,
     EditProductsComponent,
-    BuyProductUserComponent,
     ImageCarouselIIComponent,
     ProductDetailComponent,
     CartgoComponent,

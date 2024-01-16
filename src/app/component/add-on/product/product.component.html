@@ -13,12 +13,12 @@
               product.stock_quantity, 
               url+ product.id
             )">
-              <!-- เปลี่ยนที่นี่ -->
               <img [src]=" url+ product.id" alt="{{ product.name }}">
-              <!-- จบที่นี่ -->
-              <h3>{{ product.product_name }}</h3>
-              <p>{{ product.description }}</p>
-              <p class="price">{{ product.price_per_piece | currency: '฿' }}</p>
+              <div class="product-item-text">
+                <h3>{{ product.product_name }}</h3>
+                <p>{{ product.description }}</p>
+                <p class="price">{{ product.price_per_piece | currency: '฿' }}</p>
+              </div>
             </a>
           </div>
         </div>
