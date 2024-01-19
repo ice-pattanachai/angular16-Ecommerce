@@ -1,27 +1,5 @@
-<!-- <div *ngIf="product">
-  <div class="pagination">
-    <p>{{ product.product_name }}</p>
-  </div>
-  <section class="product-container">
-    <div class="img-card">
-      <img [src]="url+ product.id" alt="{{ product.product_name }}">
-    </div>
-    <div class="product-info">
-      <h3>{{ product.product_name }}</h3>
-      <h5>{{ product.price_per_piece | currency: '฿' }}<del></del></h5>
-      <p>{{ product.description }}</p>
-      <p>มีสินค้า: {{ product.stock_quantity }}</p>
-      <div class="quantity">
-        <input type="number" step="1" min="1" max="{{ product.stock_quantity }}" [(ngModel)]="quantity" />
-      </div>
-      <button (click)="addToCart(product)">AddToCart</button>
-      <button (click)="removeFromCart(product.id)">Remove</button>
-    </div>
-  </section>
-</div> -->
-
-<section class="py-5" *ngIf=" product">
-  <div class="container px-4 px-lg-5 my-5">
+<section *ngIf=" product">
+  <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 align-items-center">
       <div class="col-md-6">
         <img class="card-img-top mb-5 mb-md-0" [src]="url+ product.id" alt="{{ product.product_name }}" />
@@ -29,7 +7,7 @@
       <div class="col-md-6">
         <!-- <div class="small mb-1">SKU: BST-498</div> -->
         <h1 class="display-5 fw-bolder">{{ product.product_name }}</h1>
-        <div class="fs-5 mb-5">
+        <div class="fs-5 mb-5 custom-text">
           <span>{{ product.price_per_piece | currency: '฿' }}</span>
         </div>
         <p class="lead">{{ product.description }}</p>
@@ -56,7 +34,7 @@
           <div class="card-body p-4">
             <div class="text-center">
               <h5 class="fw-bolder">{{ product.product_name }}</h5>
-              {{ product.price_per_piece | currency: '฿' }}
+              <h5 class="custom-text">{{ product.price_per_piece | currency: '฿' }}</h5>
             </div>
           </div>
           <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">

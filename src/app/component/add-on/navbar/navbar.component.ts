@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../service/auth.service'
+import { User } from 'src/app/data-type';
 
 
 @Component({
@@ -15,8 +16,8 @@ export class NavbarComponent implements OnInit {
   userName: string = "";
   sellerName: string = "";
   badgeCount: string = '1';
-  // badgeCount: string | null = null;
   menuType: string = 'default';
+  users: User[] | undefined;
 
   constructor(
     private route: Router,
@@ -30,12 +31,12 @@ export class NavbarComponent implements OnInit {
     if (userData) {
       const userObject = JSON.parse(userData);
       const token = userObject.token;
+      this.userName = userObject.username;
+      console.log(this.userName);
       if (token) {
-        // console.log('Sending request with token:', token);
         this.authService.authenticateToken(token)
           .subscribe((response: any) => {
             const status = response.status;
-            // console.log('API Response Status:', status);
             if (status === 'ok') {
               const decoded = response.decoded;
               if (decoded && decoded.roles !== undefined) {
@@ -43,7 +44,6 @@ export class NavbarComponent implements OnInit {
                 if (typeof roles === 'string') {
                   const roleParts = roles.split('|');
                   const firstRole = roleParts[0];
-
                   if (firstRole === 'seller') {
                     this.menuType = 'seller';
                   } else if (firstRole === 'user') {
@@ -85,7 +85,6 @@ export class NavbarComponent implements OnInit {
                 }).then((result) => {
                   if (result.isConfirmed) {
                     window.location.reload();
-                    // this.route.navigate(['/user-login']);
                   }
                 });
               } else {
@@ -153,20 +152,10 @@ export class NavbarComponent implements OnInit {
   closeMenu3() {
     this.isMenuOpen3 = false;
   }
-
-  // AddToCart(): void {
-  //   const existingCartData = localStorage.getItem('AddToCart');
-  //   if (existingCartData) {
-  //     this.badgeCount = "";
-  //   } else {
-  //     this.badgeCount = "0";
-  //   }
-  // }
   AddToCart(): void {
     const existingCartData = localStorage.getItem('AddToCart');
     if (existingCartData) {
       const cartItems = JSON.parse(existingCartData);
-      // นับจำนวน item ในตะกร้า
       this.badgeCount = cartItems.length.toString();
     } else {
       this.badgeCount = '0';

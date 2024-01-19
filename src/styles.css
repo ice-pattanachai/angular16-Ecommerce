@@ -11,6 +11,7 @@ body {
   --color-sky: #00ADB5;
   --color-footer: #6ebfc4;
   --color-orange: #ff5722;
+  --text-custom: rgb(180, 0, 0);
   margin: 0;
   /* padding: 0; */
   font-family: "Poppins", sans-serif;
@@ -24,12 +25,13 @@ body.dark-theme {
 
 }
 
+.custom-text {
+  color: var(--text-custom);
+}
+
 .background-container {
-  /* height: 2796px; */
   width: 100vw;
-  /* 100% ของความยาวของ viewport */
   height: 100vh;
-  /* 100% ของความสูงของ viewport */
   background-image: url('assets/images/back.jpg');
   background-size: cover;
   background-position: center;
