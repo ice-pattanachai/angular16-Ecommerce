@@ -23,4 +23,10 @@ export class AppComponent {
       console.error('reCAPTCHA response is null');
     }
   }
+  private excludedUrls: Set<string> = new Set(['/user-login', '/seller-login']);
+
+  shouldShowNavbar(): boolean {
+    // return window.location.pathname !== '/user-login' ;
+    return !this.excludedUrls.has(window.location.pathname);
+  }
 }

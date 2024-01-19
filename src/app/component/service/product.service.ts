@@ -142,6 +142,10 @@ export class ProductService {
     return this.http.post<product[]>('http://localhost:3030/api/products_all', {});
   }
 
+  getProduct(id: string) {
+    return this.http.get<product>(`http://localhost:3030/api/products_id/get/${id}`);
+  }
+
   sellerProductId(productId: any): Observable<product[]> {
     const body = { productId: productId };
     const data = this.http.post<product[]>('http://localhost:3030/api/products_id', body)

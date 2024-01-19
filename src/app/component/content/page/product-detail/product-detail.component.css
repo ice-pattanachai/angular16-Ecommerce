@@ -1,4 +1,4 @@
-* {
+/* * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -10,7 +10,6 @@ body {
   padding: 0 30px;
   margin-top: 70px;
   font-family: 'Lato', sans-serif;
-  /* เพิ่มการใช้งาน font-family */
 }
 
 header {
@@ -29,9 +28,7 @@ header {
   flex-shrink: 0;
   border-radius: 4px;
   height: 100%;
-  /* ปรับความสูงให้เต็ม container */
   object-fit: contain;
-  /* ให้ภาพเต็ม container แต่อาจทำให้ภาพมีพื้นที่เปล่งออกมา */
 }
 
 .small-Card {
@@ -43,9 +40,7 @@ header {
 
 .small-Card img {
   width: 80px;
-  /* ปรับขนาดภาพ */
   height: 80px;
-  /* ปรับขนาดภาพ */
   border-radius: 4px;
   cursor: pointer;
 }
@@ -80,10 +75,7 @@ header {
   color: #424551;
   margin: 15px 0;
   width: 100%;
-  /* ปรับความกว้างให้เต็ม container */
 }
-
-/* เพิ่มส่วนของ sizes และ size-option ที่อาจจะขาดหายไป */
 
 .quantity input {
   width: 51px;
@@ -114,7 +106,6 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  /* ปรับความกว้างให้เต็ม container */
   color: #787a80;
   font-size: 12px;
   line-height: 150%;
@@ -124,7 +115,6 @@ button:hover {
 hr {
   color: #787a80;
   width: 100%;
-  /* ปรับความกว้างให้เต็ม container */
   opacity: 0.67;
 }
 
@@ -142,9 +132,7 @@ hr {
 
   .small-Card img {
     width: 60px;
-    /* ปรับขนาดภาพ */
     height: 60px;
-    /* ปรับขนาดภาพ */
   }
 
   .product-info {
@@ -162,4 +150,8 @@ hr {
   hr {
     width: 100%;
   }
+} */
+
+.container {
+  max-width: 85%;
 }

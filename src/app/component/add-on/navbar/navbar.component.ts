@@ -14,8 +14,8 @@ export class NavbarComponent implements OnInit {
   isNavbarVisible: boolean = true;
   userName: string = "";
   sellerName: string = "";
-  // badgeCount: string = '1';
-  badgeCount: string | null = null;
+  badgeCount: string = '1';
+  // badgeCount: string | null = null;
   menuType: string = 'default';
 
   constructor(
@@ -154,13 +154,22 @@ export class NavbarComponent implements OnInit {
     this.isMenuOpen3 = false;
   }
 
+  // AddToCart(): void {
+  //   const existingCartData = localStorage.getItem('AddToCart');
+  //   if (existingCartData) {
+  //     this.badgeCount = "";
+  //   } else {
+  //     this.badgeCount = "0";
+  //   }
+  // }
   AddToCart(): void {
     const existingCartData = localStorage.getItem('AddToCart');
     if (existingCartData) {
-      // ให้แสดง "สัญญาลัก" ใน <span class="badge">
-      this.badgeCount = "!";
+      const cartItems = JSON.parse(existingCartData);
+      // นับจำนวน item ในตะกร้า
+      this.badgeCount = cartItems.length.toString();
     } else {
-      this.badgeCount = null;
+      this.badgeCount = '0';
     }
   }
 }

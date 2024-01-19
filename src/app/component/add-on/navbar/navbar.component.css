@@ -1,4 +1,4 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -10,7 +10,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 20px 100px;
+    padding: 15px 100px;
     background: #00ADB5;
     display: flex;
     justify-content: space-between;
@@ -74,9 +74,6 @@ a .badge {
     transition: .3s;
 }
 
-/* .navbar a:hover::before {
-    width: 100%;
-} */
 .navbar a:hover {
     color: #000000;
 }
@@ -384,4 +381,4 @@ a .badge {
     to {
         opacity: 0;
     }
-}
+} */

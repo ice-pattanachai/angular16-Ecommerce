@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/component/service/product.service';
 import { product } from 'src/app/data-type';
 import Swal from 'sweetalert2';
@@ -12,27 +12,66 @@ import Swal from 'sweetalert2';
 export class ProductDetailComponent implements OnInit {
   url = "http://localhost:3030/api/products_all/image?product_id="
   product: product | undefined;
+  products: product[] | undefined;
   quantity: number = 1;
+  productData: undefined | product;
 
   constructor(
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private activeRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
-    const userData = localStorage.getItem('Product');
-
-    if (userData) {
-      const userObject = JSON.parse(userData);
-      const productId = userObject.id;
-
+    this.activeRoute.params.subscribe(params => {
+      const productId = params['id'];
+      // console.log('Product ID:', productId);
+      // ทำสิ่งที่คุณต้องการด้วย productId
       if (productId) {
         this.productService.productList().subscribe((products) => {
           // ค้นหา product ที่มี id ตรงกันใน productList
-          this.product = products.find(product => product.id === productId);
+          this.product = products.find(product => product.id == productId);
+          const randomProducts = this.getRandomProducts(products, 8);
+          this.products = randomProducts;
         });
       }
+    });
+    // const userData = localStorage.getItem('Product');
+
+    // if (userData) {
+    //   const userObject = JSON.parse(userData);
+    //   const productId = userObject.id;
+
+    //   // if (productId) {
+    //   //   this.productService.productList().subscribe((products) => {
+    //   //     // ค้นหา product ที่มี id ตรงกันใน productList
+    //   //     this.product = products.find(product => product.id === productId);
+    //   //   });
+    //   // }
+    // }
+
+
+    // let productId = this.activeRoute.snapshot.paramMap.get('productId');
+    // this.productService.getProduct(productId).subscribe((result) => {
+    //   this.productData = result
+    //   console.log(this.productData);
+    // })
+  }
+  getRandomProducts(products: any[], count: number): any[] {
+    const shuffled = products.slice(0);
+    let i = products.length;
+    const min = i - count;
+    let temp;
+    let index;
+
+    while (i-- > min) {
+      index = Math.floor((i + 1) * Math.random());
+      temp = shuffled[index];
+      shuffled[index] = shuffled[i];
+      shuffled[i] = temp;
     }
+
+    return shuffled.slice(min);
   }
 
   addToCart(product: product): void {

@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'bongo-cat', component: CatErrorComponent },
   { path: 'shop', component: ShopComponent },
-  { path: 'product', component: ProductDetailComponent },
+  { path: 'product/:id', component: ProductDetailComponent },
   { path: 'cartgo', component: CartgoComponent },
   { path: 'setting', component: SettingUserAllComponent },
   // user
