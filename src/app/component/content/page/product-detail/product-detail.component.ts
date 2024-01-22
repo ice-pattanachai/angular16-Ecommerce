@@ -25,13 +25,12 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit() {
     this.activeRoute.params.subscribe(params => {
       const productId = params['id'];
-      // console.log('Product ID:', productId);
       // ทำสิ่งที่คุณต้องการด้วย productId
       if (productId) {
         this.productService.productList().subscribe((products) => {
           // ค้นหา product ที่มี id ตรงกันใน productList
           this.product = products.find(product => product.id == productId);
-          const randomProducts = this.getRandomProducts(products, 8);
+          const randomProducts = this.getRandomProducts(products, 4);
           this.products = randomProducts;
         });
       }
@@ -63,14 +62,12 @@ export class ProductDetailComponent implements OnInit {
     const min = i - count;
     let temp;
     let index;
-
     while (i-- > min) {
       index = Math.floor((i + 1) * Math.random());
       temp = shuffled[index];
       shuffled[index] = shuffled[i];
       shuffled[i] = temp;
     }
-
     return shuffled.slice(min);
   }
 

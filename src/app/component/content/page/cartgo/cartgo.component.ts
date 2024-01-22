@@ -203,4 +203,19 @@ export class CartgoComponent implements OnInit, AfterViewInit {
   reloadPage(): void {
     window.location.reload();
   }
+
+  updateQuantity(product: any, change: number): void {
+    const updatedCart = this.cartData.map(item => {
+      if (item.id === product.id) {
+        item.quantity += change;
+        if (item.quantity < 1) {
+          item.quantity = 1;
+        }
+      }
+      return item;
+    });
+
+    localStorage.setItem('AddToCart', JSON.stringify(updatedCart));
+    this.loadCartData();
+  }
 }
