@@ -81,13 +81,12 @@ export class AuthService {
   }
 
   edit_User(
-    id: number, password_hash: string, mail: string, name: string, fullname: string
+    id: number, mail: string, name: string, fullname: string
   ): Observable<any> {
     return this.http.post(
       AUTH_API + 'edit_user',
       {
         id,
-        password_hash,
         mail,
         name,
         fullname
@@ -96,22 +95,47 @@ export class AuthService {
 
     );
   }
-
-  edit_seller(
-    id: number, password_hash: string, name: string
+  edit_User_Password(
+    id: number, password_hash: string
   ): Observable<any> {
     return this.http.post(
-      AUTH_API + 'edit_seller',
+      AUTH_API + 'edit_user',
       {
         id,
         password_hash,
-        name,
       },
       httpOptions
 
     );
   }
 
+
+  edit_seller(
+    id: number, name: string
+  ): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'edit_seller',
+      {
+        id,
+        name,
+      },
+      httpOptions
+
+    );
+  }
+  edit_seller_Password(
+    id: number, password_hash: string
+  ): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'edit_seller',
+      {
+        id,
+        password_hash,
+      },
+      httpOptions
+
+    );
+  }
   checkPasswordUser(id: number, password_hash: string): Observable<any> {
     return this.http.post(
       AUTH_API + 'check_password/user',

@@ -1,184 +1,352 @@
 <div *ngIf="isLoggedIn" [ngSwitch]="menuType">
     <div>
-        <ul *ngSwitchCase="'seller'">
+        <ul *ngSwitchCase="'seller'" class="list-group">
             <div *ngFor="let seller of sellerall">
-                <div class="container">
-                    <table class="shopping-cart-table">
-                        <thead>
-                            <tr class="table-head">
-                                <th class="column-1"></th>
-                                <th class="column-2"></th>
-                                <th class="column-3"></th>
-                                <th class="column-4"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="table-row">
-                                <td class="column-1">Seller Information [{{ seller.id }}]</td>
-                                <td class="column-2">Username: {{ seller.username }}</td>
-                                <td class="column-3">Name: {{ seller.name }}</td>
-                                <td class="column-4">
-                                    <button (click)="toggleMenuSeller()" class="bg-edit">Edit</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody *ngIf="OpenMenuSeller">
-                            <tr class="table-row">
-                                <td class="column-1">password:</td>
-                                <td class="column-2">
-                                    <input type="password" name="password" required
-                                        [(ngModel)]="checkpasswordseller_hash">
-                                </td>
-                                <td class="column-3">New Name:</td>
-                                <td class="column-4">
-                                    <input type="text" name="name" required [(ngModel)]="seller.name">
-                                </td>
-                            </tr>
-                            <tr class="table-row">
-                                <td class="column-1">New password:</td>
-                                <td class="column-2">
-                                    <input type="password" name="password" required
-                                        [(ngModel)]="newpasswordseller_hash">
-                                </td>
-                                <td class="column-3"></td>
-                                <td class="column-4"></td>
-                            </tr>
-                            <tr class="table-row">
-                                <td class="column-1">Confirm Password:</td>
-                                <td class="column-2">
-                                    <input type="password" name="password" required
-                                        [(ngModel)]="checknewpasswordseller_hash">
-                                </td>
-                                <td class="column-3"></td>
-                                <td class="column-4">
-                                    <button class="bg-Ok"
-                                        (click)="onClickEditSeller(seller.id , checkpasswordseller_hash ,seller.name)">
-                                        Ok
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="container-fluid">
+                    <div class="row">
+                        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar min-vh-100">
+                            <div class="position-sticky">
+                                <ul class="nav flex-column mt-4">
+                                    <li class="">
+                                        <button class="nav-link text-dark" (click)="toggleSettingSeller()">
+                                            <i class="bi bi-gear"></i> <span class="ms-2"> รหัสผ่าน</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-4">
+                            <div class="container" *ngIf="isMenuOpenSettingSeller">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr class="table-row">
+                                                <td class="column-1">User Information [{{ seller.id }}]</td>
+                                                <td class="column-2">Username: {{ seller.username }}</td>
+                                                <td class="column-3">Name: {{ seller.name }}</td>
+                                            </tr>
+                                            <tr class="table-row">
+                                                <td class="column-1">
+                                                    <button class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#editPasswordSellerModal">
+                                                        Edit Password
+                                                    </button>
+                                                </td>
+                                                <td class="column-2">
+                                                    <button class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#editSellerModal">
+                                                        Edit user
+                                                    </button>
+                                                </td>
+                                                <td class="column-3"></td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="modal fade" id="editPasswordSellerModal" tabindex="-1"
+                                    aria-labelledby="editPasswordSellerModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="eeditPasswordSellerModalLabel">Edit Password
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="mb-1 modal-body">
+                                                <label for="name_input">password</label>
+                                                <input class="form-control" type="password" name="password" required
+                                                    [(ngModel)]="checkpasswordseller_hash">
+                                            </div>
+                                            <div class="mb-1 modal-body">
+                                                <label for="name_input">New password</label>
+                                                <input class="form-control" type="password" name="new-password" required
+                                                    required [(ngModel)]="newpasswordseller_hash">
+                                            </div>
+                                            <div class="mb-1 modal-body">
+                                                <label for="name_input">Confirm Password</label>
+                                                <input class="form-control" type="password" name="confirm-password"
+                                                    required [(ngModel)]="checknewpasswordseller_hash">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    (click)="onClickEditSellerPassword(seller.id ,  checkpasswordseller_hash)">
+                                                    Save changes
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="editSellerModal" tabindex="-1"
+                                    aria-labelledby="editSellerModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editSellerModalLabel">Set up an account</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="mb-1 modal-body">
+                                                <label for="name_input">Edit Name</label>
+                                                <input class="form-control" type="text" name="mail" required
+                                                    [(ngModel)]="seller.name">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    (click)="onClickEditSeller(seller.id , seller.name)">
+                                                    Save changes
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </ul>
     </div>
     <div *ngIf="userall">
-        <ul *ngSwitchCase="'user'">
+        <ul *ngSwitchCase="'user'" class="list-group">
             <div *ngFor="let user of userall">
-                <div class="container">
-                    <table class="shopping-cart-table">
-                        <thead>
-                            <tr class="table-head">
-                                <th class="column-1"></th>
-                                <th class="column-2"></th>
-                                <th class="column-3"></th>
-                                <th class="column-4"></th>
-                                <th class="column-5"></th>
-                                <th class="column-6"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="table-row">
-                                <td class="column-1">User Information [{{ user.id }}]</td>
-                                <td class="column-2">Username: {{ user.username }}</td>
-                                <td class="column-3">Email: {{ user.mail }}</td>
-                                <td class="column-4">Name: {{ user.name }}</td>
-                                <td class="column-5">Fullname: {{ user.fullname }}</td>
-                                <td class="column-6">
-                                    <button class="bg-edit" (click)="toggleMenuUser()">
-                                        Edit
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody *ngIf="OpenMenuUser">
-                            <tr class="table-row">
-                                <td class="column-1">password:</td>
-                                <td class="column-2">
-                                    <input type="password" name="password" required [(ngModel)]="checkpassword_hash">
-                                </td>
-                                <td class="column-3">New Email:</td>
-                                <td class="column-4">
-                                    <input type="text" name="mail" required [(ngModel)]="user.mail">
-                                </td>
-                                <td class="column-5"></td>
-                                <td class="column-6"></td>
-                            </tr>
-                            <tr class="table-row">
-                                <td class="column-1">New password:</td>
-                                <td class="column-2">
-                                    <input type="password" name="password" required [(ngModel)]="newpassword_hash">
-                                </td>
-                                <td class="column-3">New Name:</td>
-                                <td class="column-4">
-                                    <input type="text" name="name" required [(ngModel)]="user.name">
-                                </td>
-                                <td class="column-5"></td>
-                                <td class="column-6"></td>
-                            </tr>
-                            <tr class="table-row">
-                                <td class="column-1">Confirm Password:</td>
-                                <td class="column-2">
-                                    <input type="password" name="password" required [(ngModel)]="checknewpassword_hash">
-                                </td>
-                                <td class="column-3">Fullname:</td>
-                                <td class="column-4">
-                                    <input type="text" name="fullname" required [(ngModel)]="user.fullname">
-                                </td>
-                                <td class="column-5"></td>
-                                <td class="column-6">
-                                    <button class="bg-Ok"
-                                        (click)="onClickEditUser(user.id , checkpassword_hash ,user.mail ,user.name ,user.fullname)">
-                                        Ok
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="container">
-                    <table class="shopping-cart-table">
-                        <thead>
-                            <tr class="table-head">
-                                <th class="column-1">Fullname</th>
-                                <th class="column-2">Address</th>
-                                <th class="column-3">Postal Code</th>
-                                <th class="column-4">Phone</th>
-                                <th class="column-5"></th>
-                            </tr>
-                            <tr class="table-row" *ngFor="let address of user.addresses">
-                                <td class="column-1">{{ address.fullname }}</td>
-                                <td class="column-2">{{ address.address }}</td>
-                                <td class="column-3">{{ address.postalcode }}</td>
-                                <td class="column-4">{{ address.phone }}</td>
-                                <td class="column-5">
-                                    <button (click)="onClickDeleteAssresses( address.id)">
-                                        delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="table-row">
-                                <td class="column-1">
-                                    <input type="text" name="name" required [(ngModel)]="fullname">
-                                </td>
-                                <td class="column-2">
-                                    <input type="text" name="name" required [(ngModel)]="address">
-                                </td>
-                                <td class="column-3">
-                                    <input type="text" name="name" required [(ngModel)]="postalcode">
-                                </td>
-                                <td class="column-4">
-                                    <input type="text" name="name" required [(ngModel)]="phone">
-                                </td>
-                                <td class="column-5">
-                                    <button class="bg-Ok" (click)="onClickSubmitAssresses(user.id)">
-                                        Add
-                                    </button>
-                                </td>
-                            </tr>
-                        </thead>
-                    </table>
+                <div class="container-fluid">
+                    <div class="row">
+                        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar min-vh-100">
+                            <div class="position-sticky">
+                                <ul class="nav flex-column mt-4">
+                                    <li class="">
+                                        <button class="nav-link text-dark" (click)="toggleAddressUser()">
+                                            <i class="bi bi-house-door"></i> <span class="ms-2">ที่อยู่</span>
+                                        </button>
+                                    </li>
+                                    <li class="">
+                                        <button class="nav-link text-dark" (click)="toggleSettingUser()">
+                                            <i class="bi bi-gear"></i> <span class="ms-2"> รหัสผ่าน</span>
+                                        </button>
+                                    </li>
+                                    <li class="">
+                                        <button class="nav-link text-dark" (click)="toggleUserOrderhistory()">
+                                            <i class="bi bi-cart3"></i> <span class="ms-2"> ประวัติการสั่งซื้อ</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-4">
+                            <div class="container" *ngIf="isMenuOpenSettingUser">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr class="table-row">
+                                                <td class="column-1">User Information [{{ user.id }}]</td>
+                                                <td class="column-2">Username: {{ user.username }}</td>
+                                                <td class="column-3">Email: {{ user.mail }}</td>
+                                                <td class="column-4">Name: {{ user.name }}</td>
+                                                <td class="column-5">Fullname: {{ user.fullname }}</td>
+                                            </tr>
+                                            <tr class="table-row">
+                                                <td class="column-1">
+                                                    <button class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#editPasswordModal">
+                                                        Edit Password
+                                                    </button>
+                                                </td>
+                                                <td class="column-2">
+                                                    <button class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#editUserModal">
+                                                        Edit user
+                                                    </button>
+                                                </td>
+                                                <td class="column-3"></td>
+                                                <td class="column-4"></td>
+                                                <td class="column-5"></td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="modal fade" id="editPasswordModal" tabindex="-1"
+                                    aria-labelledby="editPasswordModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editPasswordModalLabel">Edit Password</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="mb-1 modal-body">
+                                                <label for="name_input">password</label>
+                                                <input class="form-control" type="password" name="password" required
+                                                    [(ngModel)]="checkpassword_hash">
+                                            </div>
+                                            <div class="mb-1 modal-body">
+                                                <label for="name_input">New password</label>
+                                                <input class="form-control" type="password" name="new-password" required
+                                                    [(ngModel)]="newpassword_hash">
+                                            </div>
+                                            <div class="mb-1 modal-body">
+                                                <label for="name_input">Confirm Password</label>
+                                                <input class="form-control" type="password" name="confirm-password"
+                                                    required [(ngModel)]="checknewpassword_hash">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    (click)="onClickEditUserPassword(user.id , checkpassword_hash)">
+                                                    Save changes
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="editUserModal" tabindex="-1"
+                                    aria-labelledby="editUserModallLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editUserModalLabel">Set up an account</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="mb-1 modal-body">
+                                                <label for="name_input">Edit Email</label>
+                                                <input class="form-control" type="text" name="mail" required
+                                                    [(ngModel)]="user.mail">
+                                            </div>
+                                            <div class="mb-1 modal-body">
+                                                <label for="name_input">Edit Name:</label>
+                                                <input class="form-control" type="text" name="new-password" required
+                                                    [(ngModel)]="user.name">
+                                            </div>
+                                            <div class="mb-1 modal-body">
+                                                <label for="name_input">Fullname:</label>
+                                                <input class="form-control" type="text" name="confirm-password" required
+                                                    [(ngModel)]="user.fullname">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    (click)="onClickEditUser(user.id , user.name ,user.mail  ,user.fullname)">
+                                                    Save changes
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container" *ngIf="isMenuOpenAddressUser">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">
+                                                    <h5>ที่อยู่ของฉัน</h5>
+                                                </th>
+                                                <th scope="col text-center">
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#popupModal">
+                                                        + เพิ่มที่อยู่
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                            <tr class="table-row" *ngFor="let address of user.addresses">
+                                                <td class="column-1 text-break " style="max-width: 600px;">
+                                                    {{ address.fullname }} | {{ address.phone }} <br>
+                                                    {{ address.address }} {{ address.postalcode }}
+                                                </td>
+                                                <td class="column-2 text-center">
+                                                    <button class="btn btn-md rounded-circle bg-light border mt-4"
+                                                        (click)="onClickDeleteAssresses(address.id)">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="container" *ngIf="isMenuOpenOrderhistorUser">
+                                <div class="table-responsive">
+                                    <h5>ประวัติการสั่งซื้อ</h5>
+                                    <app-purchase-history></app-purchase-history>
+                                    <!-- <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">
+                                                    <h5>ประวัติการสั่งซื้อ</h5>
+                                                </th>
+                                                <th scope="col text-center">
+                                                </th>
+                                            </tr>
+                                            <app-purchase-history></app-purchase-history>
+                                            <tr class="table-row" *ngFor="let address of user.addresses">
+                                                <td class="column-1 text-break " style="max-width: 600px;">
+                                                    {{ address.fullname }} | {{ address.phone }} <br>
+                                                    {{ address.address }} {{ address.postalcode }}
+                                                </td>
+                                                <td class="column-2 text-center">
+                                                    <button class="btn btn-md rounded-circle bg-light border mt-4"
+                                                        (click)="onClickDeleteAssresses(address.id)">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                    </table> -->
+                                </div>
+                            </div>
+                            <div class="modal fade" id="popupModal" tabindex="-1" aria-labelledby="popupModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="popupModalLabel">ที่อยู่ใหม่</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="contact_form" name="contact_form" method="post">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="name_input">ชื่อ-นามสกุล</label>
+                                                        <input class="form-control" type="text" name="fullname" required
+                                                            [(ngModel)]="fullname">
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="name_input">หมายเลขโทรศัพท์</label>
+                                                        <input class="form-control" type="text" name="phone" required
+                                                            [(ngModel)]="phone">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="message">ที่อยู่</label>
+                                                    <textarea class="form-control" id="message" name="address" rows="3"
+                                                        required [(ngModel)]="address">
+                                                            </textarea>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="name_input">รหัสไปรษณีย์</label>
+                                                    <input class="form-control" type="text" name="postalcode" required
+                                                        [(ngModel)]="postalcode">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary"
+                                                    (click)="onClickSubmitAssresses(user.id)">
+                                                    Submit
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </ul>

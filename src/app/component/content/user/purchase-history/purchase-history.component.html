@@ -1,56 +1,46 @@
-<div class="app-body">
-    <div class="main-container">
-        <section class="cart-section bg-white p-t-70 p-b-100">
-            <div class="container">
-                <div class="cart-table-container">
-                    <div class="shopping-cart-wrap bg-white">
-                        <table class="shopping-cart-table">
-                            <tbody>
-                                <ng-container *ngFor="let product of products; let i = index">
-                                    <tr class="table-row">
-                                        <td colspan="" class="column-1 cart-img-container">
-                                            <img [src]="url + product.id" alt="Product Image">
-                                        </td>
-                                        <td class="column-2"></td>
-                                        <td class="column-3"></td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td class="column-1 product-name">
-                                            {{product.product_name}}
-                                        </td>
-                                        <td class="column-2"></td>
-                                        <td class="column-3"></td>
-                                    </tr>
-                                    <tr class="table-row" *ngIf="aa && aa[i]">
-                                        <td class="column-1 address-info">
-                                            ที่อยู่: {{aa[i].addresses_name}}: {{aa[i].address}} {{aa[i].postalcode}}
-                                            phone:{{aa[i].phone}}
-                                        </td>
-                                        <td class="column-2"></td>
-                                        <td class="column-3"></td>
-                                    </tr>
-                                    <tr class="table-row" *ngIf="aa && aa[i]">
-                                        <td class="column-1">
-                                            จำนวนการสั่งซื้อ:{{aa[i].quantity}}
-                                        </td>
-                                        <td class="column-2">ราคา:{{aa[i].total_price}}</td>
-                                        <td class="column-3">{{aa[i].parcel_number}}</td>
-                                    </tr>
-                                    <tr class="table-row" *ngIf="aa && aa[i]">
-                                        <td class="column-1">
-                                            สถานะ:{{aa[i].status ? 'ยืนยันคำสั่งซื้อ' : 'รอยืนยันคำสั่งซื้อ'}}
-                                        </td>
-                                        <td class="column-2">ชำระเงิน:{{aa[i].payment_format}}</td>
-                                        <td class="column-3">
-                                            ยืนยันการชำระเงิน:{{aa[i].confirm_payment ? 'ชำระ' :'ยังไม่ชำระ'}}
-                                        </td>
-                                    </tr>
-                                </ng-container>
-                            </tbody>
-                        </table>
-                    </div>
+<div class="list-group">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container" *ngIf="isMenuhistor">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead *ngFor="let product of products; let i = index">
+                            <tr class="table-row align-top">
+                                <td class="column-1 text-break " style="max-width: 10%;">
+                                    <img [src]="url + product.id" alt="Product Image">
+                                </td>
+                                <td class="column-1 text-break " style="max-width: 50%" *ngIf="aa && aa[i]">
+                                    {{product.product_name}} <br>
+                                    <!-- {{aa[i].addresses_name}} | {{aa[i].phone}} | {{aa[i].parcel_number}}<br>
+                                    {{aa[i].address}} {{aa[i].postalcode}} <br> -->
+                                    จำนวนการสั่งซื้อ: {{aa[i].quantity}} <br> หมายเลขพัสดุ : {{aa[i].parcel_number}}
+                                </td>
+                                <!-- <td class="column-2 text-break" style="width: 15%" *ngIf="aa && aa[i]">
+                                    {{aa[i].status ? 'ยืนยันคำสั่งซื้อ' : 'รอยืนยันคำสั่งซื้อ'}}<br>
+                                    {{aa[i].payment_format}} <br>
+                                    {{aa[i].confirm_payment ? 'ชำระเงินเสร็จสิน' :'ยังไม่ชำระเงิน'}}
+                                </td> -->
+                                <td class="column-2 text-break" style="width: 20%" *ngIf="aa && aa[i]">
+                                    <!-- จำนวนการสั่งซื้อ: {{aa[i].quantity}} <br> -->
+                                    <br>ราคา: {{aa[i].total_price}}
+                                </td>
+                                <td class="column-2 text-break" style="width: 5%" *ngIf="aa && aa[i]">
+
+                                </td>
+                            </tr>
+                            <!-- <tr class="table-row">
+                                    <td class="column-1 text-break " style="max-width: 100%;" *ngIf="aa && aa[i]">
+                                    </td>
+                                    <td class="column-1 text-break " style="max-width: 100%;" *ngIf="aa && aa[i]">
+                                        สถานะ:{{aa[i].status ? 'ยืนยันคำสั่งซื้อ' : 'รอยืนยันคำสั่งซื้อ'}}
+                                        ชำระเงิน:{{aa[i].payment_format}}
+                                        ยืนยันการชำระเงิน:{{aa[i].confirm_payment ?'ชำระ' :'ยังไม่ชำระ'}}<br>
+                                    </td>
+                                </tr> -->
+                        </thead>
+                    </table>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
 </div>

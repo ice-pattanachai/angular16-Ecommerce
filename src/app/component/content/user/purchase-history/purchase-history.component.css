@@ -1,4 +1,4 @@
-.bodymain {
+/* .bodymain {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     background-color: #f4f4f4;
@@ -138,7 +138,6 @@ select {
     }
 }
 
-/* Additional styles for better readability */
 .product-name {
     font-weight: bold;
 }
@@ -154,4 +153,9 @@ select {
 .column-2,
 .column-3 {
     width: 35%;
+} */
+img {
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 8px;
 }

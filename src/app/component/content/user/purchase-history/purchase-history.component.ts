@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/component/service/auth.service';
 import { ProductService } from 'src/app/component/service/product.service';
@@ -13,7 +13,7 @@ import { forkJoin } from 'rxjs';
 export class PurchaseHistoryComponent {
   userall: User[] | undefined;
   ordersall: PurchaseOrders[] | undefined;
-  aa: PurchaseOrders[] | undefined;
+  aa!: PurchaseOrders[];
   // orders: PurchaseOrders[] | undefined;
   showLogin = true;
   products: product[] | undefined;
@@ -22,6 +22,8 @@ export class PurchaseHistoryComponent {
   isLoggedIn = false;
   url = "http://localhost:3030/api/products_all/image?product_id="
   images: any;
+  modalService: any;
+  popupModal: any;
 
   constructor(
     private router: Router,
@@ -74,10 +76,15 @@ export class PurchaseHistoryComponent {
             });
           }
           this.aa = orderall;
+
         });
       }
     }
   }
-}
 
+  isMenuhistor = true;
+  toggleUserOrderhistory() {
+    this.isMenuhistor = !this.isMenuhistor;
+  }
+}
 

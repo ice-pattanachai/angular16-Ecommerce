@@ -97,16 +97,6 @@ export class SettingUserAllComponent implements OnInit {
       }
     }
   }
-  OpenMenuUser = false;
-  toggleMenuUser() {
-    this.OpenMenuUser = !this.OpenMenuUser;
-  }
-
-  OpenMenuSeller = false;
-  toggleMenuSeller() {
-    this.OpenMenuSeller = !this.OpenMenuSeller;
-  }
-
   fullname: string = '';
   address: string = '';
   postalcode: number = 0;
@@ -146,7 +136,29 @@ export class SettingUserAllComponent implements OnInit {
   checkpassword_hash: string = '';
   newpassword_hash: string = '';
   checknewpassword_hash: string = '';
-  onClickEditUser(id: number, checkpassword_hash: string, name: string, mail: string, fullname: string) {
+  onClickEditUser(id: number, name: string, mail: string, fullname: string) {
+    this.authService.edit_User(id, mail, name, fullname,).subscribe({
+      next: data => {
+        Swal.fire({
+          icon: 'success',
+          title: 'success',
+          text: 'User information has been updated successfully.',
+        });
+        window.location.reload();
+      },
+      error: err => {
+        console.error('Error editing user:', err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to edit user information. Please try again.',
+        });
+      }
+    });
+
+  }
+
+  onClickEditUserPassword(id: number, checkpassword_hash: string) {
     if (this.checkpassword_hash === '') {
       Swal.fire({
         icon: 'error',
@@ -160,7 +172,7 @@ export class SettingUserAllComponent implements OnInit {
         const isMatch = this.newpassword_hash === this.checknewpassword_hash;
         if (isMatch) {
           if (isMatch && this.newpassword_hash !== checkpassword_hash) {
-            this.authService.edit_User(id, this.newpassword_hash, mail, name, fullname,).subscribe({
+            this.authService.edit_User_Password(id, this.newpassword_hash).subscribe({
               next: data => {
                 Swal.fire({
                   icon: 'success',
@@ -227,12 +239,30 @@ export class SettingUserAllComponent implements OnInit {
     })
   }
 
-  // /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   checkpasswordseller_hash: string = '';
   newpasswordseller_hash: string = '';
   checknewpasswordseller_hash: string = '';
-  onClickEditSeller(id: number, checkpasswordseller_hash: string, name: string) {
+  onClickEditSeller(id: number, name: string) {
+    this.authService.edit_seller(id, name,).subscribe({
+      next: data => {
+        Swal.fire({
+          icon: 'success',
+          title: 'success',
+          text: 'User information has been updated successfully.',
+        });
+        window.location.reload();
+      },
+      error: err => {
+        console.error('Error editing user:', err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to edit user information. Please try again.',
+        });
+      }
+    });
+  }
+  onClickEditSellerPassword(id: number, checkpasswordseller_hash: string) {
     if (this.checkpasswordseller_hash === '') {
       Swal.fire({
         icon: 'error',
@@ -246,7 +276,7 @@ export class SettingUserAllComponent implements OnInit {
         const isMatch = this.newpasswordseller_hash === this.checknewpasswordseller_hash;
         if (isMatch) {
           if (isMatch && this.newpasswordseller_hash !== checkpasswordseller_hash) {
-            this.authService.edit_seller(id, this.newpasswordseller_hash, name,).subscribe({
+            this.authService.edit_seller_Password(id, this.newpasswordseller_hash).subscribe({
               next: data => {
                 Swal.fire({
                   icon: 'success',
@@ -290,5 +320,28 @@ export class SettingUserAllComponent implements OnInit {
     });
   }
 
+  isMenuOpenAddressUser = true;
+  toggleAddressUser() {
+    this.isMenuOpenAddressUser = !this.isMenuOpenAddressUser;
+    this.isMenuOpenSettingUser = false;
+    this.isMenuOpenOrderhistorUser = false
+  }
+  isMenuOpenSettingUser = false;
+  toggleSettingUser() {
+    this.isMenuOpenSettingUser = !this.isMenuOpenSettingUser;
+    this.isMenuOpenAddressUser = false;
+    this.isMenuOpenOrderhistorUser = false
+  }
 
+  isMenuOpenOrderhistorUser = false;
+  toggleUserOrderhistory() {
+    this.isMenuOpenOrderhistorUser = !this.isMenuOpenOrderhistorUser;
+    this.isMenuOpenSettingUser = false;
+    this.isMenuOpenAddressUser = false;
+  }
+
+  isMenuOpenSettingSeller = true;
+  toggleSettingSeller() {
+    this.isMenuOpenSettingSeller = !this.isMenuOpenSettingSeller;
+  }
 }
