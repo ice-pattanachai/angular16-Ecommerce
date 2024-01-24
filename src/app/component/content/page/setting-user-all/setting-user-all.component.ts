@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/component/service/auth.service';
 import { StorageService } from 'src/app/component/service/storage.service';
@@ -326,6 +326,7 @@ export class SettingUserAllComponent implements OnInit {
     this.isMenuOpenSettingUser = false;
     this.isMenuOpenOrderhistorUser = false
   }
+
   isMenuOpenSettingUser = false;
   toggleSettingUser() {
     this.isMenuOpenSettingUser = !this.isMenuOpenSettingUser;
@@ -333,7 +334,8 @@ export class SettingUserAllComponent implements OnInit {
     this.isMenuOpenOrderhistorUser = false
   }
 
-  isMenuOpenOrderhistorUser = false;
+  @Input() isMenuOpenOrderhistorUser: boolean | undefined = false;
+  // isMenuOpenOrderhistorUser = false;
   toggleUserOrderhistory() {
     this.isMenuOpenOrderhistorUser = !this.isMenuOpenOrderhistorUser;
     this.isMenuOpenSettingUser = false;

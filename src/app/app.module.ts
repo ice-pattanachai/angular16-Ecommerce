@@ -28,6 +28,7 @@ import { SettingUserAllComponent } from './component/content/page/setting-user-a
 import { PurchaseHistoryComponent } from './component/content/user/purchase-history/purchase-history.component';
 import { ManageOrdersComponent } from './component/content/seller/manage-orders/manage-orders.component';
 import { EditOrderComponent } from './component/content/seller/edit-order/edit-order.component';
+import { OrderDetailComponent } from './component/add-on/order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { EditOrderComponent } from './component/content/seller/edit-order/edit-o
     SettingUserAllComponent,
     PurchaseHistoryComponent,
     ManageOrdersComponent,
-    EditOrderComponent
+    EditOrderComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,

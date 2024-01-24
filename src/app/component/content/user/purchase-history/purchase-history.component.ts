@@ -1,9 +1,10 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/component/service/auth.service';
 import { ProductService } from 'src/app/component/service/product.service';
 import { PurchaseOrders, User, product } from 'src/app/data-type';
 import { forkJoin } from 'rxjs';
+import * as promptpayQr from 'promptpay-qr';
 
 @Component({
   selector: 'app-purchase-history',
@@ -13,7 +14,8 @@ import { forkJoin } from 'rxjs';
 export class PurchaseHistoryComponent {
   userall: User[] | undefined;
   ordersall: PurchaseOrders[] | undefined;
-  aa!: PurchaseOrders[];
+  orderDetail!: PurchaseOrders[];
+
   // orders: PurchaseOrders[] | undefined;
   showLogin = true;
   products: product[] | undefined;
@@ -21,6 +23,7 @@ export class PurchaseHistoryComponent {
   orders: any;
   isLoggedIn = false;
   url = "http://localhost:3030/api/products_all/image?product_id="
+  urlpromptpay = "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl="
   images: any;
   modalService: any;
   popupModal: any;
@@ -65,7 +68,7 @@ export class PurchaseHistoryComponent {
           }
           const order = this.ordersall[0];
           const orderall = order.orders;
-          console.log(orderall);
+          // console.log(orderall);
 
           const productIds = orderall.map((item: { product_id: any; }) => item.product_id);
           const productId = productIds[0];
@@ -75,7 +78,7 @@ export class PurchaseHistoryComponent {
               this.products = products as product[] | undefined;
             });
           }
-          this.aa = orderall;
+          this.orderDetail = orderall;
 
         });
       }
@@ -86,5 +89,24 @@ export class PurchaseHistoryComponent {
   toggleUserOrderhistory() {
     this.isMenuhistor = !this.isMenuhistor;
   }
+
+  // @Input() isMenuOpen: boolean | undefined = true;
+  isMenuOpen = true;
+  isMenuDetail = false
+  toggleUserisMenuOpen() {
+    this.isMenuOpen = !this.isMenuOpen;
+    this.isMenuDetail = !this.isMenuDetail;
+  }
+
+  selectedOrderDetail: any; // ตัวแปรเพื่อเก็บข้อมูลที่ถูกเลือก
+  selectedOrderProduct: any;
+  // ฟังก์ชันเพื่อเซ็ตข้อมูลที่ถูกเลือก
+  setSelectedOrderDetail(orderDetail: any, product: any) {
+    this.selectedOrderDetail = orderDetail;
+    this.selectedOrderProduct = product;
+  }
+
+
+
 }
 

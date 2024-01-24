@@ -158,6 +158,12 @@ export class ProductService {
     return data;
   }
 
+  purchase_orders_id(id: any): Observable<PurchaseOrders[]> {
+    const body = { id: id };
+    const data = this.http.post<PurchaseOrders[]>('http://localhost:3030/api/purchase_orders/search/Id', body)
+    return data;
+  }
+
   updateProduct(productData: FormData): Observable<any> {
     return this.http.post('http://localhost:3030/api/products_edit', productData);
   }

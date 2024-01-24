@@ -27,7 +27,6 @@ const routes: Routes = [
   { path: 'setting', component: SettingUserAllComponent },
   // user
   { path: 'user-login', component: LoginComponent },
-  { path: 'purchasehistory', component: PurchaseHistoryComponent },
   // seller
   { path: 'seller-login', component: LoginSellerComponent },
   { path: 'edit-products', component: EditProductsComponent },

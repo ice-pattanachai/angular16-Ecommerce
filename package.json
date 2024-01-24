@@ -25,6 +25,7 @@
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.2",
     "ngx-turnstile": "^0.1.0",
+    "promptpay-qr": "^0.5.0",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.10.2",
     "tslib": "^2.3.0",

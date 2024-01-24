@@ -1,4 +1,4 @@
-<div class="list-group">
+<div class="list-group" *ngIf="isMenuOpen">
     <div class="container-fluid">
         <div class="row">
             <div class="container" *ngIf="isMenuhistor">
@@ -6,40 +6,87 @@
                     <table class="table">
                         <thead *ngFor="let product of products; let i = index">
                             <tr class="table-row align-top">
-                                <td class="column-1 text-break " style="max-width: 10%;">
+                                <td class="column-1 text-break " style="max-width: 10%;" href=""
+                                    routerLink="../product/{{product.id}}">
                                     <img [src]="url + product.id" alt="Product Image">
                                 </td>
-                                <td class="column-1 text-break " style="max-width: 50%" *ngIf="aa && aa[i]">
+                                <td class="column-1 text-break " style="max-width: 50%"
+                                    *ngIf="orderDetail && orderDetail[i]">
                                     {{product.product_name}} <br>
-                                    <!-- {{aa[i].addresses_name}} | {{aa[i].phone}} | {{aa[i].parcel_number}}<br>
-                                    {{aa[i].address}} {{aa[i].postalcode}} <br> -->
-                                    จำนวนการสั่งซื้อ: {{aa[i].quantity}} <br> หมายเลขพัสดุ : {{aa[i].parcel_number}}
+                                    จำนวนการสั่งซื้อ: {{orderDetail[i].quantity}} <br> หมายเลขพัสดุ :
+                                    {{orderDetail[i].parcel_number}}
                                 </td>
-                                <!-- <td class="column-2 text-break" style="width: 15%" *ngIf="aa && aa[i]">
-                                    {{aa[i].status ? 'ยืนยันคำสั่งซื้อ' : 'รอยืนยันคำสั่งซื้อ'}}<br>
-                                    {{aa[i].payment_format}} <br>
-                                    {{aa[i].confirm_payment ? 'ชำระเงินเสร็จสิน' :'ยังไม่ชำระเงิน'}}
-                                </td> -->
-                                <td class="column-2 text-break" style="width: 20%" *ngIf="aa && aa[i]">
-                                    <!-- จำนวนการสั่งซื้อ: {{aa[i].quantity}} <br> -->
-                                    <br>ราคา: {{aa[i].total_price}}
+                                <td class="column-2 text-break" style="width: 130px"
+                                    *ngIf="orderDetail && orderDetail[i]">
+                                    <br>ราคา: {{orderDetail[i].total_price}}
                                 </td>
-                                <td class="column-2 text-break" style="width: 5%" *ngIf="aa && aa[i]">
-
+                                <td class="column-2 text-center align-end" style="width: 5%"
+                                    *ngIf="orderDetail && orderDetail[i]"><br>
+                                    <button class="btn btn-primary"
+                                        (click)="setSelectedOrderDetail(orderDetail[i], product)" data-bs-toggle="modal"
+                                        data-bs-target="#popupModal">
+                                        view
+                                    </button>
                                 </td>
                             </tr>
-                            <!-- <tr class="table-row">
-                                    <td class="column-1 text-break " style="max-width: 100%;" *ngIf="aa && aa[i]">
-                                    </td>
-                                    <td class="column-1 text-break " style="max-width: 100%;" *ngIf="aa && aa[i]">
-                                        สถานะ:{{aa[i].status ? 'ยืนยันคำสั่งซื้อ' : 'รอยืนยันคำสั่งซื้อ'}}
-                                        ชำระเงิน:{{aa[i].payment_format}}
-                                        ยืนยันการชำระเงิน:{{aa[i].confirm_payment ?'ชำระ' :'ยังไม่ชำระ'}}<br>
-                                    </td>
-                                </tr> -->
                         </thead>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="popupModal" tabindex="-1" aria-labelledby="popupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 550px; width: 38%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="popupModalLabel">ประวัติการสั่งซื้อ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="contact_form" name="contact_form" method="post">
+                    <div class="mb-3">
+                        <h6>{{ selectedOrderProduct?.product_name }}</h6>
+                        <p class="text-center">
+                            <img [src]="url + selectedOrderProduct?.id" alt="Product Image"><br>
+                        </p>
+                        <p>
+                            ที่อยู่ :{{ selectedOrderDetail?.addresses_name }} | {{ selectedOrderDetail?.phone }}
+                            <br> {{ selectedOrderDetail?.address }} {{ selectedOrderDetail?.postalcode }}<br>
+                        </p>
+                        <p>
+                            สถานะ:{{selectedOrderDetail?.status ? 'ยืนยันคำสั่งซื้อ' : 'รอยืนยันคำสั่งซื้อ'}} <br>
+                            หมายเลขพัสดุ : {{selectedOrderDetail?.parcel_number}}
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>รูปแบบการชำระเงิน :</label>
+                            <p>
+                                {{selectedOrderDetail?.payment_format }}
+                            </p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>ยืนยันการชำระเงิน :</label>
+                            <p>
+                                {{selectedOrderDetail?.confirm_payment ?
+                                'ชำระ' :'ยังไม่ชำระ'}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        ราคา: {{selectedOrderDetail?.total_price}} บาท
+                    </div>
+                    <div class="mb-3">
+                        <p class="text-center">
+                            <!-- แก้ไขเพิ่มเติ่มตรงนี้ -->
+                            <img [src]="urlpromptpay + selectedOrderProduct?.id+selectedOrderDetail?.total_price+selectedOrderDetail?.id "
+                                alt="promptpay Image"><br>
+                        </p>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
