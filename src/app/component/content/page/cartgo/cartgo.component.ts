@@ -110,7 +110,6 @@ export class CartgoComponent implements OnInit, AfterViewInit {
     localStorage.setItem('Product', JSON.stringify(productData));
   }
 
-
   selectedAddress: any;
   selectedAddressId: number | undefined;
   selectChang(event: any) {
@@ -134,8 +133,7 @@ export class CartgoComponent implements OnInit, AfterViewInit {
   confirm_payment: boolean = false;
   user_id: number = 0;
   product_id: number = 0;
-  paymentFormat: string = '';
-
+  receipt_id: number = 0;
   onClickConfirm() {
     for (const product of this.cartData) {
       const productId = product.id;
@@ -143,11 +141,10 @@ export class CartgoComponent implements OnInit, AfterViewInit {
       const address = this.selectedAddress.address;
       const addresses_name = this.selectedAddress.fullname;
       const phone = this.selectedAddress.phone;
-      const payment_format = this.paymentFormat;
       const postalcode = this.selectedAddress.postalcode;
       const status = this.status;
+      const receipt_id = this.receipt_id
 
-      // เรียกใช้ฟังก์ชันที่ปรับปรุงไว้เพื่อทำการส่งข้อมูล
       this.processOrder(
         addresses_name,
         address,
@@ -156,10 +153,9 @@ export class CartgoComponent implements OnInit, AfterViewInit {
         product.quantity,
         product.price_per_piece * product.quantity,
         status,
-        payment_format,
-        this.confirm_payment,
         user_id,
-        productId
+        productId,
+        receipt_id,
       );
     }
   }
@@ -172,10 +168,9 @@ export class CartgoComponent implements OnInit, AfterViewInit {
     quantity: number,
     total_price: number,
     status: boolean,
-    payment_format: string,
-    confirm_payment: boolean,
     user_id: number,
-    product_id: number
+    product_id: number,
+    receipt_id: number,
   ): void {
     this.productService.add_purchase_orders(
       addresses_name,
@@ -185,10 +180,9 @@ export class CartgoComponent implements OnInit, AfterViewInit {
       quantity,
       total_price,
       status,
-      payment_format,
-      confirm_payment,
       user_id,
-      product_id
+      product_id,
+      receipt_id,
     ).subscribe({
       next: data => {
         this.removeFromCart(product_id);

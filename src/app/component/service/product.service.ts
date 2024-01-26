@@ -59,6 +59,28 @@ export class ProductService {
     );
   }
 
+  add_Receipt_purchase_orders(
+    order_receipt_number: string,
+    receipt_make_payment: boolean,
+    receipt_visibility: boolean,
+    receipt_status: boolean,
+    receipt_confirm_payment: boolean,
+    payment_format: string,
+  ): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'receipt/add',//
+      {
+        order_receipt_number,
+        receipt_make_payment,
+        receipt_visibility,
+        receipt_status,
+        receipt_confirm_payment,
+        payment_format,
+      },
+      httpOptions
+    );
+  }
+
   add_purchase_orders(
     addresses_name: string,
     address: string,
@@ -67,10 +89,9 @@ export class ProductService {
     quantity: number,
     total_price: number,
     status: boolean,
-    payment_format: string,
-    confirm_payment: boolean,
     user_id: number,
-    product_id: number
+    product_id: number,
+    receipt_id: number,
 
   ): Observable<any> {
     return this.http.post(
@@ -83,10 +104,9 @@ export class ProductService {
         quantity,
         total_price,
         status,
-        payment_format,
-        confirm_payment,
         user_id,
         product_id,
+        receipt_id,
       },
       httpOptions
     );

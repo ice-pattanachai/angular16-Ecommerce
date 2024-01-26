@@ -57,9 +57,21 @@
                             <br> {{ selectedOrderDetail?.address }} {{ selectedOrderDetail?.postalcode }}<br>
                         </p>
                         <p>
-                            สถานะ:{{selectedOrderDetail?.status ? 'ยืนยันคำสั่งซื้อ' : 'รอยืนยันคำสั่งซื้อ'}} <br>
+                            สถานะ : {{selectedOrderDetail?.status ? ' ยืนยันคำสั่งซื้อ' : ' รอยืนยันคำสั่งซื้อ'}} <br>
                             หมายเลขพัสดุ : {{selectedOrderDetail?.parcel_number}}
                         </p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <p>
+                                จำนวนการสั่งซื้อ : {{selectedOrderDetail?.quantity}}
+                            </p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <p>
+                                ราคาต่อหน่วย : {{selectedOrderDetail?.total_price/selectedOrderDetail?.quantity}} บาท
+                            </p>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -79,13 +91,12 @@
                     <div class="mb-3">
                         ราคา: {{selectedOrderDetail?.total_price}} บาท
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <p class="text-center">
-                            <!-- แก้ไขเพิ่มเติ่มตรงนี้ -->
                             <img [src]="urlpromptpay + selectedOrderProduct?.id+selectedOrderDetail?.total_price+selectedOrderDetail?.id "
                                 alt="promptpay Image"><br>
                         </p>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>
