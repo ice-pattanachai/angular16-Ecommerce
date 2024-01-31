@@ -27,7 +27,8 @@
                 <tbody>
                     <tr *ngFor="let element of cartData">
                         <th scope="row">
-                            <div class="d-flex align-items-center" routerLink="../../product/{{element.id}}">
+                            <div class="d-flex align-items-center" routerLink="../../product/{{element.id}}"
+                                routerLink="../product/{{element.id}}">
                                 <img src="{{ url+ element.id }}" class="img-fluid me-5 rounded-circle"
                                     style="width: 80px; height: 80px;" alt="Product Image">
                             </div>
@@ -77,7 +78,7 @@
                             <label for="addressSelect" class="form-label">Choose Address:</label>
                             <select class="form-select" id="addressSelect" name="product_status"
                                 (change)="selectChang($event)">
-                                <option value="">Select an Address</option>
+                                <option value="" disabled selected>Select an Address</option>
                                 <ng-container *ngFor="let address of user.addresses">
                                     <option [value]="address.id">{{ address.fullname }}</option>
                                 </ng-container>
