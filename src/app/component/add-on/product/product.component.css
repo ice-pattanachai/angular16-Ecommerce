@@ -6,9 +6,16 @@
   max-width: 100%;
 }
 
-.product-item:hover .card {
+/* .product-item:hover .card {
   border: 1px solid var(--text-custom);
-  /* เปลี่ยนสีของเส้นกรอบตามที่คุณต้องการ */
   transition: border 0.3s ease-in-out;
-  /* เพิ่มเอฟเฟกต์ transition */
+} */
+
+.product-item .card {
+  transition: box-shadow 0.2s;
+}
+
+.product-item .card:hover {
+  /* box-shadow: 0 0 10px var(--text-custom); */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, var(--text-custom) 0px 0px 0px 1px;
 }

@@ -49,6 +49,8 @@ export class LoginSellerComponent {
         if (data.token) {
           this.storageService.saveToken(data.token);
           this.router.navigate(['/home']);
+          console.log('Log', data);
+
           Swal.fire({
             icon: 'success',
             title: 'Login Success',
@@ -79,8 +81,10 @@ export class LoginSellerComponent {
   onClickSubmitRegister() {
     this.authService.register_seller(this.username, this.password_hash, this.name).subscribe({
       next: data => {
+        console.log('⚡⚡⚡', data);
+
         this.storageService.registerUser(data);
-        this.reloadPage();
+        // this.reloadPage();
         Swal.fire({
           icon: 'success',
           title: 'register Success',

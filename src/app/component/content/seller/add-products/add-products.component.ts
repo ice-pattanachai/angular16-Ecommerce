@@ -105,6 +105,8 @@ export class AddProductsComponent implements OnInit {
     }, 1000);
     this.productService.addProduct(formData).subscribe(
       (response: any) => {
+        console.log('⚡⚡⚡', response);
+
         this.addProductMessage = 'Product added successfully!';
         Swal.fire({
           icon: 'success',

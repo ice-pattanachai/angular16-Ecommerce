@@ -88,8 +88,13 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="paymentSelect" class="form-label">Payment Method:</label>
-                            <select class="form-select" id="paymentSelect" name="product_status">
-                                <!-- [(ngModel)]="paymentFormat" -->
+                            <!-- <select class="form-select" id="paymentSelect" name="paymentSelect"
+                                [(ngModel)]="paymentFormat">
+                                <option value="PromptPay">PromptPay</option>
+                                <option value="Cash on delivery">Cash on delivery</option>
+                            </select> -->
+                            <select class="form-select" id="paymentSelect" name="product_status"
+                                [(ngModel)]="paymentFormat" (change)="onPaymentChange($event)">
                                 <option value="PromptPay">PromptPay</option>
                                 <option value="Cash on delivery">Cash on delivery</option>
                             </select>

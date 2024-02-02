@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/component/service/auth.service';
 import { ProductService } from 'src/app/component/service/product.service';
 import { StorageService } from 'src/app/component/service/storage.service';
 import { User } from 'src/app/data-type';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cartgo',
@@ -13,11 +14,7 @@ import { User } from 'src/app/data-type';
 export class CartgoComponent implements OnInit, AfterViewInit {
   userall: User[] | undefined;
   isLoggedIn = false;
-  roles: string[] = [];
   cartData: any[] = [];
-  displayedColumns: string[] = ['position', 'name', 'price', 'quantity', 'total', 'actions'];
-  quantity: number = 1;
-  product: any;
   totalPerItem: number[] = [];
   grandTotal: number = 0;
   url = "http://localhost:3030/api/products_all/image?product_id="
@@ -57,6 +54,7 @@ export class CartgoComponent implements OnInit, AfterViewInit {
         });
       }
     }
+    this.generateOrderReceiptNumber();
   }
 
   loadCartData(): void {
@@ -129,35 +127,98 @@ export class CartgoComponent implements OnInit, AfterViewInit {
   phone: string = '';
   total_price: number = 0;
   status: boolean = false;
-  payment_format: string = '';
+  // payment_format: string = '';
   confirm_payment: boolean = false;
   user_id: number = 0;
   product_id: number = 0;
-  receipt_id: number = 0;
-  onClickConfirm() {
-    for (const product of this.cartData) {
-      const productId = product.id;
-      const user_id = this.userall![0].id;
-      const address = this.selectedAddress.address;
-      const addresses_name = this.selectedAddress.fullname;
-      const phone = this.selectedAddress.phone;
-      const postalcode = this.selectedAddress.postalcode;
-      const status = this.status;
-      const receipt_id = this.receipt_id
 
-      this.processOrder(
-        addresses_name,
-        address,
-        postalcode,
-        phone,
-        product.quantity,
-        product.price_per_piece * product.quantity,
-        status,
-        user_id,
-        productId,
-        receipt_id,
-      );
+
+  order_receipt_number: string = ''
+  receipt_make_payment: boolean = false;
+  receipt_visibility: boolean = true;
+  receipt_status: boolean = true;
+  receipt_confirm_payment: boolean = false;
+  receipt_id: number = 0;
+
+  paymentFormat: string = '';
+
+  // สุ่มเลข 64
+  generateRandomBase64(length: number): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
+    return btoa(result);
+  }
+  getCurrentTime(): string {
+    const now = new Date();
+    return now.toISOString();
+  }
+
+  generateOrderReceiptNumber(): void {
+    const randomBase64 = this.generateRandomBase64(10);
+    const currentTime = this.getCurrentTime();
+    this.order_receipt_number = randomBase64 + '_' + currentTime;
+  }
+  onPaymentChange(event: any) {
+    console.log('Payment Format from HTML:', event.target.value);
+    this.paymentFormat = event.target.value;
+    console.log('Payment Format in Component:', this.paymentFormat);
+  }
+
+  onClickConfirm() {
+    console.log(this.paymentFormat);
+    this.productService.add_Receipt_purchase_orders(
+      this.order_receipt_number,
+      this.receipt_make_payment,
+      this.receipt_visibility,
+      this.receipt_status,
+      this.receipt_confirm_payment,
+      this.paymentFormat
+    ).subscribe({
+      next: data => {
+        const x_id = data.Receipt
+        console.log('⚡⚡⚡', data);
+        console.log('💻⚡⚡⚡', x_id.id);
+
+        for (const product of this.cartData) {
+          const productId = product.id;
+          const user_id = this.userall![0].id;
+          const address = this.selectedAddress.address;
+          const addresses_name = this.selectedAddress.fullname;
+          const phone = this.selectedAddress.phone;
+          const postalcode = this.selectedAddress.postalcode;
+          const status = this.status;
+          const receipt_id = x_id.id
+
+          this.processOrder(
+            addresses_name,
+            address,
+            postalcode,
+            phone,
+            product.quantity,
+            product.price_per_piece * product.quantity,
+            status,
+            user_id,
+            productId,
+            receipt_id,
+          );
+          console.log('⚡⚡⚡', this.processOrder);
+        }
+      },
+      error: err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: err.error.message,
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        console.log(err.error.message);
+      }
+    });
+
   }
 
   processOrder(
@@ -185,6 +246,7 @@ export class CartgoComponent implements OnInit, AfterViewInit {
       receipt_id,
     ).subscribe({
       next: data => {
+        console.log('⚡⚡⚡', data);
         this.removeFromCart(product_id);
         console.log('Order placed successfully for product id:', product_id);
       },
