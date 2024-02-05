@@ -89,3 +89,21 @@ export interface PurchaseOrders {
   user_id: number,
   product_id: number
 }
+
+
+export interface Receipts {
+  Receipt_orders: Receipts;
+  id: number,
+  addresses_name: string,
+  address: string,
+  postalcode: string,
+  phone: string,
+  status: boolean,
+  parcel_number: string,
+  order_receipt_number: string,
+  receipt_make_payment: boolean,
+  receipt_visibility: boolean,
+  receipt_status: boolean,
+  receipt_confirm_payment: boolean,
+  payment_format: string,
+}

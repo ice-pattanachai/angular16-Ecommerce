@@ -67,7 +67,7 @@ export class ManageOrdersComponent implements OnInit {
       // console.log(productIds);
 
       if (productIds) {
-        forkJoin(productIds.map((productId: any) => this.productService.sellerProductId(productId))).subscribe((products) => {
+        forkJoin(productIds.map((productId: any) => this.productService.SearchProductId(productId))).subscribe((products) => {
           this.products = products as unknown as product[] | undefined;
         });
       }

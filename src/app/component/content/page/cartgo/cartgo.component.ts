@@ -140,6 +140,8 @@ export class CartgoComponent implements OnInit, AfterViewInit {
   receipt_confirm_payment: boolean = false;
   receipt_id: number = 0;
 
+  parcel_number: string = 'หากทำการจัดส่งจะมีเลขคำสั่งซื้อ';
+
   paymentFormat: string = '';
 
   // สุ่มเลข 64
@@ -167,9 +169,36 @@ export class CartgoComponent implements OnInit, AfterViewInit {
     console.log('Payment Format in Component:', this.paymentFormat);
   }
 
+
   onClickConfirm() {
-    console.log(this.paymentFormat);
+    const address = this.selectedAddress.address;
+    const addresses_name = this.selectedAddress.fullname;
+    const phone = this.selectedAddress.phone;
+    const postalcode = this.selectedAddress.postalcode;
+    const status = this.status;
+    console.log(
+      '⚡⚡⚡',
+      addresses_name,
+      address,
+      postalcode,
+      phone,
+      status,
+      this.parcel_number,
+      this.order_receipt_number,
+      this.receipt_make_payment,
+      this.receipt_visibility,
+      this.receipt_status,
+      this.receipt_confirm_payment,
+      this.paymentFormat
+    );
+
     this.productService.add_Receipt_purchase_orders(
+      addresses_name,
+      address,
+      postalcode,
+      phone,
+      status,
+      this.parcel_number,
       this.order_receipt_number,
       this.receipt_make_payment,
       this.receipt_visibility,
@@ -183,23 +212,24 @@ export class CartgoComponent implements OnInit, AfterViewInit {
         console.log('💻⚡⚡⚡', x_id.id);
 
         for (const product of this.cartData) {
-          const productId = product.id;
+          // const address = this.selectedAddress.address;
+          // const addresses_name = this.selectedAddress.fullname;
+          // const phone = this.selectedAddress.phone;
+          // const postalcode = this.selectedAddress.postalcode;
+          // const status = this.status;
+
           const user_id = this.userall![0].id;
-          const address = this.selectedAddress.address;
-          const addresses_name = this.selectedAddress.fullname;
-          const phone = this.selectedAddress.phone;
-          const postalcode = this.selectedAddress.postalcode;
-          const status = this.status;
+          const productId = product.id;
           const receipt_id = x_id.id
 
           this.processOrder(
-            addresses_name,
-            address,
-            postalcode,
-            phone,
+            // addresses_name,
+            // address,
+            // postalcode,
+            // phone,
             product.quantity,
             product.price_per_piece * product.quantity,
-            status,
+            // status,
             user_id,
             productId,
             receipt_id,
@@ -222,25 +252,25 @@ export class CartgoComponent implements OnInit, AfterViewInit {
   }
 
   processOrder(
-    addresses_name: string,
-    address: string,
-    postalcode: string,
-    phone: string,
+    // addresses_name: string,
+    // address: string,
+    // postalcode: string,
+    // phone: string,
     quantity: number,
     total_price: number,
-    status: boolean,
+    // status: boolean,
     user_id: number,
     product_id: number,
     receipt_id: number,
   ): void {
     this.productService.add_purchase_orders(
-      addresses_name,
-      address,
-      postalcode,
-      phone,
+      // addresses_name,
+      // address,
+      // postalcode,
+      // phone,
       quantity,
       total_price,
-      status,
+      // status,
       user_id,
       product_id,
       receipt_id,

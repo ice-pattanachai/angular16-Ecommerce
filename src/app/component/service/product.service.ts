@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { PurchaseOrders, User, cart, order, product } from '../../data-type'
+import { PurchaseOrders, Receipts, User, cart, order, product } from '../../data-type'
 import { Observable } from 'rxjs';
 
 const AUTH_API = 'http://localhost:3030/api/';
@@ -60,6 +60,13 @@ export class ProductService {
   }
 
   add_Receipt_purchase_orders(
+    addresses_name: string,
+    address: string,
+    postalcode: string,
+    phone: string,
+    status: boolean,
+    parcel_number: string,
+    // ^new
     order_receipt_number: string,
     receipt_make_payment: boolean,
     receipt_visibility: boolean,
@@ -70,6 +77,13 @@ export class ProductService {
     return this.http.post(
       AUTH_API + 'receipt/add',//
       {
+        addresses_name,
+        address,
+        postalcode,
+        phone,
+        status,
+        parcel_number,
+        // ^new
         order_receipt_number,
         receipt_make_payment,
         receipt_visibility,
@@ -81,14 +95,39 @@ export class ProductService {
     );
   }
 
+  // add_purchase_orders(
+  //   // addresses_name: string,
+  //   // address: string,
+  //   // postalcode: string,
+  //   // phone: string,
+  //   quantity: number,
+  //   total_price: number,
+  //   // status: boolean,
+  //   user_id: number,
+  //   product_id: number,
+  //   receipt_id: number,
+
+  // ): Observable<any> {
+  //   return this.http.post(
+  //     AUTH_API + 'purchase_orders/add',
+  //     {
+  //       // addresses_name,
+  //       // address,
+  //       // postalcode,
+  //       // phone,
+  //       quantity,
+  //       total_price,
+  //       // status,
+  //       user_id,
+  //       product_id,
+  //       receipt_id,
+  //     },
+  //     httpOptions
+  //   );
+  // }
   add_purchase_orders(
-    addresses_name: string,
-    address: string,
-    postalcode: string,
-    phone: string,
     quantity: number,
     total_price: number,
-    status: boolean,
     user_id: number,
     product_id: number,
     receipt_id: number,
@@ -97,13 +136,8 @@ export class ProductService {
     return this.http.post(
       AUTH_API + 'purchase_orders/add',
       {
-        addresses_name,
-        address,
-        postalcode,
-        phone,
         quantity,
         total_price,
-        status,
         user_id,
         product_id,
         receipt_id,
@@ -166,9 +200,15 @@ export class ProductService {
     return this.http.get<product>(`http://localhost:3030/api/products_id/get/${id}`);
   }
 
-  sellerProductId(productId: any): Observable<product[]> {
+  SearchProductId(productId: any): Observable<product[]> {
     const body = { productId: productId };
     const data = this.http.post<product[]>('http://localhost:3030/api/products_id', body)
+    return data;
+  }
+
+  SearchReceiptId(receiptId: any): Observable<Receipts[]> {
+    const body = { receiptId: receiptId };
+    const data = this.http.post<Receipts[]>('http://localhost:3030/api/receipt/search/id', body)
     return data;
   }
 

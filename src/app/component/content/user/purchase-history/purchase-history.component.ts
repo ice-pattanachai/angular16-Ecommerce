@@ -2,7 +2,7 @@ import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/component/service/auth.service';
 import { ProductService } from 'src/app/component/service/product.service';
-import { PurchaseOrders, User, product } from 'src/app/data-type';
+import { PurchaseOrders, Receipts, User, product } from 'src/app/data-type';
 import { forkJoin } from 'rxjs';
 import * as promptpayQr from 'promptpay-qr';
 
@@ -27,6 +27,8 @@ export class PurchaseHistoryComponent {
   images: any;
   modalService: any;
   popupModal: any;
+  receipts: Receipts[] | undefined;
+  receiptObjec: any;
 
   constructor(
     private router: Router,
@@ -54,8 +56,6 @@ export class PurchaseHistoryComponent {
           } else {
             this.userall = [userData];
           }
-          // console.log(userData);
-
         });
       }
 
@@ -68,18 +68,26 @@ export class PurchaseHistoryComponent {
           }
           const order = this.ordersall[0];
           const orderall = order.orders;
-          // console.log(orderall);
 
           const productIds = orderall.map((item: { product_id: any; }) => item.product_id);
           const productId = productIds[0];
-
           if (productId) {
-            forkJoin(productIds.map((productId: any) => this.productService.sellerProductId(productId))).subscribe((products) => {
+            forkJoin(productIds.map((productId: any) => this.productService.SearchProductId(productId))).subscribe((products) => {
               this.products = products as product[] | undefined;
             });
           }
-          this.orderDetail = orderall;
 
+          const receiptIds = orderall.map((item: { receipt_id: any; }) => item.receipt_id);
+          const receiptId = receiptIds;
+          console.log('⚡', receiptId);
+          if (receiptId) {
+            forkJoin(receiptIds.map((receiptId: any) => this.productService.SearchReceiptId(receiptId))).subscribe((receipts) => {
+              this.receipts = receipts as Receipts[] | undefined;
+              console.log('⚡', this.receipts);
+            });
+          }
+          console.log('⚡', this.receipts);
+          this.orderDetail = orderall;
         });
       }
     }
@@ -90,7 +98,6 @@ export class PurchaseHistoryComponent {
     this.isMenuhistor = !this.isMenuhistor;
   }
 
-  // @Input() isMenuOpen: boolean | undefined = true;
   isMenuOpen = true;
   isMenuDetail = false
   toggleUserisMenuOpen() {
