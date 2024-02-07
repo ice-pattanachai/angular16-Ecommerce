@@ -8,8 +8,31 @@
                             <div class="position-sticky">
                                 <ul class="nav flex-column mt-4">
                                     <li class="">
+                                        <button class="nav-link text-dark">
+                                            <i class="bi bi-exclamation-lg"></i> <span class="ms-2">
+                                                จัดการคำสั่งซื้อ</span>
+                                        </button>
+                                    </li>
+                                    <li class="">
+                                        <button class="nav-link text-dark">
+                                            <i class="bi bi-box-seam-fill"></i> <span class="ms-2">
+                                                เพิ่มสินค้า</span>
+                                        </button>
+                                    </li>
+                                    <li class="">
+                                        <button class="nav-link text-dark">
+                                            <i class="bi bi-boxes"></i> <span class="ms-2">
+                                                แก้ไขสินค้า</span>
+                                        </button>
+                                    </li>
+                                    <li class="">
                                         <button class="nav-link text-dark" (click)="toggleSettingSeller()">
                                             <i class="bi bi-gear"></i> <span class="ms-2"> รหัสผ่าน</span>
+                                        </button>
+                                    </li>
+                                    <li class="">
+                                        <button class="nav-link text-dark" (click)="logoutSwal()">
+                                            <i class="bi bi-person-x"></i> <span class="ms-2"> ออกจากระบบ</span>
                                         </button>
                                     </li>
                                 </ul>
@@ -132,6 +155,11 @@
                                     <li class="">
                                         <button class="nav-link text-dark" (click)="toggleUserOrderhistory()">
                                             <i class="bi bi-cart3"></i> <span class="ms-2"> ประวัติการสั่งซื้อ</span>
+                                        </button>
+                                    </li>
+                                    <li class="">
+                                        <button class="nav-link text-dark" (click)="logoutSwal()">
+                                            <i class="bi bi-person-x"></i> <span class="ms-2"> ออกจากระบบ</span>
                                         </button>
                                     </li>
                                 </ul>
@@ -275,30 +303,6 @@
                                 <div class="table-responsive">
                                     <h5>ประวัติการสั่งซื้อ</h5>
                                     <app-purchase-history></app-purchase-history>
-                                    <!-- <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">
-                                                    <h5>ประวัติการสั่งซื้อ</h5>
-                                                </th>
-                                                <th scope="col text-center">
-                                                </th>
-                                            </tr>
-                                            <app-purchase-history></app-purchase-history>
-                                            <tr class="table-row" *ngFor="let address of user.addresses">
-                                                <td class="column-1 text-break " style="max-width: 600px;">
-                                                    {{ address.fullname }} | {{ address.phone }} <br>
-                                                    {{ address.address }} {{ address.postalcode }}
-                                                </td>
-                                                <td class="column-2 text-center">
-                                                    <button class="btn btn-md rounded-circle bg-light border mt-4"
-                                                        (click)="onClickDeleteAssresses(address.id)">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </thead>
-                                    </table> -->
                                 </div>
                             </div>
                             <div class="modal fade" id="popupModal" tabindex="-1" aria-labelledby="popupModalLabel"

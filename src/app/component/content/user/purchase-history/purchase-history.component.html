@@ -11,20 +11,20 @@
                                     <img [src]="url + product.id" alt="Product Image">
                                 </td>
                                 <td class="column-1 text-break " style="max-width: 50%"
-                                    *ngIf="orderDetail && orderDetail[i]">
+                                    *ngIf="orderDetail && orderDetail[i] && receipts && receipts[i]">
                                     {{product.product_name}} <br>
                                     จำนวนการสั่งซื้อ: {{orderDetail[i].quantity}} <br> หมายเลขพัสดุ :
-                                    {{orderDetail[i].parcel_number}}
+                                    {{receipts[i].parcel_number}}
                                 </td>
                                 <td class="column-2 text-break" style="width: 130px"
                                     *ngIf="orderDetail && orderDetail[i]">
                                     <br>ราคา: {{orderDetail[i].total_price}}
                                 </td>
                                 <td class="column-2 text-center align-end" style="width: 5%"
-                                    *ngIf="orderDetail && orderDetail[i]"><br>
+                                    *ngIf="orderDetail && orderDetail[i] && receipts && receipts[i]"><br>
                                     <button class="btn btn-primary"
-                                        (click)="setSelectedOrderDetail(orderDetail[i], product)" data-bs-toggle="modal"
-                                        data-bs-target="#popupModal">
+                                        (click)="setSelectedOrderDetail(orderDetail[i], product ,receipts[i])"
+                                        data-bs-toggle="modal" data-bs-target="#popupModal">
                                         view
                                     </button>
                                 </td>
@@ -53,12 +53,12 @@
                             <img [src]="url + selectedOrderProduct?.id" alt="Product Image"><br>
                         </p>
                         <p>
-                            ที่อยู่ :{{ selectedOrderDetail?.addresses_name }} | {{ selectedOrderDetail?.phone }}
-                            <br> {{ selectedOrderDetail?.address }} {{ selectedOrderDetail?.postalcode }}<br>
+                            ที่อยู่ :{{ selectedReceipt?.addresses_name }} | {{ selectedReceipt?.phone }}
+                            <br> {{ selectedReceipt?.address }} {{ selectedReceipt?.postalcode }}<br>
                         </p>
                         <p>
-                            สถานะ : {{selectedOrderDetail?.status ? ' ยืนยันคำสั่งซื้อ' : ' รอยืนยันคำสั่งซื้อ'}} <br>
-                            หมายเลขพัสดุ : {{selectedOrderDetail?.parcel_number}}
+                            สถานะ : {{selectedReceipt?.status ? ' ยืนยันคำสั่งซื้อ' : ' รอยืนยันคำสั่งซื้อ'}} <br>
+                            หมายเลขพัสดุ : {{selectedReceipt?.parcel_number}}
                         </p>
                     </div>
                     <div class="row">
@@ -77,19 +77,22 @@
                         <div class="col-md-6 mb-3">
                             <label>รูปแบบการชำระเงิน :</label>
                             <p>
-                                {{selectedOrderDetail?.payment_format }}
+                                {{selectedReceipt?.payment_format }}
                             </p>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label>ยืนยันการชำระเงิน :</label>
                             <p>
-                                {{selectedOrderDetail?.confirm_payment ?
+                                {{selectedReceipt?.confirm_payment ?
                                 'ชำระ' :'ยังไม่ชำระ'}}
                             </p>
                         </div>
                     </div>
                     <div class="mb-3">
                         ราคา: {{selectedOrderDetail?.total_price}} บาท
+                    </div>
+                    <div class="mb-1" style="font-size: 12px;">
+                        เลขที่สั่งซื้อ: {{selectedReceipt?.order_receipt_number}}
                     </div>
                     <!-- <div class="mb-3">
                         <p class="text-center">

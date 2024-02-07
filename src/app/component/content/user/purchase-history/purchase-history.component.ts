@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/component/service/auth.service';
 import { ProductService } from 'src/app/component/service/product.service';
 import { PurchaseOrders, Receipts, User, product } from 'src/app/data-type';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import * as promptpayQr from 'promptpay-qr';
 
 @Component({
@@ -78,15 +78,13 @@ export class PurchaseHistoryComponent {
           }
 
           const receiptIds = orderall.map((item: { receipt_id: any; }) => item.receipt_id);
-          const receiptId = receiptIds;
-          console.log('⚡', receiptId);
+          const receiptId = receiptIds[0];
           if (receiptId) {
-            forkJoin(receiptIds.map((receiptId: any) => this.productService.SearchReceiptId(receiptId))).subscribe((receipts) => {
-              this.receipts = receipts as Receipts[] | undefined;
+            forkJoin(receiptIds.map((receiptId: any) => this.productService.SearchReceiptId(receiptId))).subscribe((receipts: any) => {
+              this.receipts = receipts.map((receipt: any) => receipt.data[0]) as Receipts[] | undefined;
               console.log('⚡', this.receipts);
             });
           }
-          console.log('⚡', this.receipts);
           this.orderDetail = orderall;
         });
       }
@@ -107,13 +105,13 @@ export class PurchaseHistoryComponent {
 
   selectedOrderDetail: any; // ตัวแปรเพื่อเก็บข้อมูลที่ถูกเลือก
   selectedOrderProduct: any;
+  selectedReceipt: any;
   // ฟังก์ชันเพื่อเซ็ตข้อมูลที่ถูกเลือก
-  setSelectedOrderDetail(orderDetail: any, product: any) {
+  setSelectedOrderDetail(orderDetail: any, product: any, receipt: any) {
     this.selectedOrderDetail = orderDetail;
     this.selectedOrderProduct = product;
+    this.selectedReceipt = receipt;
+    console.log('⚡⚡⚡', this.selectedReceipt);
   }
-
-
-
 }
 

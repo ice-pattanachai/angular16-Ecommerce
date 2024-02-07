@@ -106,4 +106,5 @@ export interface Receipts {
   receipt_status: boolean,
   receipt_confirm_payment: boolean,
   payment_format: string,
+  aaa: any,
 }

@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
       const userObject = JSON.parse(userData);
       const token = userObject.token;
       this.userName = userObject.username;
-      console.log(this.userName);
+      // console.log(this.userName);
       if (token) {
         this.authService.authenticateToken(token)
           .subscribe((response: any) => {

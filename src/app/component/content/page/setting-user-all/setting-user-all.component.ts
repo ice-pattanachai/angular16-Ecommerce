@@ -20,6 +20,7 @@ export class SettingUserAllComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private storageService: StorageService,
+    private route: Router,
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +42,7 @@ export class SettingUserAllComponent implements OnInit {
           } else {
             this.userall = [userData];
           }
-          console.log(userData);
+          // console.log(userData);
         });
       }
       if (userId) {
@@ -51,7 +52,7 @@ export class SettingUserAllComponent implements OnInit {
           } else {
             this.sellerall = [userData];
           }
-          console.log(userData);
+          // console.log(userData);
         });
       }
 
@@ -320,6 +321,41 @@ export class SettingUserAllComponent implements OnInit {
     });
   }
 
+  logoutSwal() {
+    Swal.fire({
+      title: 'Do you want to log out?',
+      text: "To log out, press Yes. If you don't want to, press Cancel.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes!',
+      cancelButtonText: 'cancel!',
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire({
+          title: 'Log out successful.',
+          text: 'successful!',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1000,
+        }).then(() => {
+          this.logout();
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.close();
+      }
+    });
+  }
+
+  logout() {
+    this.authService.removeItem()
+    this.route.navigate(['/'])
+    window.location.reload();
+  }
+
   isMenuOpenAddressUser = true;
   toggleAddressUser() {
     this.isMenuOpenAddressUser = !this.isMenuOpenAddressUser;
@@ -335,7 +371,6 @@ export class SettingUserAllComponent implements OnInit {
   }
 
   @Input() isMenuOpenOrderhistorUser: boolean | undefined = false;
-  // isMenuOpenOrderhistorUser = false;
   toggleUserOrderhistory() {
     this.isMenuOpenOrderhistorUser = !this.isMenuOpenOrderhistorUser;
     this.isMenuOpenSettingUser = false;
