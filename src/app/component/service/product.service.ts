@@ -65,7 +65,7 @@ export class ProductService {
     postalcode: string,
     phone: string,
     status: boolean,
-    parcel_number: string,
+    // parcel_number: string,
     // ^new
     order_receipt_number: string,
     receipt_make_payment: boolean,
@@ -82,7 +82,7 @@ export class ProductService {
         postalcode,
         phone,
         status,
-        parcel_number,
+        // parcel_number,
         // ^new
         order_receipt_number,
         receipt_make_payment,
@@ -210,6 +210,10 @@ export class ProductService {
     const body = { receiptId: receiptId };
     const data = this.http.post<Receipts[]>('http://localhost:3030/api/receipt/search/id', body)
     return data;
+  }
+
+  SearchReceiptAll(): Observable<Receipts[]> {
+    return this.http.post<Receipts[]>('http://localhost:3030/api/receipt/search/all', {});
   }
 
   purchase_orders_userid(user_id: any): Observable<PurchaseOrders[]> {

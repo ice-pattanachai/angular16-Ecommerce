@@ -377,8 +377,16 @@ export class SettingUserAllComponent implements OnInit {
     this.isMenuOpenAddressUser = false;
   }
 
-  isMenuOpenSettingSeller = true;
+
+  @Input() isMenuOpenGestionarpedidos: boolean | undefined = false;
+  // isMenuOpenGestionarpedidos = true;
+  toggleGestionarpedidos() {
+    this.isMenuOpenGestionarpedidos = !this.isMenuOpenGestionarpedidos;
+  }
+
+  isMenuOpenSettingSeller = false;
   toggleSettingSeller() {
     this.isMenuOpenSettingSeller = !this.isMenuOpenSettingSeller;
+    this.isMenuOpenGestionarpedidos = false;
   }
 }

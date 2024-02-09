@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/component/service/auth.service';
 import { ProductService } from 'src/app/component/service/product.service';
-import { PurchaseOrders, product } from 'src/app/data-type';
+import { PurchaseOrders, Receipts, User, product } from 'src/app/data-type';
 
 @Component({
   selector: 'app-manage-orders',
@@ -13,6 +13,8 @@ import { PurchaseOrders, product } from 'src/app/data-type';
 export class ManageOrdersComponent implements OnInit {
   orders: PurchaseOrders[] = [];
   products: product[] | undefined;
+  users: User[] | undefined;
+  receipts: Receipts[] | undefined;
   showLogin = true;
   url = "http://localhost:3030/api/products_all/image?product_id="
   constructor(
@@ -27,11 +29,11 @@ export class ManageOrdersComponent implements OnInit {
       const userObject = JSON.parse(userData);
       const token = userObject.token;
       if (token) {
-        console.log('Sending request with token:', token);
+        // console.log('Sending request with token:', token);
         this.authService.authenticateToken(token).subscribe(
           (response: any) => {
             const status = response.status;
-            console.log('API Response Status:', status);
+            // console.log('API Response Status:', status);
             if (status === 'ok') {
               const decoded = response.decoded;
               if (decoded && decoded.roles !== undefined) {
@@ -63,12 +65,33 @@ export class ManageOrdersComponent implements OnInit {
 
     this.productService.ordersList().subscribe((data) => {
       this.orders = data;
+      // console.log('⚡⚡⚡', data);
       const productIds = this.orders.map(order => order.product_id);
-      // console.log(productIds);
+      const userids = this.orders.map(order => order.user_id);
+      const receiptids = this.orders.map(order => order.receipt_id);
+
+      // console.log('⚡⚡⚡', 'productIds = ', productIds);
+      // console.log('⚡⚡⚡', 'userids = ', userids);
+      // console.log('⚡⚡⚡', 'receiptids = ', receiptids);
 
       if (productIds) {
         forkJoin(productIds.map((productId: any) => this.productService.SearchProductId(productId))).subscribe((products) => {
           this.products = products as unknown as product[] | undefined;
+          console.log('⚡⚡⚡', this.products);
+        });
+      }
+      if (userids) {
+        const id = userids
+        forkJoin(id.map((id: any) => this.authService.userList(id))).subscribe((users) => {
+          this.users = users as unknown as User[] | undefined;
+          console.log('⚡⚡⚡', this.users);
+        });
+      }
+      if (receiptids) {
+        const receiptId = receiptids
+        forkJoin(receiptId.map((receiptId: any) => this.productService.SearchReceiptId(receiptId))).subscribe((receiptids) => {
+          this.receipts = receiptids.map((receipt: any) => receipt.data[0]) as Receipts[] | undefined;
+          console.log('⚡⚡⚡', this.receipts);
         });
       }
     });

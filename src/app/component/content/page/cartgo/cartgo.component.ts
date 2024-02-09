@@ -140,7 +140,7 @@ export class CartgoComponent implements OnInit, AfterViewInit {
   receipt_confirm_payment: boolean = false;
   receipt_id: number = 0;
 
-  parcel_number: string = 'หากทำการจัดส่งจะมีเลขคำสั่งซื้อ';
+  // parcel_number: string = 'หากทำการจัดส่งจะมีเลขคำสั่งซื้อ';
 
   paymentFormat: string = '';
 
@@ -183,7 +183,7 @@ export class CartgoComponent implements OnInit, AfterViewInit {
       postalcode,
       phone,
       status,
-      this.parcel_number,
+      // this.parcel_number,
       this.order_receipt_number,
       this.receipt_make_payment,
       this.receipt_visibility,
@@ -198,7 +198,7 @@ export class CartgoComponent implements OnInit, AfterViewInit {
       postalcode,
       phone,
       status,
-      this.parcel_number,
+      // this.parcel_number,
       this.order_receipt_number,
       this.receipt_make_payment,
       this.receipt_visibility,

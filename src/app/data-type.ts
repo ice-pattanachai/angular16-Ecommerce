@@ -88,6 +88,7 @@ export interface PurchaseOrders {
   confirm_payment: boolean,
   user_id: number,
   product_id: number
+  receipt_id: number
 }
 
 
@@ -99,6 +100,7 @@ export interface Receipts {
   postalcode: string,
   phone: string,
   status: boolean,
+  transport_company_name: string,
   parcel_number: string,
   order_receipt_number: string,
   receipt_make_payment: boolean,
@@ -107,4 +109,5 @@ export interface Receipts {
   receipt_confirm_payment: boolean,
   payment_format: string,
   aaa: any,
+  purchase_orders: PurchaseOrders[];
 }

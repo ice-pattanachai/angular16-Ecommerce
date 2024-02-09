@@ -29,6 +29,7 @@ import { PurchaseHistoryComponent } from './component/content/user/purchase-hist
 import { ManageOrdersComponent } from './component/content/seller/manage-orders/manage-orders.component';
 import { EditOrderComponent } from './component/content/seller/edit-order/edit-order.component';
 import { OrderDetailComponent } from './component/add-on/order-detail/order-detail.component';
+import { ReceiptComponent } from './component/content/seller/receipt/receipt.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { OrderDetailComponent } from './component/add-on/order-detail/order-deta
     PurchaseHistoryComponent,
     ManageOrdersComponent,
     EditOrderComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    ReceiptComponent
   ],
   imports: [
     BrowserModule,

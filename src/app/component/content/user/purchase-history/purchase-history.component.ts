@@ -24,6 +24,8 @@ export class PurchaseHistoryComponent {
   isLoggedIn = false;
   url = "http://localhost:3030/api/products_all/image?product_id="
   urlpromptpay = "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl="
+  barcode = "https://barcode.tec-it.com/barcode.ashx?data="
+  barcodeend = "&code=Code128&translate-esc=on"
   images: any;
   modalService: any;
   popupModal: any;

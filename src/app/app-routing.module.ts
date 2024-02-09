@@ -15,6 +15,7 @@ import { AddProductsComponent } from './component/content/seller/add-products/ad
 import { SettingUserAllComponent } from './component/content/page/setting-user-all/setting-user-all.component';
 import { ManageOrdersComponent } from './component/content/seller/manage-orders/manage-orders.component';
 import { EditOrderComponent } from './component/content/seller/edit-order/edit-order.component';
+import { ReceiptComponent } from './component/content/seller/receipt/receipt.component';
 
 const routes: Routes = [
   // page
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'product/:id', component: ProductDetailComponent },
   { path: 'cartgo', component: CartgoComponent },
   { path: 'setting', component: SettingUserAllComponent },
+  // { path: 'receip', component: ReceiptComponent },
   // user
   { path: 'user-login', component: LoginComponent },
   // seller

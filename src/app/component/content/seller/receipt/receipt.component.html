@@ -1,0 +1,309 @@
+<div class="list-group" *ngIf="isMenuOpen">
+    <div class=" container-fluid">
+        <div class="row">
+            <div class="container " *ngIf="isMenuhistor">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead *ngFor="let receipts of receipts; let i = index">
+                            <tr class="table-row align-top">
+                                <!-- *ngFor="let orders of receipts.purchase_orders" -->
+                                <td class="column-1 text-break " style="max-width: 10%;">
+                                    {{receipts.addresses_name}}
+                                    <div class="mb-1" style="font-size: 12px;">
+                                        {{receipts.order_receipt_number}}
+                                    </div>
+                                    <!-- <p>
+                                        เลขที่ใบสั่งซื้อ : {{Ordernumberid.order_receipt_number}}
+                                    </p> -->
+                                </td>
+                                <td class="column-1 text-break " style="max-width: 50%">
+                                    Confirm order = {{receipts.status? 'confirm' : 'not confirmed'}} <br>
+
+                                    status = {{receipts.payment_format? 'normal' : 'cancel'}}
+                                </td>
+                                <td class="column-2 text-break" style="max-width: 50%">
+                                    Payment format = {{receipts.payment_format}} <br>
+                                    Payment status = {{receipts.receipt_make_payment? 'completed' : 'not yet
+                                    paid'}}<br>
+                                </td>
+                                <!-- <td class="column-2 text-center align-end row-cols-md-2>" style="width: 5%">
+                                    <button class="btn btn-primary">
+                                        แก้ไขคำสั่งซื้อ
+                                    </button>
+                                    <button class="btn btn-primary">
+                                        ดูคำสั่งซื้อ
+                                    </button>
+                                </td> -->
+                                <!-- <td class="column-2 text-center align-end row-cols-md-2">
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-primary me-2">แก้ไขคำสั่งซื้อ</button>
+                                        <button class="btn btn-primary">ดูคำสั่งซื้อ</button>
+                                    </div>
+                                </td> -->
+                                <td class="column-2 text-end">
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-primary me-2" data-bs-toggle="modal"
+                                            data-bs-target="#popupModalEdit">Edit</button>
+                                        <button class="btn btn-primary" (click)="viewreceipts(receipts)"
+                                            data-bs-toggle="modal" data-bs-target="#popupModalView">View</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="popupModalView" tabindex="-1" aria-labelledby="popupModalViewLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px; width: 45%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="popupModalViewLabel"> Purchase order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="contact_form" name="contact_form" method="post">
+                    <div class="container-fluid invoice-container">
+                        <!-- Header -->
+                        <!-- <header>
+                            <div class="row align-items-center gy-3">
+                                <div class="col-sm-7 text-center text-sm-start">
+                                    <h4 class="text-7 mb-0">Purchase order</h4>
+                                    <img id="logo" src="images/logo.png" title="Koice" alt="Koice">
+                                </div>
+                                <div class="col-sm-5 text-center text-sm-end">
+                                    <h4 class="text-7 mb-0">Purchase order</h4>
+                                </div>
+                            </div>
+                            <hr>
+                        </header> -->
+                        <main>
+                            <div class="table-responsive">
+                                <table class="table border mb-0 table-bordered">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <td class="col-4 text-1"><strong>Shipping company :
+                                                    {{receiptsview?.transport_company_name}}</strong></td>
+                                            <td class="col-2 text-center"><strong>COD</strong></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="col-4 text-center">
+                                                <!-- <img [src]="barcode+'TH270457WNXQ6A'+barcodeend" alt="Image"> -->
+                                                <ng-container
+                                                    *ngIf="receiptsview?.parcel_number === 'no data'; else otherparcelnumber">
+                                                </ng-container>
+                                                <ng-template #otherparcelnumber>
+                                                    <img [src]="barcode+receiptsview?.parcel_number+barcodeend"
+                                                        alt="Image">
+                                                </ng-template>
+                                            </td>
+                                            <td class="col-2 text-center" style="vertical-align: middle ;">
+                                                <ng-container
+                                                    *ngIf="receiptsview?.payment_format === 'Cash on delivery'; else otherPayment">
+                                                    <h3 style="margin-bottom: 0;">
+                                                        {{totalall | currency: '฿'}}
+                                                    </h3>
+                                                </ng-container>
+                                                <ng-template #otherPayment>
+                                                    <h6 style="margin-bottom: 0;">
+                                                        ไม่ต้องเก็บเงิน
+                                                    </h6>
+                                                </ng-template>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="table-responsive">
+                                    <table class="table border border-top-0 mb-0">
+                                        <tbody>
+                                            <tr class="bg-light">
+                                                <td class="col-sm-2 text-1">
+                                                    <div class="order-sm-0"> <strong>Shipper:</strong>
+                                                        <address>
+                                                            <!-- {{receiptsview?.addresses_name}} | {{receiptsview?.phone}}<br>
+                                                                                            {{receiptsview?.address}}<br>
+                                                                                            {{receiptsview?.postalcode}}<br> -->
+                                                        </address>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="table border border-top-0 mb-0">
+                                        <tbody>
+                                            <tr class="bg-light">
+                                                <td class="col-sm-2 text-1">
+                                                    <div class="order-sm-0"> <strong>Product delivery:</strong>
+                                                        <address>
+                                                            {{receiptsview?.addresses_name}} |
+                                                            {{receiptsview?.phone}}<br>
+                                                            {{receiptsview?.address}}<br>
+                                                            {{receiptsview?.postalcode}}<br>
+                                                        </address>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </main>
+                        <footer class="text-center mt-4">
+                            <td class="col-4 text-center">
+                                <img [src]="barcode+receiptsview?.order_receipt_number+barcodeend" alt="Image"
+                                    style="max-width: 100%; max-height: 50px;">
+                            </td>
+                        </footer>
+                        <hr>
+                        <main>
+                            <div class="row">
+                                <div class=""><strong>Order Number:</strong>
+                                    {{receiptsview?.order_receipt_number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <strong>Status:</strong>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 order-sm-0">
+                                    Confirm order = {{receiptsview?.status? 'confirm' : 'not confirmed'}} <br>
+                                    status = {{receiptsview?.payment_format? 'normal' : 'cancel'}}
+                                </div>
+                                <div class="col-sm-6 order-sm-0">
+                                    Payment format = {{receiptsview?.payment_format}} <br>
+                                    Payment status = {{receiptsview?.receipt_make_payment? 'completed' : 'not yet
+                                    paid'}}
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <br>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table border mb-0 table-bordered">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <td class="col-1 text-center"><strong>code</strong></td>
+                                            <td class="col-4 text-center"><strong>Product name</strong></td>
+                                            <td class="col-1 text-center"><strong>Price</strong></td>
+                                            <td class="col-1 text-center"><strong>QTY</strong></td>
+                                            <td class="col-1 text-center"><strong>Total</strong></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let orders of receiptsview?.purchase_orders ; let i = index">
+                                        <tr>
+                                            <td class="col-1 text-center">{{products![i].id}}</td>
+                                            <td class="col-4 text-1">{{products![i].product_name}}</td>
+                                            <td class="col-1 text-center">{{orders?.total_price / orders?.quantity |
+                                                currency: '฿'}}
+                                            </td>
+                                            <td class="col-1 text-center">{{orders?.quantity}}</td>
+                                            <td class="col-1 text-center">{{orders?.total_price | currency: '฿'}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table border border-top-0 mb-0">
+                                    <tbody>
+                                        <tr class="bg-light">
+                                            <td class="text-end"><strong>Total price:</strong></td>
+                                            <td class="col-sm-2 text-end">{{totalall | currency: '฿'}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </main>
+                        <footer class="text-center mt-4">
+                            <td class="col-4 text-center">
+                                <img [src]="barcode+receiptsview?.order_receipt_number+barcodeend" alt="Image"
+                                    style="max-width: 100%; max-height: 50px;">
+                            </td>
+                            <p class="text-1"><strong>NOTE :</strong> This is a purchase order. To prepare products for
+                                delivery Don't use a receipt. <br>
+                                <i class="bi bi-scissors"></i> Please cut out this section if printing to ship products.
+                            </p>
+                        </footer>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="popupModalEdit" tabindex="-1" aria-labelledby="popupModalEditLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px; width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="popupModalEditLabel">Order Edit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="contact_form" name="contact_form" method="post">
+                    <div class="mb-3">
+                        <h6>#####</h6>
+                        <p class="text-center">
+                            <!-- <img [src]="url + selectedOrderProduct?.id" alt="Product Image"><br> -->
+                        </p>
+                        <p>
+                            ####
+                        </p>
+                        <p>
+                            ####
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <p>
+                                ####
+                            </p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <p>
+                                ####
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>#### :</label>
+                            <p>
+                                ####
+                            </p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>#### :</label>
+                            <p>
+                                ####
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        #####
+                    </div>
+                    <div class="mb-1" style="font-size: 12px;">
+                        ####
+                        <div class="">
+                            <!-- <img [src]="barcode+selectedReceipt?.order_receipt_number+barcodeend" alt="Image"
+                                style="width: 100%; height: auto;"> -->
+                        </div>
+                    </div>
+                    <!-- <div class="mb-3">
+                        <p class="text-center">
+                            <img [src]="urlpromptpay + selectedOrderProduct?.id+selectedOrderDetail?.total_price+selectedOrderDetail?.id "
+                                alt="promptpay Image"><br>
+                        </p>
+                    </div> -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

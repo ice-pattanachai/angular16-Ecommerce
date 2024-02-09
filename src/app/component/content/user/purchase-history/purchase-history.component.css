@@ -155,7 +155,13 @@ select {
     width: 35%;
 } */
 
-img {
+/* img {
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 8px;
+} */
+
+.productimg {
     max-width: 80px;
     max-height: 80px;
     border-radius: 8px;

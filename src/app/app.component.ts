@@ -23,6 +23,7 @@ export class AppComponent {
       console.error('reCAPTCHA response is null');
     }
   }
+
   private excludedUrls: Set<string> = new Set(['/user-login', '/seller-login']);
 
   shouldShowNavbar(): boolean {

@@ -8,7 +8,7 @@
                             <tr class="table-row align-top">
                                 <td class="column-1 text-break " style="max-width: 10%;" href=""
                                     routerLink="../product/{{product.id}}">
-                                    <img [src]="url + product.id" alt="Product Image">
+                                    <img [src]="url + product.id" alt="Product Image" class="productimg">
                                 </td>
                                 <td class="column-1 text-break " style="max-width: 50%"
                                     *ngIf="orderDetail && orderDetail[i] && receipts && receipts[i]">
@@ -92,7 +92,11 @@
                         ราคา: {{selectedOrderDetail?.total_price}} บาท
                     </div>
                     <div class="mb-1" style="font-size: 12px;">
-                        เลขที่สั่งซื้อ: {{selectedReceipt?.order_receipt_number}}
+                        เลขที่สั่งซื้อ: {{selectedReceipt?.order_receipt_number}}<br>
+                        <div class="">
+                            <img [src]="barcode+selectedReceipt?.order_receipt_number+barcodeend" alt="Image"
+                                style="width: 100%; height: auto;">
+                        </div>
                     </div>
                     <!-- <div class="mb-3">
                         <p class="text-center">
