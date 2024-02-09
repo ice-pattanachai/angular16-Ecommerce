@@ -1,6 +1,10 @@
 <div class="animsition">
-  <!-- <app-navbar></app-navbar> -->
   <app-navbar *ngIf="shouldShowNavbar()"></app-navbar>
+  <div class="app-container">
+    <div class="sidebar">
+      <app-sidebar *ngIf="shouldShowSidebar()"></app-sidebar>
+    </div>
+  </div>
   <router-outlet></router-outlet>
   <app-back-to-top></app-back-to-top>
 </div>

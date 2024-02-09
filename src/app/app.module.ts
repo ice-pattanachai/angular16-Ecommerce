@@ -30,6 +30,8 @@ import { ManageOrdersComponent } from './component/content/seller/manage-orders/
 import { EditOrderComponent } from './component/content/seller/edit-order/edit-order.component';
 import { OrderDetailComponent } from './component/add-on/order-detail/order-detail.component';
 import { ReceiptComponent } from './component/content/seller/receipt/receipt.component';
+import { SidebarComponent } from './component/add-on/sidebar/sidebar.component';
+import { PasswordComponent } from './component/add-on/password/password.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { ReceiptComponent } from './component/content/seller/receipt/receipt.com
     ManageOrdersComponent,
     EditOrderComponent,
     OrderDetailComponent,
-    ReceiptComponent
+    ReceiptComponent,
+    SidebarComponent,
+    PasswordComponent,
   ],
   imports: [
     BrowserModule,

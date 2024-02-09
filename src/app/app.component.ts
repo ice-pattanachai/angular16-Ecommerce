@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgxTurnstileService } from 'ngx-turnstile';
 import { Router } from '@angular/router';
 
@@ -24,10 +24,13 @@ export class AppComponent {
     }
   }
 
-  private excludedUrls: Set<string> = new Set(['/user-login', '/seller-login']);
-
+  private excludedUrls_navbar: Set<string> = new Set(['/user-login', '/seller-login']);
   shouldShowNavbar(): boolean {
-    // return window.location.pathname !== '/user-login' ;
-    return !this.excludedUrls.has(window.location.pathname);
+    return !this.excludedUrls_navbar.has(window.location.pathname);
+  }
+
+  private excludedUrls_sidebar: Set<string> = new Set(['/setting', '/setting/password']);
+  shouldShowSidebar(): boolean {
+    return this.excludedUrls_sidebar.has(window.location.pathname);
   }
 }

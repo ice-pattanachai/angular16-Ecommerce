@@ -16,6 +16,7 @@ import { SettingUserAllComponent } from './component/content/page/setting-user-a
 import { ManageOrdersComponent } from './component/content/seller/manage-orders/manage-orders.component';
 import { EditOrderComponent } from './component/content/seller/edit-order/edit-order.component';
 import { ReceiptComponent } from './component/content/seller/receipt/receipt.component';
+import { PasswordComponent } from './component/add-on/password/password.component';
 
 const routes: Routes = [
   // page
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'product/:id', component: ProductDetailComponent },
   { path: 'cartgo', component: CartgoComponent },
   { path: 'setting', component: SettingUserAllComponent },
+  { path: 'setting/password', component: PasswordComponent },
   // { path: 'receip', component: ReceiptComponent },
   // user
   { path: 'user-login', component: LoginComponent },
