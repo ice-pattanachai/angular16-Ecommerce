@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
         this.authService.authenticateToken(token)
           .subscribe((response: any) => {
             const status = response.status;
-            if (status === 'ok') {
+            if (status === 200) {
               const decoded = response.decoded;
               if (decoded && decoded.roles !== undefined) {
                 const roles = decoded.roles;
@@ -69,7 +69,21 @@ export class NavbarComponent implements OnInit {
                   text: 'Roles is undefined',
                 });
               }
-            } else {
+            } else if (status === 500) {
+              const errorMessage = response.message || 'Failed to Authenticate';
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: errorMessage,
+              })
+                .then((result) => {
+                  if (result.isConfirmed) {
+                    window.location.reload();
+                    localStorage.removeItem('user')
+                  }
+                });
+            }
+            else {
               console.error('Error response from API:', response);
               const errorMessage = response.message || 'Failed to Authenticate';
               console.error(`Error: ${errorMessage}`);

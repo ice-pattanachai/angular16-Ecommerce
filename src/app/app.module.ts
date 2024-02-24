@@ -32,6 +32,7 @@ import { OrderDetailComponent } from './component/add-on/order-detail/order-deta
 import { ReceiptComponent } from './component/content/seller/receipt/receipt.component';
 import { SidebarComponent } from './component/add-on/sidebar/sidebar.component';
 import { PasswordComponent } from './component/add-on/password/password.component';
+import { AccountComponent } from './component/add-on/account/account.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { PasswordComponent } from './component/add-on/password/password.componen
     ReceiptComponent,
     SidebarComponent,
     PasswordComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,

@@ -60,7 +60,7 @@ export class SettingUserAllComponent implements OnInit {
         this.authService.authenticateToken(token)
           .subscribe((response: any) => {
             const status = response.status;
-            if (status === 'ok') {
+            if (status === 200) {
               const decoded = response.decoded;
               if (decoded && decoded.roles !== undefined) {
                 const roles = decoded.roles;

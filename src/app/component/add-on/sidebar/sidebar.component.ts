@@ -16,12 +16,45 @@ export class SidebarComponent implements OnInit {
   userall: User[] | undefined;
   sellerall: User[] | undefined;
   user: any;
+  listMenu: any[] = []
   constructor(
     private router: Router,
     private authService: AuthService,
     private storageService: StorageService,
     private route: Router,
-  ) { }
+  ) {
+    this.Main()
+  }
+
+  Main() {
+    const token = localStorage.getItem('auth-token');
+    if (token) {
+      const loginSubscr = this.authService.authenticateToken(token).subscribe((response: any) => {
+        if (response.status === 200) {
+          const decoded = response.decoded;
+          if (decoded && decoded.roles !== undefined) {
+            const roles = decoded.roles;
+            let listMenu: any[] = []
+            if (typeof roles === 'string') {
+              const roleParts = roles.split('|');
+              const firstRole = roleParts[0];
+              if (firstRole === 'seller') {
+                console.log(listMenu);
+                this.menuType = 'seller';
+              } else if (firstRole === 'user') {
+                this.menuType = 'user';
+              } else {
+                this.router.navigate(['/user-login']);
+              }
+            }
+          }
+        } else {
+          // console.log('else', result);
+          // this.authService.getLogout()
+        }
+      });
+    }
+  }
 
   ngOnInit(): void {
     const userData = localStorage.getItem('user');
@@ -52,46 +85,46 @@ export class SidebarComponent implements OnInit {
           }
         });
       }
-      if (token) {
-        this.authService.authenticateToken(token)
-          .subscribe((response: any) => {
-            const status = response.status;
-            if (status === 'ok') {
-              const decoded = response.decoded;
-              if (decoded && decoded.roles !== undefined) {
-                const roles = decoded.roles;
-                if (typeof roles === 'string') {
-                  const roleParts = roles.split('|');
-                  const firstRole = roleParts[0];
-                  if (firstRole === 'seller') {
-                    this.menuType = 'seller';
-                  } else if (firstRole === 'user') {
-                    this.menuType = 'user';
-                  } else {
-                    this.router.navigate(['/user-login']);
-                  }
-                } else {
-                  console.error('Invalid roles format:', roles);
-                  this.menuType = 'error';
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Invalid roles format',
-                  });
-                }
-              } else {
-                console.error('Error: Roles is undefined');
-                this.menuType = 'error';
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Error',
-                  text: 'Roles is undefined',
-                });
-              }
-            }
-          },
-          );
-      }
+      // if (token) {
+      //   this.authService.authenticateToken(token)
+      //     .subscribe((response: any) => {
+      //       const status = response.status;
+      //       if (status === 200) {
+      //         const decoded = response.decoded;
+      //         if (decoded && decoded.roles !== undefined) {
+      //           const roles = decoded.roles;
+      //           if (typeof roles === 'string') {
+      //             const roleParts = roles.split('|');
+      //             const firstRole = roleParts[0];
+      //             if (firstRole === 'seller') {
+      //               this.menuType = 'seller';
+      //             } else if (firstRole === 'user') {
+      //               this.menuType = 'user';
+      //             } else {
+      //               this.router.navigate(['/user-login']);
+      //             }
+      //           } else {
+      //             console.error('Invalid roles format:', roles);
+      //             this.menuType = 'error';
+      //             Swal.fire({
+      //               icon: 'error',
+      //               title: 'Error',
+      //               text: 'Invalid roles format',
+      //             });
+      //           }
+      //         } else {
+      //           console.error('Error: Roles is undefined');
+      //           this.menuType = 'error';
+      //           Swal.fire({
+      //             icon: 'error',
+      //             title: 'Error',
+      //             text: 'Roles is undefined',
+      //           });
+      //         }
+      //       }
+      //     },
+      //     );
+      // }
     }
   }
 
@@ -128,5 +161,9 @@ export class SidebarComponent implements OnInit {
     this.authService.removeItem()
     this.route.navigate(['/'])
     window.location.reload();
+  }
+
+  navigateToPassword() {
+    this.router.navigate(['/setting/password']);
   }
 }

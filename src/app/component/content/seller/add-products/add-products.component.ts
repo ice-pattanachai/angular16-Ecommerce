@@ -45,7 +45,7 @@ export class AddProductsComponent implements OnInit {
           (response: any) => {
             const status = response.status;
             console.log('API Response Status:', status);
-            if (status === 'ok') {
+            if (status === 200) {
               const decoded = response.decoded;
               if (decoded && decoded.roles !== undefined) {
                 const roles = decoded.roles;

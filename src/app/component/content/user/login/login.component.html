@@ -16,75 +16,77 @@
   </nav>
 </header>
 
-<body>
-  <div class="signin" *ngIf="isSignIn; else signup">
-    <div class="content">
-      <h2>User Login</h2>
-      <div class="form">
-        <div class="inputBox">
-          <input type="text" [(ngModel)]="username" name="username" required>
-          <i>Username</i>
-          <div *ngIf="isLoginFailed" class="error-message">
-            {{ errorMessage }}
-          </div>
-        </div>
-        <div class="inputBox">
-          <input type="password" [(ngModel)]="password_hash" name="password" required
-            (keyup.enter)="onClickSubmitLogin()">
-          <i>Password</i>
-          <div *ngIf="isLoginFailed" class="error-message">
-            {{ errorMessage }}
-          </div>
-        </div>
-        <div class="links">
-          <a></a>
-          <div class="button2 button2-normal" (click)="toggleSignIn()">Signup</div>
-        </div>
-        <div class="button button-normal">
-          <button (click)="onClickSubmitLogin()" class="button button-normal">Login</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <ng-template #signup>
-    <div class="signup">
+<div clsss="background">
+  <div class="body">
+    <div class="signin" *ngIf="isSignIn; else signup">
       <div class="content">
-        <h2>Sign Up</h2>
+        <h2>User Login</h2>
         <div class="form">
           <div class="inputBox">
             <input type="text" [(ngModel)]="username" name="username" required>
             <i>Username</i>
-            <!-- <div *ngIf="isLoginFailed" class="error-message">
-                {{ errorMessage }}
-              </div> -->
-            <div *ngFor="let errorMessage of errorMessages" class="error-message">
+            <div *ngIf="isLoginFailed" class="error-message">
               {{ errorMessage }}
             </div>
           </div>
           <div class="inputBox">
-            <input type="password" [(ngModel)]="password_hash" name="password" required>
+            <input type="password" [(ngModel)]="password_hash" name="password" required
+              (keyup.enter)="onClickSubmitLogin()">
             <i>Password</i>
-            <!-- <div *ngIf="isLoginFailed" class="error-message">
-              {{ errorMessage }}
-            </div> -->
-            <div *ngFor="let errorMessage of errorMessages" class="error-message">
+            <div *ngIf="isLoginFailed" class="error-message">
               {{ errorMessage }}
             </div>
-          </div>
-          <div class="inputBox">
-            <input type="text" [(ngModel)]="mail" name="Emain" required>
-            <i>Emain</i>
           </div>
           <div class="links">
             <a></a>
-            <div class="button2 button2-normal" (click)="toggleSignIn()">Sigin</div>
+            <div class="button2 button2-normal" (click)="toggleSignIn()">Signup</div>
           </div>
           <div class="button button-normal">
-            <button (click)="onClickSubmitRegister()" class="button button-normal">Register</button>
+            <button (click)="onClickSubmitLogin()" class="button button-normal">Login</button>
           </div>
         </div>
       </div>
     </div>
-  </ng-template>
-</body>
+
+    <ng-template #signup>
+      <div class="signup">
+        <div class="content">
+          <h2>Sign Up</h2>
+          <div class="form">
+            <div class="inputBox">
+              <input type="text" [(ngModel)]="username" name="username" required>
+              <i>Username</i>
+              <!-- <div *ngIf="isLoginFailed" class="error-message">
+                {{ errorMessage }}
+              </div> -->
+              <div *ngFor="let errorMessage of errorMessages" class="error-message">
+                {{ errorMessage }}
+              </div>
+            </div>
+            <div class="inputBox">
+              <input type="password" [(ngModel)]="password_hash" name="password" required>
+              <i>Password</i>
+              <!-- <div *ngIf="isLoginFailed" class="error-message">
+              {{ errorMessage }}
+            </div> -->
+              <div *ngFor="let errorMessage of errorMessages" class="error-message">
+                {{ errorMessage }}
+              </div>
+            </div>
+            <div class="inputBox">
+              <input type="text" [(ngModel)]="mail" name="Emain" required>
+              <i>Emain</i>
+            </div>
+            <div class="links">
+              <a></a>
+              <div class="button2 button2-normal" (click)="toggleSignIn()">Sigin</div>
+            </div>
+            <div class="button button-normal">
+              <button (click)="onClickSubmitRegister()" class="button button-normal">Register</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

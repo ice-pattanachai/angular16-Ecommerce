@@ -29,7 +29,15 @@ export class AppComponent {
     return !this.excludedUrls_navbar.has(window.location.pathname);
   }
 
-  private excludedUrls_sidebar: Set<string> = new Set(['/setting', '/setting/password']);
+  private excludedUrls_sidebar: Set<string> = new Set(
+    [
+      '/setting',
+      '/setting/password',
+      '/setting/receip',
+      '/setting/account',
+      '/setting/product',
+    ]
+  );
   shouldShowSidebar(): boolean {
     return this.excludedUrls_sidebar.has(window.location.pathname);
   }

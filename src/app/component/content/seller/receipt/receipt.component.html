@@ -1,20 +1,16 @@
-<div class="list-group" *ngIf="isMenuOpen">
-    <div class=" container-fluid">
+<div class="list-group d-flex mt-2" *ngIf="isMenuOpen">
+    <div class="container-fluid">
         <div class="row">
             <div class="container " *ngIf="isMenuhistor">
                 <div class="table-responsive">
                     <table class="table">
                         <thead *ngFor="let receipts of receipts; let i = index">
                             <tr class="table-row align-top">
-                                <!-- *ngFor="let orders of receipts.purchase_orders" -->
                                 <td class="column-1 text-break " style="max-width: 10%;">
                                     {{receipts.addresses_name}}
                                     <div class="mb-1" style="font-size: 12px;">
                                         {{receipts.order_receipt_number}}
                                     </div>
-                                    <!-- <p>
-                                        เลขที่ใบสั่งซื้อ : {{Ordernumberid.order_receipt_number}}
-                                    </p> -->
                                 </td>
                                 <td class="column-1 text-break " style="max-width: 50%">
                                     Confirm order = {{receipts.status? 'confirm' : 'not confirmed'}} <br>
@@ -26,20 +22,6 @@
                                     Payment status = {{receipts.receipt_make_payment? 'completed' : 'not yet
                                     paid'}}<br>
                                 </td>
-                                <!-- <td class="column-2 text-center align-end row-cols-md-2>" style="width: 5%">
-                                    <button class="btn btn-primary">
-                                        แก้ไขคำสั่งซื้อ
-                                    </button>
-                                    <button class="btn btn-primary">
-                                        ดูคำสั่งซื้อ
-                                    </button>
-                                </td> -->
-                                <!-- <td class="column-2 text-center align-end row-cols-md-2">
-                                    <div class="d-flex justify-content-end">
-                                        <button class="btn btn-primary me-2">แก้ไขคำสั่งซื้อ</button>
-                                        <button class="btn btn-primary">ดูคำสั่งซื้อ</button>
-                                    </div>
-                                </td> -->
                                 <td class="column-2 text-end">
                                     <div class="d-flex justify-content-end">
                                         <button class="btn btn-primary me-2" data-bs-toggle="modal"
@@ -48,7 +30,6 @@
                                             data-bs-toggle="modal" data-bs-target="#popupModalView">View</button>
                                     </div>
                                 </td>
-
                             </tr>
                         </thead>
                     </table>

@@ -17,6 +17,7 @@ import { ManageOrdersComponent } from './component/content/seller/manage-orders/
 import { EditOrderComponent } from './component/content/seller/edit-order/edit-order.component';
 import { ReceiptComponent } from './component/content/seller/receipt/receipt.component';
 import { PasswordComponent } from './component/add-on/password/password.component';
+import { AccountComponent } from './component/add-on/account/account.component';
 
 const routes: Routes = [
   // page
@@ -28,7 +29,9 @@ const routes: Routes = [
   { path: 'cartgo', component: CartgoComponent },
   { path: 'setting', component: SettingUserAllComponent },
   { path: 'setting/password', component: PasswordComponent },
-  // { path: 'receip', component: ReceiptComponent },
+  { path: 'setting/receip', component: ReceiptComponent },
+  { path: 'setting/account', component: AccountComponent },
+  // { path: 'setting/account', component: AccountComponent },
   // user
   { path: 'user-login', component: LoginComponent },
   // seller
@@ -37,6 +40,7 @@ const routes: Routes = [
   { path: 'add-proders', component: AddProductsComponent },
   { path: 'manage_porders', component: ManageOrdersComponent },
   { path: 'all', component: ProductsForSaleComponent },
+  { path: 'setting/product', component: ProductsForSaleComponent },
   { path: 'edit-order', component: EditOrderComponent },
   // end
   { path: '**', component: Error404Component },

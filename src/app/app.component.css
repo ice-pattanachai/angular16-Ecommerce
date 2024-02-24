@@ -1,12 +1,14 @@
 body {
     margin-top: 80px;
-    /* margin-right: 2%;
-    margin-left: 2%; */
 }
 
 .animsition {
-    /* margin-top: 80px; */
     animation: fadeIn 1s;
+}
+
+.layout {
+    display: flex;
+    flex-grow: 1;
 }
 
 @keyframes fadeIn {

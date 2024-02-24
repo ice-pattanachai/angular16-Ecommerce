@@ -41,7 +41,7 @@ export class ReceiptComponent implements OnInit {
         this.authService.authenticateToken(token).subscribe(
           (response: any) => {
             const status = response.status;
-            if (status === 'ok') {
+            if (status === 200) {
               const decoded = response.decoded;
               if (decoded && decoded.roles !== undefined) {
                 const roles = decoded.roles;
@@ -80,7 +80,7 @@ export class ReceiptComponent implements OnInit {
     if (this.showLogin) {
       this.router.navigate(['/']);
     } else {
-      this.router.navigate(['/receip']);
+      this.router.navigate(['/setting/receip']);
     }
   }
 

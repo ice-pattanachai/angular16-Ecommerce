@@ -1,13 +1,12 @@
 <div class="animsition">
   <app-navbar *ngIf="shouldShowNavbar()"></app-navbar>
-  <div class="app-container">
-    <div class="sidebar">
-      <app-sidebar *ngIf="shouldShowSidebar()"></app-sidebar>
-    </div>
+  <div class="layout">
+    <app-sidebar *ngIf="shouldShowSidebar()"></app-sidebar>
+    <router-outlet></router-outlet>
   </div>
-  <router-outlet></router-outlet>
   <app-back-to-top></app-back-to-top>
 </div>
+
 
 <!-- <div>
     <ngx-turnstile
